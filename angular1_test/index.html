@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <title>Angular test</title>
+    <style type="text/css">
+        body{
+            margin:0;
+        }
+    </style>
+
+  　<!-- 見た目用にBootstrapを使う -->
+  　<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+ 
+  　<!-- AngularJS 1.5を公式サイトから引っ張ってくる -->
+  　<script src="//code.angularjs.org/1.5.7/angular.min.js"></script>
+
+</head>
+<body class="container">
+
+  <div ng-controller="AppController">
+ 
+    <div>
+　　　　　<h1>登録フォーム</h1>
+　　　　　<form ng-submit="submit()">
+　　　　　　
+        <div class="form-group">
+        <label for="username">ユーザー名</label>
+        <input type="text" class="form-control" id="username" placeholder="twitterのユーザー名を入力" ng-model="username">
+        </div>
+
+        <button type="submit" class="btn btn-primary">登録</button>
+      </form>
+    </div>
+ 
+　　　　<hr>
+ 
+　　　　<div>
+　　　　　<h1>ユーザー一覧</h1>
+　　　　　<ul>
+        <li style="padding: 5px" ng-repeat="user in users">
+          <div>
+            <a href="{{user.url}}" target="_blank">{{user.username}}</a>
+          </div>
+        </li>
+　　　　　</ul>
+　　　　</div>
+
+　　</div>
+
+
+    <script type="text/javascript">
+      //http://udemy.benesse.co.jp/development/angularjs.html
+
+      
+      // 「myAppというAngularJSのアプリケーションを作ります」宣言
+      var test = angular.module( 'myApp', [] ).controller( 'AppController', function( $scope ){
+   
+        // 入力されたユーザー名を保持
+        $scope.username = '';
+
+        // ユーザー一覧（空の配列で初期化）
+        $scope.users = [];
+
+        // 新しいユーザーをユーザー一覧に登録する
+        $scope.submit = function() {
+
+        　　$scope.users.push({
+            username : $scope.username,
+            url : '//twitter.com/' + $scope.username
+        　　});
+
+        };
+         
+      });
+
+    </script>
+</body>
+</html>
