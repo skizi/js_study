@@ -4,13 +4,15 @@ import { HttpModule }    from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { SubComponent } from './sub.component';
+import { PopupComponent } from './popup.component';
 
 import { TestService }          from './test.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SubComponent
+    SubComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,

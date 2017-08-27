@@ -3,10 +3,12 @@
   <sub-component></sub-component>
 
   <ul id="newsContainer">
-    <li *ngFor="let news of newses" class="news">
+    <li *ngFor="let news of newses" class="news" (click)="newsClick(news)">
       <h4>{{news.title}}</h4>
       <p>{{news.description}}</p>
     </li>
   </ul>
+
+  <popup-component>{{newsText}}</popup-component>
 </div>
 

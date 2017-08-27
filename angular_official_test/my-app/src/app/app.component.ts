@@ -11,6 +11,7 @@ import { News } from './news';
 })
 export class AppComponent {
   title = 'app';
+  newsText = '222';
 
   newses: News[] = [];
 
@@ -25,15 +26,21 @@ export class AppComponent {
   ngOnInit(): void {
     this.testService.getHeroes()
       .then( xmlStr => {
+
       	var items:JQuery = $( xmlStr ).find( 'item' );
       	for( var i = 0; i < items.length; i++ ){
       		var item:JQuery = $( $( items[i] ).context );
       		var title:string = item.find( 'title' ).text();
       		var description:string = item.find( 'description' ).text();
-      		this.newses[i] = new News( title, description );
+      		var content:string = item[0].textContent;
+      		this.newses[i] = new News( title, description, content );
       	}
-
       });
+  }
+
+
+  newsClick( news ){
+  	this.newsText = news.content;
   }
 
 }
