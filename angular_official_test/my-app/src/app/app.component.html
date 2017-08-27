@@ -1,0 +1,12 @@
+<div id="appComponent">
+  <p (click)="subClick()">こんにちわ{{title}}</p>
+  <sub-component></sub-component>
+
+  <ul id="newsContainer">
+    <li *ngFor="let news of newses" class="news">
+      <h4>{{news.title}}</h4>
+      <p>{{news.description}}</p>
+    </li>
+  </ul>
+</div>
+
