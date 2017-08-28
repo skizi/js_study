@@ -1,9 +1,26 @@
 #popup{
 	width: 80%;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fff;
-    position: fixed;
-    top: 0px;
-    left: 0px;
+  margin: -120px 0 0 -425px;
+  padding: 20px;
+  border: 2px solid #aaa;
+  border-radius: 10px;
+  background-color: #fff;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+
+  a.close_btn{
+  	width:40px;
+  	height:40px;
+    line-height: 40px;
+  	background-color: #fff;
+  	border:2px solid #aaa;
+  	border-radius:100px;
+  	position:absolute;
+  	top:-16px;
+  	right:-16px;
+    text-align: center;
+    font-size: 22px;
+    cursor: pointer;
+  }
 }
