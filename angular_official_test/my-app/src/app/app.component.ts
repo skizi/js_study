@@ -16,7 +16,8 @@ export class AppComponent {
   private popupComponent: PopupComponent;
 
   title = 'app';
-  newsText = '222';
+  newsText = '';
+  newsUrl = '';
 
   newses: News[] = [];
 
@@ -38,14 +39,17 @@ export class AppComponent {
       		var title:string = item.find( 'title' ).text();
       		var description:string = item.find( 'description' ).text();
       		var content:string = item[0].textContent;
-      		this.newses[i] = new News( title, description, content );
+      		var url:string = item.attr( 'rdf:about' );
+      		this.newses[i] = new News( title, description, content, url );
       	}
+
       });
   }
 
 
   newsClick( news ){
   	this.newsText = news.content;
+  	this.newsUrl = news.url;
   	this.popupComponent.show();
   }
 
