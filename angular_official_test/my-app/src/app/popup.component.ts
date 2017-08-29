@@ -1,6 +1,6 @@
 /// <reference path="../typings/globals/jquery/index.d.ts" />
 
-import { Component, Input, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, Input, Output, AfterViewInit, AfterViewChecked, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'popup-component',
@@ -46,8 +46,10 @@ export class PopupComponent implements AfterViewInit, AfterViewChecked {
   }
 
 
+  @Output() hidePopup = new EventEmitter<boolean>();
   closeBtnClick(){
   	$('#popup').hide();
+    this.hidePopup.emit();
   }
 
 }

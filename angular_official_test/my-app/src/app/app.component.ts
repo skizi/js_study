@@ -43,4 +43,9 @@ export class AppComponent {
   	this.newsText = news.content;
   }
 
+
+  hidePopup(){
+  	console.log( 'popup close' );
+  }
+
 }

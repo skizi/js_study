@@ -9,6 +9,6 @@
     </li>
   </ul>
 
-  <popup-component [newsText]="newsText"></popup-component>
+  <popup-component [newsText]="newsText" (hidePopup)="hidePopup($event)"></popup-component>
 </div>
 
