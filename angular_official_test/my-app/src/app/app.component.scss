@@ -16,5 +16,11 @@ ul#newsContainer{
 		margin-bottom:20px;
 		border-bottom:1px solid #333;
 		list-style: none;
+
+		p{
+		    line-height: 200%;
+	        letter-spacing: .5px;
+	        cursor:pointer;
+		}
 	}
 }
