@@ -1,8 +1,9 @@
 /// <reference path="../typings/globals/jquery/index.d.ts" />
 
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TestService } from './test.service';
 import { News } from './news';
+import { PopupComponent } from './popup.component';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,10 @@ import { News } from './news';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+ 
+  @ViewChild(PopupComponent)
+  private popupComponent: PopupComponent;
+
   title = 'app';
   newsText = '222';
 
@@ -41,6 +46,7 @@ export class AppComponent {
 
   newsClick( news ){
   	this.newsText = news.content;
+  	this.popupComponent.show();
   }
 
 

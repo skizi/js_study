@@ -12,15 +12,16 @@ export class PopupComponent implements AfterViewInit, AfterViewChecked {
   private _newsText:string;
 
 
-  ngInit(){
-  	console.log("init");
+  public show(){
+  	$('#popup').show();
   }
 
 
   @Input()
   set newsText(newsText: string) {
+  	
   	this._newsText = newsText;
-  	$('#popup').show();
+
   }
 
 
