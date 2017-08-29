@@ -1,8 +1,8 @@
 <div id="popupBg" [@bgVisibleState]="animState" (click)="closeBtnClick()"></div>
 <div id="popup" [@visibleState]="animState" (@visibleState.start)="animationStarted($event)" (@visibleState.done)="animationDone($event)" [ngStyle]="myStyles">
-	{{newsText}}<br>
-	<a href="{{newsUrl}}" target="_blank">
-		＞＞詳しく見る
-	</a>
+	<div class="text_content">
+		<p [innerHTML]="newsText"></p>
+	</div>
+	<a href="{{newsUrl}}" target="_blank" class="detail_btn">＞＞詳しく見る</a>
 	<a class="close_btn" (click)="closeBtnClick()">×</a>
 </div>

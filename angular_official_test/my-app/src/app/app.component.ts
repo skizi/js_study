@@ -15,19 +15,14 @@ export class AppComponent {
   @ViewChild(PopupComponent)
   private popupComponent: PopupComponent;
 
-  title = 'app';
+  title = 'RSSリーダー';
   newsText = '';
   newsUrl = '';
 
   newses: News[] = [];
 
 
-  constructor( private testService:TestService ) {
-  }
-
-  subClick(){
-  	alert( "main" );
-  }
+  constructor( private testService:TestService ) {}
 
   ngOnInit(): void {
     this.testService.getHeroes()
@@ -38,7 +33,8 @@ export class AppComponent {
       		var item:JQuery = $( $( items[i] ).context );
       		var title:string = item.find( 'title' ).text();
       		var description:string = item.find( 'description' ).text();
-      		var content:string = item[0].textContent;
+      		//var content:string = item[0].textContent;
+      		var content:string = item[0].innerHTML;
       		var url:string = item.attr( 'rdf:about' );
       		this.newses[i] = new News( title, description, content, url );
       	}

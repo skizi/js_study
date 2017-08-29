@@ -40,11 +40,13 @@ export class PopupComponent implements AfterViewInit, AfterViewChecked {
   
   private element:any;
   private bg:any;
+  private textContent:any;
   private _newsText:string;
   private _newsUrl:string;
   public animState : string = 'hide';
   private myStyles = { display:'none', marginLeft:'0px', marginTop:'0px' }
   private resizeTimeOutId;
+
 
 
   public show(){
@@ -91,6 +93,7 @@ export class PopupComponent implements AfterViewInit, AfterViewChecked {
     this.animState = 'hide';
     this.element = document.getElementById( 'popup' );
     this.bg = document.getElementById( 'popupBg' );
+  	this.textContent = this.element.getElementsByClassName( 'text_content' )[0];
     window.addEventListener( 'resize', this.resize.bind( this ) );
 
   }
@@ -99,6 +102,12 @@ export class PopupComponent implements AfterViewInit, AfterViewChecked {
   //DOMが更新されたら実行
   ngAfterViewChecked(){
 
+  	var a = this.textContent.getElementsByTagName( 'a' );
+  	if( a.length ){
+  		for( var i = 0; i < a.length; i++ ){
+	  		a[i].setAttribute( 'target', '_blank' );
+	  	}
+  	}
   	this.resize();
 
   }

@@ -1,4 +1,6 @@
+
 div#appComponent{
+    margin: 0 40px;
 	background-color:#fff;
 
 	p{
@@ -8,8 +10,11 @@ div#appComponent{
 
 
 ul#newsContainer{
+	padding-left: 0px;
+
 	li.news{
 		margin-bottom:20px;
 		border-bottom:1px solid #333;
+		list-style: none;
 	}
 }
