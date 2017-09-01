@@ -1,0 +1,43 @@
+<div>main</div>
+<sub-component [title]=title></sub-component>
+
+
+<label for="name">Name</label>
+
+<!--required：入力必須-->
+<input type="text" id="name" class="form-control"
+       required minlength="4" maxlength="24"
+       name="name" [(ngModel)]="hero.name"
+       #name="ngModel" ><br>
+
+<!--ユーザーが値を編集する前からバリデーションエラーのメッセージが表示されるのは良くないことです。dirty, touched のチェックを行うことで、この早すぎるエラー表示を防ぐ-->
+<!--[hidden]はtrueのときは非表示。falseのときは表示-->
+<div *ngIf="name.errors && (name.dirty || name.touched)"
+     class="alert alert-danger">
+    <div [hidden]="!name.errors.required">
+      名前は必須です
+    </div>
+    <div [hidden]="!name.errors.minlength">
+      ４文字以上でお願いします
+    </div>
+    <div [hidden]="!name.errors.maxlength">
+    　２４文字以下でお願いします
+    </div>
+</div>
+
+
+<label for="age">age</label>
+<input type="number" pattern="-?\d+" [(ngModel)]="hero.age" #age="ngModel"><br>
+<div *ngIf="age.errors && (age.dirty || age.touched)">
+  <span [hidden]="!age.errors.pattern">整数でお願いします</span>
+</div>
+
+
+
+<label>郵便番号</label>
+<div ng-class="{'has-success':form.postalcode.$valid && form.postalcode.$dirty,'has-error':form.postalcode.$invalid && form.postalcode.$dirty}">
+  <input type="text" name="postalcode" [(ngModel)]="hero.postalcode" pattern="[0-9]{3}-[0-9]{4}" #postalcode="ngModel">
+  <div *ngIf="postalcode.errors && (postalcode.dirty || postalcode.touched)">
+    <span [hidden]="!postalcode.errors.pattern">XXX-XXXX形式でお願いします</span>
+  </div>
+</div>

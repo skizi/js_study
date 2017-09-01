@@ -1,0 +1,19 @@
+<div>main</div>
+
+<sub-component [rootToSub]="rootToSubText"></sub-component>
+
+<!--双方向-->
+<input [(ngModel)]="name" type="text">
+<p>Value: {{ name }}</p>
+<button (click)="setValue()">Set value</button><br><br>
+
+<!--inputの値を創出-->
+<input type="text" #exname>
+<button (click)="exBtnClick(exname.value)">ex btn</button>
+
+
+<!--inputの値を創出-->
+<table>
+  <tr><td [attr.colspan]="colspanLength">1</td></tr>
+  <tr><td>2</td><td>3</td></tr>
+</table>
