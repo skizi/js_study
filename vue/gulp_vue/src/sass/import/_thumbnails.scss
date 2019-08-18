@@ -1,0 +1,268 @@
+
+
+
+/*全ページ共通サムネール*/
+.thumbnail{
+	width: 310px;
+	display:inline-block;
+	position: relative;
+
+	a {
+		display: block;
+		transition: opacity 0.3s;
+
+		&:hover {
+			.thumbnail__img{
+				span.top,
+				span.bottom,
+				span.left,
+				span.right{
+					transform:translate(0px,0px);
+				}
+			}
+			p span{
+				color:#ba7800;
+			}
+		}
+
+		.thumbnail__img {
+			width: 100%;
+			height: 190px;
+			margin-bottom: 12px;
+			background: #f1f1f1;
+			position: relative;
+			overflow: hidden;
+			opacity: 0;
+			z-index: 0;
+		    text-align: center;
+
+			img {
+				width: auto;
+				height: 100%;
+				display: inline-block;
+				opacity: 0;
+				z-index: 1;
+				position: relative;
+			}
+
+
+			&:after {
+				content: "";
+				width: 50px;
+				height: 47px;
+				background: url("/img/common/logo.png") no-repeat 0 0 {
+				  size: contain;
+				};
+				position: absolute;
+				top: 0;
+				bottom:0;
+				left: 0;
+				right: 0;
+				z-index: 0;
+				margin: auto;
+				pointer-events: none;
+				opacity: 0.8;
+				transition: opacity 0.7s;
+				transition-delay: 0.3s;
+			}
+
+			.js-cover-name-1{
+				z-index: 2;
+				transform: translate(-100%, 0);
+			}
+
+			/*ホバー時の枠*/
+			span.top,
+			span.bottom,
+			span.right,
+			span.left{
+				width:310px;
+				height: 3px;
+				position: absolute;
+				top:0px;
+				left:0px;
+				display: block;
+				background-color: #d1ad5a;
+			    z-index: 1;
+			    transition-duration: 0.3s;
+			    transition-property: transform;
+			}
+
+			span.left,
+			span.right{
+				width:3px;
+				height: 190px;
+			}
+
+			span.top{
+				transform: translate(0px,-3px);
+			}
+
+			span.bottom{
+				top:auto;
+				bottom: 0px;
+				transform: translate(0px,3px);
+			}
+
+			span.left{
+				transform: translate(-3px,0px);
+			}
+
+			span.right{
+				left:auto;
+				right: 0px;
+				transform: translate(3px,0px);
+			}
+
+		}
+
+		p{
+	    	display: block;
+
+			span {
+			  color: $COL_BASE;
+			  font-family: $FONT_NSM;
+			  @include REM_FONT(14);
+			  line-height: 1.5;
+			  position: relative;
+			  overflow:hidden;
+			  display:inline-block;
+			  transition-property: color;
+			  transition-duration: 0.3s;
+
+			  br {
+			    display: none;
+			  }
+			}
+		}
+
+		.nodeBox__slide__outline {
+			min-height: 20px;
+			span {
+			  display: block;
+			  color: $COL_BASE;
+			  font-family: $FONT_NSM;
+			  @include REM_FONT(14);
+			  line-height: 1.5;
+			  position: relative;
+
+			  br {
+			    display: none;
+			  }
+			}
+		}
+	}
+
+
+	&.is-scroll-active {
+	  .thumbnail__img{
+	    img {
+	      opacity: 1;
+	    }
+
+	    &:after {
+	      opacity: 0;
+	    }
+	  }
+	}
+
+}
+
+
+.thumbnails{
+	.thumbnail{
+
+	    &:nth-child(2n) {
+	      margin: {
+	        left: 15px;
+	        left: 2.362204%;
+	      };
+	    }
+
+	    &:nth-child(n+3) {
+	      margin: {
+	        top: 34px;
+	      };
+	    }
+	}
+
+	.thumbnail.swiper-slide{
+		margin:0;
+	}
+}
+
+
+
+/*プライベートワーク*/
+.container__private__item {
+	& + .container__private__item {
+	  margin-top: 52px;
+	}
+}
+
+.container__privateVisual {
+	position: relative;
+	padding-bottom: 24px;
+}
+
+
+.container__privateVisual__slide {
+	img {
+	  display: block;
+	  width: 100%;
+	  height: auto;
+	}
+}
+
+.container__privateVisual__pagination {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+
+	.swiper-pagination-bullet {
+	  width: 6px;
+	  height: 6px;
+	  border: 1px solid $COL_BASE;
+	  background-color: transparent;
+	  opacity: 1;
+
+	  & + .swiper-pagination-bullet {
+	    margin-left: 10px;
+	  }
+	}
+
+	.swiper-pagination-bullet-active {
+	  background-color: $COL_BASE;
+	}
+}
+
+.container__privateContent {
+	margin-top: 28px;
+}
+
+.container__privateContent__head {
+	span {
+	  color: $COL_BASE;
+	  font-family: $FONT_NSM;
+
+	  @include REM_FONT(14);
+
+	  line-height: 1;
+	  letter-spacing: 0.02em;
+	}
+}
+
+.container__privateContent__txt {
+	margin-top: 16px;
+
+	p {
+	  color: $COL_GRAY2;
+	  font-family: $FONT_NSR;
+
+	  @include REM_FONT(14);
+
+	  line-height: 1.9;
+	}
+}

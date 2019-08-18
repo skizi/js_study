@@ -1,0 +1,84 @@
+// commonディレクトリ
+$DIR_IMG_CMN: "/img/common/";
+
+@font-face{
+  font-family: "NotoSans-Regular";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font/NotoSansCJKjp-Regular.woff2") format("woff2"), url("../font/NotoSansCJKjp-Regular.woff") format("woff"), url("../font/NotoSansCJKjp-Regular.otf") format("otf");
+}
+
+@font-face{
+  font-family: "NotoSans-Medium";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font/NotoSansCJKjp-Medium.woff2") format("woff2"), url("../font/NotoSansCJKjp-Medium.woff") format("woff"), url("../font/NotoSansCJKjp-Medium.otf") format("otf");
+}
+
+@font-face{
+  font-family: "NotoSans-Bold";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font/NotoSansCJKjp-Bold.woff2") format("woff2"), url("../font/NotoSansCJKjp-Bold.woff") format("woff"), url("../font/NotoSansCJKjp-Bold.otf") format("otf");
+}
+
+// webfont
+$FONT_NSR: 'NotoSans-Regular';
+$FONT_NSM: 'NotoSans-Medium';
+$FONT_NSB: 'NotoSans-Bold';
+
+$FONT_KAKU: "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, "Helvetica Neue", "Yu Gothic", YuGothic, Arial, "メイリオ", Meiryo, sans-serif;
+$FONT_MIN: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+
+// カラー
+$COL_BASE: #000;
+$COL_SUB: #fafafa;
+$COL_SUB2: #efefed;
+$COL_GRAY: #dfdfde;
+$COL_GRAY2: #787878;
+$COL_RED: #ff0053;
+
+
+$DE_FONT: 16;
+@mixin REM_FONT($size){
+	font-size: $size / $DE_FONT + rem;
+}
+
+$DE_FONT_VW: #{$DE_FONT/1200*100};
+
+
+// VW基準横幅
+$base_vw: 640;
+$break_point: 750;
+
+// $BREAK_POINT_PC_WIDE: 1296px;
+
+// mixin 設定
+@mixin MIX_REM($size){
+	font-size: $size + px;
+	font-size: $size / 16 + rem;
+}
+
+@mixin MIX_FONT_VW($size){
+	font-size: $size + px;
+	font-size: $size / $base_vw * 100 + vw;
+}
+
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+

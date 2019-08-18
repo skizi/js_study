@@ -1,0 +1,136 @@
+
+
+/* -----------------------------------------------
+ * LIBRARY STYLE Top
+ * ----------------------------------------------- */
+.container-libraryTop {
+  padding: 140px 0 46px 0;
+  overflow: visible;
+
+  .container__inner {
+    padding: 10px 0 60px;
+  }
+
+  .nodeBox {
+    position: relative;
+    overflow: hidden;
+
+    & + .nodeBox {
+      margin-top: 58px;
+      padding-top: 54px;
+      border: {
+        top: 1px solid $COL_GRAY;
+      };
+    }
+  }
+
+  .nodeBox__head {
+    padding-left:30px;
+    position:relative;
+    margin-bottom: 20px;
+
+    span {
+      /*color: #a0a0a0;*/
+      /*font-family: $FONT_NSB;*/
+      @include REM_FONT(20);
+      font-weight: lighter;
+      line-height: 1;
+      position: relative;
+    }
+  }
+
+  .nodeBox__inner {
+    width: 100%;
+    margin: 0;
+    overflow: visible;
+  }
+
+  .nodeBox__container {
+    position: relative;
+    overflow: visible;
+
+    .thumbnails{
+      padding:0 30px;
+    }
+  }
+
+  .nodeBox__wrapper {
+    position: static;
+    font-size: 0;
+  }
+
+  .nodeBox__slide,
+  .thumbnail0 {
+    width: 310px !important;
+  }
+
+  .nodeBox__arrow {
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    width: 43px;
+    height: 188px;
+    background: rgba(#000, 0);
+    cursor:pointer;
+    transition-duration: 0.3s;
+    transition-property: opacity;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 43px;
+      height: 188px;
+      background: url("/img/common/bg_fade_bk.png") no-repeat 0 0 {
+        size: contain;
+      };
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 80px;
+      width: 14px;
+      height: 26px;
+      background: url("/img/common/icon_arrow.svg") no-repeat 0 0 {
+        size: contain;
+      };
+    }
+
+    &.is-show {
+      transition: background 0.3s, opacity 0.3s;
+
+      &:hover {
+        background: rgba(#000, 0.3);
+      }
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0;
+    }
+  }
+
+  .nodeBox__arrow-right {
+    right: 0;
+
+    &:before {}
+
+    &:after {
+      left: 8px;
+    }
+  }
+
+  .nodeBox__arrow-left {
+    left: 0px;
+
+    &:before {
+      transform: rotate(180deg);
+    }
+
+    &:after {
+      left: 8px;
+      transform: rotate(180deg);
+    }
+  }
+}

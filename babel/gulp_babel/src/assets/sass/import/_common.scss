@@ -1,0 +1,123 @@
+/* -----------------------------------------------
+  COMMON STYLE
+  ----------------------------------------------- */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper {
+  position: relative;
+}
+
+
+.c-display-none{
+  display: none;
+}
+
+
+//マージン系
+@for $i from 1 through 10 {
+  .c-mb#{$i * 20}{
+    margin-bottom: #{$i * 20}px;
+  }
+}
+
+
+section{
+  margin-bottom: 40px;
+}
+
+p{
+  margin-bottom: 20px;
+}
+
+ul,ol{
+  margin-bottom: 20px;
+
+  li{
+    margin-bottom: 5px;
+    /*list-style-position: inside;*/
+  }
+}
+
+a{
+  color: #007dd1;
+}
+
+table{
+  margin-bottom: 20px;
+}
+
+
+//コンテナ系
+.c-wrapper{
+  min-width: 1000px;
+}
+
+.container{
+  width:800px;
+  margin:0 auto;
+  padding-top:40px;
+}
+
+
+//ローディング系
+.c-loading{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left:0px;
+  background-color: #fff;
+  background-image: url("../img/common/loading.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  display: none;
+    transition-duration: 0.2s;
+    transition-property: opacity;
+}
+
+
+//タイトル系
+.c-title0{
+  margin-bottom:20px;
+  font-size:16px;
+  text-align: center;
+}
+
+.c-title1{
+  font-size:15px;
+}
+
+
+//ボタン系
+.c-btn0{
+  width:100px;
+  padding:2px 5px;
+  display: block;
+  background-color: #ddd;
+  border-radius: 5px;
+  text-align:center;
+  color:#333;
+
+  &:hover{
+    opacity:0.8;
+  }
+}
+
+
+.c-two-column{
+  @include clearfix;
+  width: 240px;
+  margin: 0 auto;
+
+  li{
+    float:left;
+    margin:0 5px;
+  }
+}
