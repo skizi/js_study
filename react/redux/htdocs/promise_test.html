@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Promise Test</title>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/javascript">
+	
+
+	//--delay1を分解するとdelay2になる--
+
+	//msはsetTimeoutで何ミリ秒待つかの指定
+	//resolveはPromiseから渡されるコールバック関数
+	//処理が成功したらhtenの第一引数、失敗したら第二引数の関数が実行される
+	const delay1 = ms => new Promise( resolve => setTimeout(resolve, ms) );
+	delay1( 1000 ).then( () => alert( 1 ) );
+
+	var delay2 = function( ms ){
+		return new Promise( function(resolve){ return setTimeout(resolve, ms); } );
+	}
+	delay2( 1000 ).then( function(){ alert( 1 ); } );
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+@charset "utf-8";
+@import "mixin";
+// ===================================================================
+// メイン - このファイルにメインコンテンツ部分のスタイルをガツガツ書いていく。
+// ===================================================================
+
+
+header{
+	height:100px;
+	margin-bottom:40px;
+	border-bottom:1px solid #ddd;
+
+	h1{
+	    line-height: 100px;
+	    margin-left: 30px;
+		font-size:fz(30);
+	}
+
+}	
+
+section#itemList{
+    margin: 0 10px 0 10px;
+	border: 1px solid #ddd;
+
+	ul{
+		li{
+		    padding: 10px 0 10px 10px;
+			border-bottom: 1px solid #ddd;
+
+			&:last-child{
+				border-bottom:none;
+			}
+
+			div span{
+				margin-right:10px;
+			}
+		}
+	}
+}

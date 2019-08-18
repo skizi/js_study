@@ -1,0 +1,293 @@
+@charset "utf-8";
+@import "mixin";
+// ===================================================================
+// メイン - このファイルにメインコンテンツ部分のスタイルをガツガツ書いていく。
+// ===================================================================
+
+body,
+html{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+header{
+	height:128px;
+	background-color:#1482d2;
+	position:relative;
+
+	h1{
+		width: 100%;
+		height: 30px;
+		line-height: 30px;
+		position: absolute;
+		bottom: 30px;
+		color:#fff;
+		font-size:fz(30);
+		text-align: center;
+		font-weight: bold;
+	}
+
+	a#mainMenuBtn{
+		width:30px;
+		height: 30px;
+		line-height: 30px;
+		display: block;
+		position: absolute;
+		left:32px;
+		bottom: 30px;
+		color:#fff;
+		font-size:fz(30);
+		text-align: center;
+	}
+
+	a#mainMenuBtn{
+		width:42px;
+		height: 26px;
+		display: block;
+		position: absolute;
+		left:32px;
+		bottom: 33px;
+	}
+
+	a#searchBtn{
+		width:41px;
+		height: 40px;
+		display: block;
+		position: absolute;
+		right:33px;
+		bottom: 26px;
+	}
+
+}
+
+
+section#subMenu{
+	height:80px;
+	background-color:#f7f7f7;
+	overflow-x:scroll;
+	-webkit-overflow-scrolling : touch;
+
+	ul{
+		width:900px;
+
+		li{
+			width: 300px;
+			height:80px;
+			line-height:80px;
+			float:left;
+			color:#808080;
+			font-size:fz(22);
+			text-align: center;
+			font-weight: bold;
+			position:relative;
+
+			&.active{
+				color:#1482d2;
+
+				&:before{
+					content:'';
+					width:174px;
+					height:7px;
+					background-color:#1482d2;
+					position:absolute;
+					left:60px;
+					bottom:0px;
+				}
+			}
+		}
+	}
+}
+
+
+section#listContainer{
+	width:300%;
+	height:100%;
+	transition-duration:.3s;
+	transition-property:transform;
+
+	div.list{
+		width:640px;
+		height:100%;
+		float:left;
+		overflow-y:scroll;
+		-webkit-overflow-scrolling : touch;
+
+		ul li{
+			height:209px;
+			border-bottom: 1px solid #e5e9ea;
+			position:relative;
+
+			h3{
+				height:28px;
+				margin:0 0 25px 65px;
+				padding-top:25px;
+				color:#111111;
+				font-size:fz(28);
+			}
+
+			p.outline{
+				margin-left:65px;
+				color:#aaaaaa;
+				font-size:fz(22);
+				letter-spacing: 2px;
+			}
+
+			p.detail{
+				position:absolute;
+				left:65px;
+				bottom:32px;
+
+				span.fav{
+					margin-right:20px;
+					color:#ff4166;
+					font-size:fz(20);
+				}
+
+				span.url{
+					color:#999999;
+					font-size:fz(20);
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}
+
+
+section#searchModal{
+	width:100%;
+	height:100%;
+	background-color:#fff;
+	position: absolute;
+    top: 0px;
+    transition-duration:.5s;
+    transition-property: transform;
+    transform: translateY(100%);
+    display: none;
+
+    div.input_container{
+	    height:128px;
+    	background-color:#1482d2;
+    	position:relative;
+
+    	a.close_btn{
+		    width: 34px;
+		    height: 34px;
+		    display: block;
+    		position: absolute;
+		    top: 68px;
+		    left: 35px;
+    	}
+
+    	input{
+	    	width:496px;
+	    	height:56px;
+	    	margin-top: 56px;
+		    padding-left: 20px;
+    		background-color:#0e5b93;
+    		border:none;
+    		border-radius:10px;
+    		position:absolute;
+    		left:108px;
+    		bottom:16px;
+    		color: #fff;
+		    font-size: 20px;
+		    letter-spacing: 2px;
+    	}
+    }
+
+
+    ul{
+    	li{
+    		height:87px;
+    		line-height: 87px;
+    		margin-left:32px;
+    		font-size:fz(28);
+
+    		&.category{
+    			height:65px;
+	    		line-height: 65px;
+	    		margin-left:0px;
+    			padding-left:25px;
+    			background-color:#f5f5f5;
+    			color:#999999;
+    			font-size:fz(24);
+    		}
+    	}
+    }
+}
+
+
+section#mainMenu{
+	width: 100%;
+	height:100%;
+	position: absolute;
+    top: 0px;
+    left: 0px;
+    display: none;
+
+	div.bg{
+		height:100%;
+		background-color:rgba(0,0,0,0.3);
+		opacity: 0;
+		transition-duration: .3s;
+		transition-property: opacity;
+	}
+
+	div.inner{
+		width:465px;
+		height: 100%;
+		background-color:#fff;
+	    position: absolute;
+	    top: 0px;
+	    box-shadow:10px 0px 15px rgba(0,0,0,0.2);
+	    transition-duration: .3s;
+	    transition-property: transform;
+	    transform: translateX(-465px);
+
+	    h2{
+	    	height:60px;
+	    	padding-top:68px;
+	    	background-color:#1482d2;
+	    	color:#fff;
+	    	font-size:fz(30);
+	    	font-weight: bold;
+	    	text-align: center;
+    	    letter-spacing: 2px;
+	    }
+
+	    h3{
+	    	height:66px;
+	    	line-height: 66px;
+	    	padding-left:26px;
+	    	background-color:#f5f5f5;
+	    	color:#999999;
+	    	font-size:fz(24);
+	    	font-weight: bold;
+	    }
+
+	    ul{
+	    	margin-left:30px;
+
+	    	li{
+		    	height:99px;
+		    	border-bottom:1px solid #e5e9ea;
+
+		    	h4{
+		    		margin-bottom: 16px;
+		    		padding-top:19px;
+		    		font-size:fz(25);
+		    		font-weight: bold;
+		    	}
+
+		    	p{
+		    		color:#999999;
+		    		font-weight:fz(22);
+		    	}
+		    }
+		}
+	}
+
+}

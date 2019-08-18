@@ -1,0 +1,392 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>TypeScript HTML App</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <script src="js/createjs-2013.12.12.min.js"></script>
+    <script src="http://code.createjs.com/movieclip-0.7.1.min.js"></script>
+    <script src="assets/AssetsMain.js"></script>
+    <script src="js/pixi.js"></script>
+    <script src="js/tween.min.js"></script>
+
+    <script src="js/three.min.js"></script>
+    <script src="js/WebGLRenderer.js"></script>
+    
+    <script src="js/postprocessing/EffectComposer.js"></script>
+    <script src="js/postprocessing/MaskPass.js"></script>
+    <script src="js/postprocessing/RenderPass.js"></script>
+    <script src="js/postprocessing/ShaderPass.js"></script>
+    <script src="js/postprocessing/BloomPass.js"></script>
+    <script src="js/shaders/CopyShader.js"></script>
+    <script src="js/shaders/ConvolutionShader.js"></script>
+    <script src="js/shaders/HorizontalTiltShiftShader.js"></script>
+    <script src="js/shaders/VerticalTiltShiftShader.js"></script>
+    <script src="js/shaders/HorizontalBlurShader.js"></script>
+    <script src="js/shaders/VerticalBlurShader.js"></script>
+    <script src="js/shaders/DotScreenShader.js"></script>
+    <script src="js/shaders/RGBShiftShader.js"></script>
+    <script src="js/loaders/SceneLoader.js"></script>
+    <script src="js/loaders/DDSLoader.js"></script>
+
+    <script src="js/Octree.js"></script>
+
+    <script src="js/ShaderParticles.min.js"></script>
+
+
+
+
+    <script type="x-shader/x-vertex" id="vshader">
+        varying vec2 vUv;
+
+        void main(void) {
+        vec3 pos = position;
+
+        vUv = vec2( uv.x, uv.y );
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="fshader">
+        uniform sampler2D tDiffuse;
+        uniform sampler2D tBlur;
+        uniform sampler2D tLayer2;
+
+        varying vec2 vUv;
+
+
+
+        vec3 alphaBlend( vec4 c1, vec4 c2 ){
+        vec3 c = c1.a * c1.xyz + ( 1.0 - c1.a ) * c2.xyz;
+        return c;
+        }
+
+
+        void main(void) {
+
+        vec4 layer1Tex = texture2D( tDiffuse, vUv );
+        vec4 blurTex = texture2D( tBlur, vUv );
+        /*vec4 layer2Tex = texture2D( tLayer2, vUv );*/
+
+        //vec4 c = vec4( alphaBlend( layer2Tex, layer1Tex ), 1.0) + blurTex;
+        vec4 c = layer1Tex + vec4(0.5, 0.75, 1.0, 1.0) * blurTex * 2.0;
+        gl_FragColor = c;
+
+        }
+    </script>
+
+
+
+    <script type="x-shader/x-vertex" id="scroll-vshader">
+        uniform bool edge;
+        varying vec3 vNormal;
+        varying vec2 vUv;
+
+
+        void main(void) {
+        vec3 pos = position;
+
+        vNormal = normal;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+
+        vUv = uv;
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="scroll-fshader">
+        uniform vec3 lightDirection;
+        uniform sampler2D texture;
+        uniform sampler2D overlayTexture;
+        uniform float time;
+
+        varying vec3 vNormal;
+        varying vec2 vUv;
+
+
+        //c2に対してalphaを含むc1をアルファブレンドする
+        vec3 alphaBlend( vec4 c1, vec4 c2 ){
+        vec3 c = c1.a * c1.xyz + ( 1.0 - c1.a ) * c2.xyz;
+        return c;
+        }
+
+
+        void main(void) {
+
+        vec4 tex1 = texture2D( texture, vec2( vUv.x, vUv.y ) );
+        vec4 tex2 = texture2D( overlayTexture, vec2( vUv.x + time, vUv.y ) );
+        vec4 tex3 = texture2D( overlayTexture, vec2( vUv.x, vUv.y + time ) );
+        float diffuse = max(0.0, dot(vNormal, lightDirection));
+
+        vec4 base = vec4( 0 );
+
+        tex2 = tex2 * diffuse;
+        tex2.a = .4;
+        tex2 = vec4( alphaBlend( tex2, base ), 1.0);
+
+        tex3 = tex3 * diffuse;
+        tex3.a = .4;
+        tex3 = vec4( alphaBlend( tex3, tex2 ), 1.0);
+
+        vec4 c = tex1 + tex3;
+
+        gl_FragColor = c;
+
+        }
+    </script>
+
+
+    <script type="x-shader/x-vertex" id="toon-animate-vshader">
+        varying vec3 vNormal;
+        varying float uvY;
+        varying vec2 vUv;
+
+        uniform vec3 viewVector;
+
+        #ifdef USE_MORPHTARGETS
+
+            #ifndef USE_MORPHNORMALS
+
+                uniform float morphTargetInfluences[ 8 ];
+
+            #else
+
+                uniform float morphTargetInfluences[ 4 ];
+
+            #endif
+
+        #endif
+
+
+
+
+        void main(void) {
+
+      		vUv = uv;
+            vNormal = normal;
+
+            #ifdef USE_MORPHNORMALS
+
+                vec3 morphedNormal = vec3( 0.0 );
+
+                morphedNormal += ( morphNormal0 - normal ) * morphTargetInfluences[ 0 ];
+                morphedNormal += ( morphNormal1 - normal ) * morphTargetInfluences[ 1 ];
+                morphedNormal += ( morphNormal2 - normal ) * morphTargetInfluences[ 2 ];
+                morphedNormal += ( morphNormal3 - normal ) * morphTargetInfluences[ 3 ];
+
+                morphedNormal += normal;
+                vNormal = morphedNormal;
+
+            #endif
+
+
+            vec3 n = normalize( normalMatrix * vNormal );
+            vec3 v = normalize( normalMatrix * viewVector );
+            uvY = clamp( dot( n, v ), 0.0, 1.0 );
+            uvY = pow( uvY, 4.0 );
+
+
+            vec3 morphed = position;
+            #ifdef USE_MORPHTARGETS
+
+                morphed += ( morphTarget0 - position ) * morphTargetInfluences[ 0 ];
+                morphed += ( morphTarget1 - position ) * morphTargetInfluences[ 1 ];
+                morphed += ( morphTarget2 - position ) * morphTargetInfluences[ 2 ];
+                morphed += ( morphTarget3 - position ) * morphTargetInfluences[ 3 ];
+
+                #ifndef USE_MORPHNORMALS
+
+                    morphed += ( morphTarget4 - position ) * morphTargetInfluences[ 4 ];
+                    morphed += ( morphTarget5 - position ) * morphTargetInfluences[ 5 ];
+                    morphed += ( morphTarget6 - position ) * morphTargetInfluences[ 6 ];
+                    morphed += ( morphTarget7 - position ) * morphTargetInfluences[ 7 ];
+
+                #endif
+
+            #endif
+
+            gl_Position = projectionMatrix * modelViewMatrix * vec4( morphed, 1.0 );
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="toon-animate-fshader">
+        precision mediump float;
+
+        uniform vec3 lightDirection;
+        uniform sampler2D toonTexture;
+        uniform sampler2D texture;
+        uniform vec3 viewVector;
+
+        varying vec3 vNormal;
+        varying float uvY;
+        varying vec2 vUv;
+
+        void main(void) {
+
+            vec4 tex = texture2D( texture, vUv );
+            if ( tex.a < 0.5 ) discard;
+
+            float diffuse = clamp(dot(vNormal, lightDirection), 0.0, 1.0);
+            vec4 c = tex * texture2D(toonTexture, vec2(diffuse, uvY));
+
+            gl_FragColor = c;
+
+        }
+    </script>
+
+
+    <script type="x-shader/x-vertex" id="toon-vshader">
+        varying vec3 vNormal;
+        varying float uvY;
+        varying vec2 vUv;
+
+        uniform vec3 viewVector;
+
+
+        void main(void) {
+            vUv = uv;
+
+
+            vNormal = normal;
+
+
+            vec3 n = normalize( normalMatrix * normal );
+            vec3 v = normalize( normalMatrix * viewVector );
+            uvY = clamp( dot( n, v ), 0.0, 1.0 );
+            uvY = pow( uvY, 4.0 );
+
+
+            gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="toon-fshader">
+        precision mediump float;
+
+        uniform vec3 lightDirection;
+        uniform sampler2D toonTexture;
+        uniform sampler2D texture;
+
+        varying vec3 vNormal;
+        varying float uvY;
+        varying vec2 vUv;
+
+        void main(void) {
+
+            vec4 tex = texture2D( texture, vUv );
+            if ( tex.a < 0.5 ) discard;
+
+            //float diffuse = clamp(dot(vNormal, lightDirection), 0.0, 1.0);
+            //vec4 c = tex * texture2D(toonTexture, vec2(diffuse, uvY));
+            //gl_FragColor = c;
+            gl_FragColor = tex;
+        }
+    </script>
+
+
+    <script type="x-shader/x-vertex" id="toon-alpha-vshader">
+        varying vec3 vNormal;
+        varying float uvY;
+        varying vec2 vUv;
+
+        uniform vec3 viewVector;
+
+
+        void main(void) {
+            vUv = uv;
+
+
+            vNormal = normal;
+
+
+            vec3 n = normalize( normalMatrix * normal );
+            vec3 v = normalize( normalMatrix * viewVector );
+            uvY = clamp( dot( n, v ), 0.0, 1.0 );
+            uvY = pow( uvY, 4.0 );
+
+
+            gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="toon-alpha-fshader">
+        precision mediump float;
+
+        uniform vec3 lightDirection;
+        uniform sampler2D toonTexture;
+        uniform sampler2D texture;
+        uniform sampler2D alphaTexture;
+
+        varying vec3 vNormal;
+        varying float uvY;
+        varying vec2 vUv;
+
+        void main(void) {
+
+            vec4 alphaTex = texture2D( alphaTexture, vUv );
+            if ( alphaTex.x < 0.5 ) discard;
+
+            vec4 tex = texture2D( texture, vUv );
+            tex.a = alphaTex.x;
+            //float diffuse = clamp(dot(vNormal, lightDirection), 0.0, 1.0);
+            //vec4 c = tex * texture2D(toonTexture, vec2(diffuse, uvY));
+            //gl_FragColor = c;
+            gl_FragColor = tex;
+        }
+    </script>
+
+
+
+
+    <script type="x-shader/x-vertex" id="outline-vshader">
+
+
+        uniform float size;
+        uniform float morphTargetInfluences[ 4 ];
+
+
+
+        void main(){
+
+            vec3 morphedNormal = vec3( 0.0 );
+
+            morphedNormal +=  ( morphNormal0 - normal ) * morphTargetInfluences[ 0 ];
+            morphedNormal +=  ( morphNormal1 - normal ) * morphTargetInfluences[ 1 ];
+            morphedNormal +=  ( morphNormal2 - normal ) * morphTargetInfluences[ 2 ];
+            morphedNormal +=  ( morphNormal3 - normal ) * morphTargetInfluences[ 3 ];
+            morphedNormal += normal;
+
+            vec3 morphed = vec3( 0.0 );
+            morphed += ( morphTarget0 - position ) * morphTargetInfluences[ 0 ];
+            morphed += ( morphTarget1 - position ) * morphTargetInfluences[ 1 ];
+            morphed += ( morphTarget2 - position ) * morphTargetInfluences[ 2 ];
+            morphed += ( morphTarget3 - position ) * morphTargetInfluences[ 3 ];
+            morphed += position;
+
+            vec3 p = morphed + morphedNormal * vec3( size );
+            gl_Position = projectionMatrix * modelViewMatrix * vec4( p, 1.0 );
+
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="outline-fshader">
+        uniform vec4 color;
+
+
+
+        void main(void){
+
+            gl_FragColor = color;
+
+        }
+    </script>
+
+
+    <script src="js/all.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="debug">DEBUG</div>
+    <div id="sound-btn">sound</div>
+</body>
+</html>
