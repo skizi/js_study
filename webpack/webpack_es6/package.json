@@ -1,7 +1,6 @@
 {
-  "name": "",
+  "name": "webpack_es6",
   "version": "1.0.0",
-  "description": "",
   "author": "yoshi",
   "private": true,
   "scripts": {
@@ -50,5 +49,6 @@
     "webpack-dev-server": "^2.7.1"
   },
   "main": "webpack.config.js",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }
