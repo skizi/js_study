@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "start": "webpack -w",
+    "start": "webpack-dev-server",
     "precommit": "lint-staged"
   },
   "dependencies": {
@@ -46,7 +46,7 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "webpack": "^3.5.5",
-    "webpack-cli": "^3.3.6",
+    "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^2.7.1"
   },
   "main": "webpack.config.js",

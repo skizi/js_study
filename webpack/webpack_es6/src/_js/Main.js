@@ -4,8 +4,7 @@ class Main{
 
   constructor(){
 
-    console.log(11);
-    
+    alert(1121);
     
   }
 
