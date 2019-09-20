@@ -1,13 +1,12 @@
-var path = require('path'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin');
+// var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var PrettierPlugin = require("prettier-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const glob = require('glob');
+// const glob = require('glob');
 const globule = require('globule'); //ファイル検索用モジュール
 
 //__dirnameはconfigファイルのある場所のディレクトリが入ってる
-const src = path.resolve(__dirname, 'src');
-const dist = path.resolve(__dirname, 'htdocs');
+// const src = path.resolve(__dirname, 'src');
 
 
 //.pugファイルを探し、
@@ -42,6 +41,7 @@ const getEntriesList = (targetTypes) => {
 
 const app = [
   {
+
     // メインとなるJavaScriptファイル（エントリーポイント）
     entry: {
       main : './src/_js/Main.js',
@@ -64,10 +64,12 @@ const app = [
     //https://nogson2.hatenablog.com/entry/2018/02/01/005525
     devServer: {
       open : true, //サーバー起動時にブラウザを開くか
-      contentBase: path.join(__dirname, "htdocs"), //サーバーの起点ディレクトリ
+      contentBase: `${__dirname}/htdocs`, //サーバーの起点ディレクトリ
       inline : true, //ライブリロードを行うか
       port: 8080
     },
+
+    devtool:'cheap-module-eval-source-map', //jsのソースマップ出力（バグが分かりやすくなる）
 
     module: {
       loaders: [
@@ -79,15 +81,23 @@ const app = [
             presets: ['es2015']
           }
         },
-        {
-          test: /\.js$/,
-          exclude: /(node_modules|common)/,
-          loader: "eslint-loader",
-          enforce: 'pre' //実行タイミングの指定。この場合'pre'がついていないローダーより早く処理が実行される
-        }
+        // { //eslintで構文チェックする場合。.eslintrcは設定ファイル
+        //   test: /\.js$/,
+        //   exclude: /(node_modules|common)/,
+        //   loader: "eslint-loader",
+        //   enforce: 'pre' //実行タイミングの指定。この場合'pre'がついていないローダーより早く処理が実行される
+        // }
       ],
     },
 
+    //Prettierを指定
+    plugins: [
+      new PrettierPlugin({
+        useTabs: true,
+        printWidth: 80,
+        singleQuote: true,
+      })
+    ],
 
   },
 
@@ -133,17 +143,15 @@ const app = [
     },
     module: {
         loaders: [
-            {
+            { //文字化け対策にfont-family-unescape-loaderを使用
               test: /\.scss$/,
               //loader: ExtractTextPlugin.extract('css-loader!sass-loader')
-              loader: ExtractTextPlugin.extract('font-family-unescape-loader!css-loader!sass-loader') //文字化け対策にfont-family-unescape-loaderを使用
+              loader: ExtractTextPlugin.extract('font-family-unescape-loader!css-loader!sass-loader')
             },
-            // {
-            //   test: /\.otf$/,
-            //   loader: 'url?mimetype=application/font-otf&name=[path][name].[ext]'
-            //   test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-            //   loader: 'file-loader?name=../htdocs/assets/common/font/[name].[ext]'
-            // },
+            { //フォントの読み込み用
+              test: /\.(woff|woff2|eot|ttf|otf)$/,
+              loader: "file-loader"
+            },
         ]
     },
     devtool: 'source-map', //ソースマップを出力するように
