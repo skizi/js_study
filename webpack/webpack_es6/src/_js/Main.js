@@ -4,7 +4,7 @@ class Main{
 
   constructor(){
 
-    alert(1121);
+    alert(2);
     
   }
 
