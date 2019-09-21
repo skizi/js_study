@@ -2,8 +2,11 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var PrettierPlugin = require("prettier-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const glob = require('glob');
 const globule = require('globule'); //ファイル検索用モジュール
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
+
 
 //__dirnameはconfigファイルのある場所のディレクトリが入ってる
 // const src = path.resolve(__dirname, 'src');
@@ -39,134 +42,130 @@ const getEntriesList = (targetTypes) => {
 
 
 
-const app = [
-  {
+const app = {
 
-    // メインとなるJavaScriptファイル（エントリーポイント）
-    entry: {
-      main : './src/_js/Main.js',
-      // libs : [
-      //   './common/js/libs/jquery-3.1.1.js',
-      //   './common/js/libs/pixi.js',
-      //   './common/js/tween.js',
-      //   './common/js/libs/pixi-projection.js',
-      //   './common/js/libs/howler.min.js'
-      // ]
-    },
+  mode: 'development',
 
-    // ファイルの出力設定
-    output: {
-      //  出力ファイルのディレクトリ名
-      path: `${__dirname}/htdocs/assets/js`,
-      filename: '[name].js'
-    },
-
-    //https://nogson2.hatenablog.com/entry/2018/02/01/005525
-    devServer: {
-      open : true, //サーバー起動時にブラウザを開くか
-      contentBase: `${__dirname}/htdocs`, //サーバーの起点ディレクトリ
-      inline : true, //ライブリロードを行うか
-      port: 8080
-    },
-
-    devtool:'cheap-module-eval-source-map', //jsのソースマップ出力（バグが分かりやすくなる）
-
-    module: {
-      loaders: [
-        {
-          test: /\.js$/, // ローダーの処理対象ファイル
-          exclude: /(node_modules|common)/, // ローダーの処理対象から外すディレクトリ
-          loader: "babel-loader", //使用するloader名
-          query:{ //loader に渡したいクエリパラメータ
-            presets: ['es2015']
-          }
-        },
-        // { //eslintで構文チェックする場合。.eslintrcは設定ファイル
-        //   test: /\.js$/,
-        //   exclude: /(node_modules|common)/,
-        //   loader: "eslint-loader",
-        //   enforce: 'pre' //実行タイミングの指定。この場合'pre'がついていないローダーより早く処理が実行される
-        // }
-      ],
-    },
-
-    //Prettierを指定
-    plugins: [
-      new PrettierPlugin({
-        useTabs: true,
-        printWidth: 80,
-        singleQuote: true,
-      })
-    ],
-
+  entry: {
+    'main' : './src/_js/Main.js',
+    'style.css' : './src/_scss/style.scss',
   },
 
-
-  //pugの設定
-  {
-    // entry: {
-    //   index: glob.sync('./**/*.pug', /*{ cwd: src }*/),
-    // },
-    entry : getEntriesList(targetTypes),
-    output: {
-      path: `${__dirname}/htdocs`,
-      filename: '[name]'
-    },
-    module: {
-      rules: [
-        {
-          test: /\.pug$/,
-          use: [         
-            { loader:'html-loader'},
-            {
-              loader:'pug-html-loader',
-              options: {
-                pretty: true,
-              }
-            },
-          ]
-        },
-      ]
-    },
-    plugins : [] //後でjsで中身を代入するので必要
+  output: {
+    path: `${__dirname}/htdocs`,
+    filename: 'assets/js/[name].js'
   },
 
+  //https://nogson2.hatenablog.com/entry/2018/02/01/005525
+  devServer: {
+    open : true, //サーバー起動時にブラウザを開くか
+    contentBase: `${__dirname}/htdocs`, //サーバーの起点ディレクトリ
+    watchContentBase:true,
+    inline : true, //ライブリロードを行うか
+    port: 8080
+  },
 
-  //cssの設定
-  {
-    entry: {
-        style: './src/_scss/style.scss'
-    },
-    output: {
-        path: `${__dirname}/htdocs/assets/css`,
-        filename: '[name].css'
-    },
-    module: {
-        loaders: [
-            { //文字化け対策にfont-family-unescape-loaderを使用
-              test: /\.scss$/,
-              //loader: ExtractTextPlugin.extract('css-loader!sass-loader')
-              loader: ExtractTextPlugin.extract('font-family-unescape-loader!css-loader!sass-loader')
-            },
-            { //フォントの読み込み用
-              test: /\.(woff|woff2|eot|ttf|otf)$/,
-              loader: "file-loader"
-            },
+  // devtool:'cheap-module-eval-source-map', //jsのソースマップ出力（バグが分かりやすくなる）
+　devtool: 'eval-source-map',
+
+  module: {
+    rules: [
+
+      //pug
+      {
+        test: /\.pug$/,
+        use: [         
+          { loader:'html-loader'},
+          {
+            loader:'pug-html-loader',
+            options: {
+              pretty: true,
+            }
+          },
         ]
-    },
-    devtool: 'source-map', //ソースマップを出力するように
-    plugins: [
-        new ExtractTextPlugin('[name].css') //文字化け対策の対象ファイルを指定する
-    ]
-  }
+      },
 
-];
+      //js
+      {
+        test: /\.js$/, // ローダーの処理対象ファイル
+        exclude: /(node_modules|common)/, // ローダーの処理対象から外すディレクトリ
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015']
+            }
+          }
+        ],
+      },
+      // { //eslintで構文チェックする場合。.eslintrcは設定ファイル
+      //   test: /\.js$/,
+      //   exclude: /(node_modules|common)/,
+      //   loader: "eslint-loader",
+      //   enforce: 'pre' //実行タイミングの指定。この場合'pre'がついていないローダーより早く処理が実行される
+      // }
+
+      //css
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it uses publicPath in webpackOptions.output
+              publicPath: '../',
+              hmr: process.env.NODE_ENV === 'development',
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+              sourceMap: true
+            }
+          },
+          'sass-loader',
+        ]
+      },
+      { //フォントの読み込み用
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        loader: "file-loader"
+      },
+
+    ],
+  },
+
+  //Prettierを指定
+  plugins: [
+
+    //cssファイルをjsに含めいないようにする（webpackはデフォルトではcssをjsに含めようとする）
+    new MiniCssExtractPlugin({
+      filename: 'assets/css/[name]',
+      ignoreOrder: false
+    }),
+
+    //style.css.jsみたいなゴミファイルを生成しないようにする
+    new FixStyleOnlyEntriesPlugin({
+      extensions: ['scss', 'css']
+    }),
+
+    //js
+    new PrettierPlugin({
+      useTabs: true,
+      printWidth: 80,
+      singleQuote: true,
+    }),
+
+  ],
+
+};
 
 
 
 //pugの設定のplugins配列に、new HtmlWebpackPluginを入れていく
 for(const [ targetName, srcName ] of Object.entries(getEntriesList({ pug : 'html' }))) {
-  app[1].plugins.push(new HtmlWebpackPlugin({
+  app.plugins.push(new HtmlWebpackPlugin({
     filename : targetName,
     template : srcName
   }));

@@ -1,6 +1,6 @@
 class Main {
 	constructor() {
-		alert(2);
+		// alert(21);
 	}
 
 	check() {
