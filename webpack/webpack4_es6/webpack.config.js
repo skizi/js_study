@@ -60,7 +60,7 @@ const app = {
   devServer: {
     open : true, //サーバー起動時にブラウザを開くか
     contentBase: `${__dirname}/htdocs`, //サーバーの起点ディレクトリ
-    watchContentBase:true,
+    watchContentBase:true, //HTMLファイルなどもウォッチ対象にする場合はtrue
     inline : true, //ライブリロードを行うか
     port: 8080
   },
@@ -111,12 +111,6 @@ const app = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              // you can specify a publicPath here
-              // by default it uses publicPath in webpackOptions.output
-              publicPath: '../',
-              hmr: process.env.NODE_ENV === 'development',
-            },
           },
           {
             loader: 'css-loader',
