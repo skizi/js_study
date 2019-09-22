@@ -1,0 +1,459 @@
+
+/* -----------------------------------------------
+ * LIBRARY STYLE Single
+ * ----------------------------------------------- */
+.container-librarySingle {
+  position: relative;
+  padding: 120px 30px 0;
+
+  .container__inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    @include REM_FONT(0);
+  }
+
+
+  /*--------左側のコンテンツ----------*/
+  .container__detail {
+    width: 310px;
+    padding: 26px 30px 30px;
+    background-color: $COL_BASE;
+    overflow: hidden;
+  }
+
+  .container__manapos {
+    p {
+      color: #fff;
+      font-family: $FONT_NSB;
+      @include REM_FONT(18);
+      line-height: 1.5;
+
+      & + p {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .container__name {
+    margin-top: 52px;
+
+    p {
+      color: #fff;
+      font-family: $FONT_NSB;
+      line-height: 1;
+
+      &.is-en {
+        @include REM_FONT(34);
+
+        line-height: 1.3;
+      }
+
+      &.is-jp {
+        margin-top: 18px;
+
+        @include REM_FONT(16);
+      }
+
+      &.is-nick {
+        margin-top: 10px;
+
+        @include REM_FONT(16);
+      }
+    }
+  }
+
+  .container__flag {
+    margin-top: 53px;
+  }
+
+  .container__flag__head {
+    margin-bottom: 10px;
+
+    span {
+      color: $COL_RED;
+      font-family: $FONT_NSM;
+
+      @include REM_FONT(14);
+
+      line-height: 1;
+    }
+  }
+
+  .container__flag__icon {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 26px;
+    height: 26px;
+    border: 1px solid $COL_RED {
+      radius: 30px;
+    };
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      width: 13px;
+      height: 16px;
+      background: url(/img/common/icon_flag.svg) no-repeat 0 0 {
+        size: contain;
+      };
+   
+    }
+ 
+  }
+
+  .container__flag__num {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+
+    span {
+      font-family: $FONT_NSM;
+      color: $COL_RED;
+      @include REM_FONT(24);
+      line-height: 1;
+    }
+  }
+
+  .container__cate {
+    margin-top: 50px;
+  }
+
+  .container__cate__item {
+    span {
+      color: #fff;
+      font-family: $FONT_NSM;
+      @include REM_FONT(14);
+      line-height: 1.8;
+    }
+  }
+
+  .container__sns {
+    margin-top: 30px;
+  }
+
+  .container__sns__item {
+    display: inline-block;
+    vertical-align: middle;
+
+    a {
+      position: relative;
+      display: block;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: background 0.3s;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    & + .container__sns__item {
+      margin-left: 20px;
+    }
+  }
+
+  .container__sns__item-fb {
+    a {
+      width: 26px;
+      height: 26px;
+
+      &:before {
+        width: 26px;
+        height: 26px;
+        background: url("/img/common/sns_icon_fb.svg") no-repeat 0 0 {
+          size: contain;
+        };
+      }
+
+      &:hover {
+        &:before {
+          background: url("/img/common/sns_icon_fb_h.svg") no-repeat 0 0 {
+            size: contain;
+          };
+        }
+      }
+    }
+  }
+
+  .container__sns__item-tw {
+    a {
+      width: 31px;
+      height: 24px;
+
+      &:before {
+        width: 31px;
+        height: 24px;
+        background: url("/img/common/sns_icon_tw.svg") no-repeat 0 0 {
+          size: contain;
+        };
+      }
+
+      &:hover {
+        &:before {
+          background: url("/img/common/sns_icon_tw_h.svg") no-repeat 0 0 {
+            size: contain;
+          };
+        }
+      }
+    }
+  }
+
+  .container__sns__item-insta {
+    a {
+      width: 26px;
+      height: 26px;
+
+      &:before {
+        width: 26px;
+        height: 26px;
+        background: url("/img/common/sns_icon_insta.svg") no-repeat 0 0 {
+          size: contain;
+        };
+      }
+
+      &:hover {
+        &:before {
+          background: url("/img/common/sns_icon_insta_h.svg") no-repeat 0 0 {
+            size: contain;
+          };
+        }
+      }
+    }
+  }
+
+
+  /*--------右側のコンテンツ----------*/
+  .container__main {
+    width: calc(100% - 310px);
+    min-height: calc(100vh - 165px);
+    padding-bottom: 64px;
+    overflow-x: hidden;
+  }
+
+  .container__visual {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .container__main__inner {
+    max-width: 830px;
+    margin: 66px auto 0;
+    padding: 0 97.5px;
+  }
+
+  .container__comment {
+    p {
+      color: $COL_BASE;
+      font-family: $FONT_NSR;
+      @include REM_FONT(22);
+      line-height: 1.8;
+      position: relative;
+    }
+  }
+
+  /*スキル*/
+  .container__skill {
+    margin-top: 68px;
+    padding-top: 56px;
+    border: {
+      top: 1px solid $COL_SUB2;
+    };
+  }
+
+  .container__skill__title {
+    margin: {
+      bottom: 19px;
+    };
+
+    span {
+      color: $COL_BASE;
+
+      @include REM_FONT(22);
+
+      line-height: 1;
+    }
+  }
+
+  .container__skill__list {
+    @include REM_FONT(0);
+  }
+
+  .container__skill__item {
+    width: 44.094488%;
+    display: inline-block;
+    vertical-align: top;
+
+    &:nth-child(2n) {
+      margin: {
+        left: 11.811023%;
+      };
+    }
+
+    &:nth-child(n+3) {
+      margin: {
+        top: 6px;
+      };
+    }
+  }
+
+  .container__skill__head {
+    width: 33.571428%;
+    display: inline-block;
+    vertical-align: middle;
+
+    span {
+      font-family: $FONT_NSM;
+
+      @include REM_FONT(14);
+
+      line-height: 1.1;
+      word-break: break-all;
+    }
+  }
+
+  .container__skill__level {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+
+    width: 55.714285%;
+    height: 3px;
+    background-color: $COL_GRAY;
+
+    .container__skill__value {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background-color: $COL_BASE;
+      transform:scale(0,1);
+      transition-duration: 0.5s;
+      transition-property: transform;
+      transform-origin: left;
+    }
+
+
+    @for $i from 1 through 10{
+      &.is-level#{$i}{
+        .container__skill__value{
+          width:#{$i*10%};
+        }
+      }
+    }
+  }
+
+  .container__content {
+    margin-top: 84px;
+  }
+
+
+  /*XFLAG work、Private workまわり*/
+  .container__tabs {
+    @include clearfix;
+    margin-bottom: 60px;
+    text-align: center;
+  }
+
+  .container__tab__item {
+    display: block;
+    vertical-align: top;
+    float:left;
+    overflow: hidden;
+
+    width: 48.818897%;
+    padding: 9px 0;
+    background-color: $COL_GRAY;
+    cursor: pointer;
+    transition: background 0.3s;
+    position: relative;
+
+    span {
+      color: #fff;
+      font-family: $FONT_NSM;
+
+      @include REM_FONT(18);
+
+      line-height: 1;
+    }
+
+    &:hover {
+      background-color: $COL_BASE;
+    }
+
+    &.is-current {
+      background-color: $COL_BASE;
+    }
+
+    & + .container__tab__item {
+      margin: {
+        left: 2.362204%;
+      };
+    }
+
+    &.non-active:hover{
+      background-color: $COL_GRAY;
+      cursor:default;
+    }
+  }
+
+  .container__content__item {
+    display: none;
+
+    &.is-current {
+      display: block;
+    }
+
+    &.container__work{
+      .thumbnail{
+        width: 48.818897%;
+      }
+    }
+  }
+
+}
+
+
+@media screen and (max-width: 750px){
+  .container-librarySingle{
+    padding: 160px 30px 0;
+
+    .container__detail {
+      position: static;
+      width: 100%;
+    }
+
+    .container__title br{
+      display: none;
+    }
+
+    .container__credits{
+      margin-top: 40px;
+    }
+
+    .container__main{
+      width:100%;
+    }
+
+    .container__main__inner{
+      padding: 0;
+    }
+  }
+}

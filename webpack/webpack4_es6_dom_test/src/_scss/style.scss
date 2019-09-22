@@ -1,0 +1,14 @@
+@font-face {
+	font-family: 'harenosora-font';
+	src: url('/assets/font/Harenosora.otf'), format('opentype');
+}
+
+.wrapper {
+	font-family: 'harenosora-font', serif;
+	width: 1024px;
+	margin: 0 auto;
+}
+
+* {
+	background-color: #fff;
+}

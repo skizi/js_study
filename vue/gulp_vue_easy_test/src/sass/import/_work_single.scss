@@ -1,0 +1,368 @@
+
+
+
+/* -----------------------------------------------
+ * WORK STYLE Single
+ * ----------------------------------------------- */
+.container-workSingle {
+  position: relative;
+  padding: 120px 30px 0; 
+
+  .container__inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    @include REM_FONT(0);
+  }
+
+  /*--------左側のコンテンツ----------*/
+  .container__detail {
+    color: #fff;
+    width: 310px;
+    padding: 30px;
+    background-color: $COL_BASE;
+    overflow: hidden;
+  }
+
+  .container__date {
+    p {
+      font-family: $FONT_NSB;
+      line-height: 1;
+
+      &.is-year {
+        @include REM_FONT(28);
+      }
+
+      &.is-month {
+        margin-top: 7px;
+
+        @include REM_FONT(14);
+      }
+    }
+  }
+
+  .container__title {
+    margin-top: 35px;
+
+    span {
+      font-family: $FONT_NSB;
+
+      @include REM_FONT(30);
+
+      line-height: 1.4;
+    }
+  }
+  /*
+  .container__fav {
+    margin-top: 53px;
+  }
+
+  .container__fav__btn {
+    display: inline-block;
+    padding: 7px 17px;
+    border: 1px solid $COL_RED {
+      radius: 50px;
+    };
+    transition: background 0.3s;
+    cursor: pointer;
+
+    .container__fav__icon {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      width: 22px;
+      height: 21px;
+      transform: translate3d(0, 0, 0);
+      margin-right: 6px;
+      background: url(/img/common/icon_fav.svg) no-repeat 0 0 {
+        size: contain;
+      };
+      transition: background 0.3s;
+    }
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      font-family: $FONT_NSM;
+      color: $COL_RED;
+
+      @include REM_FONT(21);
+
+      line-height: 1;
+      transition: color 0.3s;
+    }
+
+    &:hover {
+      background-color: $COL_RED;
+
+      .container__fav__icon {
+        background: url(/img/common/icon_fav_w.svg) no-repeat 0 0 {
+          size: contain;
+        };
+      }
+
+      span {
+        color: #fff;
+      }
+    }
+
+    &.is-finished {
+      background-color: $COL_RED;
+
+      // pointer-events: none
+      .container__fav__icon {
+        background: url(/img/common/icon_fav_w.svg) no-repeat 0 0 {
+          size: contain;
+        };
+      }
+
+      span {
+        color: #fff;
+      }
+    }
+  }
+  */
+  .container__credits {
+    margin-top: 102px;
+  }
+
+  .container__credits__title {
+    margin-bottom: 20px;
+
+    span {
+      color: #fff;
+
+      @include REM_FONT(12);
+
+      line-height: 1;
+      letter-spacing: 0;
+    }
+  }
+
+  .container__credits__item {
+    & + .container__credits__item {
+      margin-top: 21px;
+    }
+  }
+
+  .container__credits__head {
+    span {
+      color: #fff;
+
+      @include REM_FONT(12);
+
+      line-height: 1.4;
+      letter-spacing: 0;
+    }
+  }
+
+  .container__credits__name {
+    span {
+      color: #fff;
+
+      @include REM_FONT(12);
+
+      line-height: 1.4;
+      letter-spacing: 0;
+    }
+  }
+
+
+  /*--------右側のコンテンツ----------*/
+  .container__main {
+    width: calc(100% - 310px);
+    min-height: calc(100vh - 165px);
+    padding-bottom: 64px;
+    overflow-x: hidden;
+  }
+
+  .container__visual {
+    position: relative;
+    padding-bottom: 20px;
+    z-index: 0;
+  }
+
+  .container__visual__slide {
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .container__visual__pagination {
+    bottom: 0;
+    width: 100%;
+
+    .swiper-pagination-bullet {
+      width: 6px;
+      height: 6px;
+      border: 1px solid $COL_BASE;
+      background-color: transparent;
+      opacity: 1;
+
+      & + .swiper-pagination-bullet {
+        margin-left: 12px;
+      }
+    }
+
+    .swiper-pagination-bullet-active {
+      background-color: $COL_BASE;
+    }
+  }
+
+  .container__main__inner {
+    max-width: 830px;
+    margin: 66px auto 0;
+    padding: 0 97.5px;
+  }
+
+  .container__tag{
+    margin-bottom: 20px;
+
+    li{
+      line-height: 20px;
+      margin: 0 5px 5px 0;
+      padding: 2px 5px;
+      display: inline-block;
+      background-color: #000;
+      color: #fff;
+      font-size: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .container__comment {
+    p {
+      color: $COL_BASE;
+      font-family: $FONT_NSR;
+      @include REM_FONT(20);
+      line-height: 1.8;
+      position: relative;
+    }
+
+    & + .container__content {
+      margin-top: 85px;
+    }
+  }
+
+
+  /*サブ画像*/
+  .container__content {
+    & + .container__member {
+      margin-top: 116px;
+    }
+  }
+
+  .container__content__item {
+    & + .container__content__item {
+      margin-top: 83px;
+    }
+  }
+
+  .container__content__img {
+    position: relative;
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    & + .container__content__txt {
+      margin-top: 36px;
+    }
+  }
+
+  .container__content__txt {
+    p {
+      position: relative;
+      color: $COL_BASE;
+      font-family: $FONT_NSR;
+
+      @include REM_FONT(16);
+
+      line-height: 1.84;
+    }
+  }
+
+  /*プロジェクトメンバー*/
+  .container__member{
+    width: 100%;
+
+    .container__member__title{
+      margin-bottom: 38px;
+
+      span {
+        color: $COL_BASE;
+        font-family: $FONT_NSR;
+
+        @include REM_FONT(20);
+
+        line-height: 1;
+      }
+    }
+
+    .thumbnail{
+      width: 48.818897%;
+      display: inline-block;
+      vertical-align: top;
+
+      &:nth-child(2n) {
+        margin: {
+          left: 15px;
+          left: 2.362204%;
+        };
+      }
+
+      &:nth-child(n+3) {
+        margin: {
+          top: 34px;
+        };
+      }
+    }
+  }
+
+  .container__member__list {
+    & + .container__member__list {
+      position: relative;
+      margin-top: 32px;
+      padding-top: 40px;
+      border-top: 1px solid $COL_GRAY;
+    }
+  }
+}
+
+
+
+
+@media screen and (max-width: 750px){
+  .container-workSingle{
+    padding: 160px 30px 0;
+
+    .container__detail {
+      position: static;
+      width: 100%;
+    }
+
+    .container__title br{
+      display: none;
+    }
+
+    .container__credits{
+      margin-top: 40px;
+    }
+
+    .container__main{
+      width:100%;
+    }
+
+    .container__main__inner{
+      padding: 0;
+    }
+  }
+}

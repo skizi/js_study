@@ -1,0 +1,54 @@
+{
+  "name": "html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^9.1.0",
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browser-sync": "^2.24.6",
+    "browserify": "^16.2.2",
+    "fs": "0.0.1-security",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-cache": "^1.0.2",
+    "gulp-changed": "^3.2.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-pleeease": "^2.0.2",
+    "gulp-plumber": "^1.2.0",
+    "gulp-postcss": "^7.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.1",
+    "gulp-uglify": "^3.0.1",
+    "http": "0.0.0",
+    "path": "^0.12.7",
+    "run-sequence": "^2.2.1",
+    "underscore": "^1.9.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0",
+    "vue-router": "^3.0.1",
+    "vueify": "^9.4.1",
+    "vuex": "^2.2.1"
+  },
+  "dependencies": {
+    "envify": "^4.1.0",
+    "eslint-config-vue": "^2.0.2",
+    "eslint-plugin-vue": "^5.1.0",
+    "gulp-eslint": "^5.0.0",
+    "gulp-strip-debug": "^3.0.0",
+    "vue": "^2.5.17"
+  },
+  "browser": {
+    "vue": "vue/dist/vue.common.js"
+  }
+}

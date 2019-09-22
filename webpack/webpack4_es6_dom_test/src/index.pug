@@ -1,0 +1,44 @@
+doctype
+html(lang="ja")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    meta(name="description", content="")
+    meta(name="keywords", content="")
+    meta(name="author", content="")
+    meta(property="og:title", content="タイトル")
+    meta(property="og:type", content="website")
+    meta(property="og:url", content="http://任意のURL")
+    meta(property="og:image", content="http://任意のURL/og_image.png")
+    meta(property="og:site_name", content="")
+    meta(property="og:description", content="")
+    meta(property="fb:app_id", content="任意のID")
+    title タイトル
+    //- link(rel='stylesheet', href="/assets/css/style.css")
+    //- script(src="/assets/js/main.js")
+
+  body
+
+    .wrapper
+        header
+            h1 Header
+
+        article
+            section.intro
+                h2.title タイトル
+
+                ul.menu
+                    li 見出し1
+                    li 見出し2
+                    li 見出し3
+
+                ul.menu2
+                    li メニュー２
+
+            form( name="test_form" )
+                input( type="text" name="name" tabindex="1" )
+                input( type="text" name="code" tabindex="2" )
+                input( type="file" name="file" tabindex="3" )
+                button( name="btn" type="button" tabindex="4" ) 送信
+
