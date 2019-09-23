@@ -1,3 +1,5 @@
+import Test from './Test';
+
 class Main {
 	constructor() {
 		//querySelector
@@ -77,6 +79,62 @@ class Main {
 			'click',
 			this.submitForm.bind(this)
 		);
+
+		//1.1.1.1 -> 1[.]1[.]1[.]1
+		var defangIPaddr = function(address) {
+			return address.replace(/\./g, '[.]');
+		};
+
+		console.log(defangIPaddr('1.1.1.1'));
+
+		//
+		var numJewelsInStones = function(J, S) {
+			var j = J.split('A').length - 1;
+			var s = S.split('A').length - 1;
+			return j + s;
+		};
+		console.log(numJewelsInStones('aA', 'aAAbbbb'));
+
+		//
+		var toLowerCase = function(str) {
+			let lowerCase = '';
+
+			for (let letter of str) {
+				const index = letter.charCodeAt(0);
+				if (index >= 65 && index <= 90) {
+					console.log(index + ':' + letter);
+					letter = String.fromCharCode(index + 32);
+				}
+				lowerCase += letter;
+			}
+
+			return lowerCase;
+		};
+		console.log(toLowerCase('aaBB'));
+
+		//
+
+		function Person() {
+			console.log(1);
+		}
+		var person1 = Person();
+		var person2 = new Person();
+		console.log(person1);
+		console.log(person2);
+
+		//
+		new Test();
+
+		//
+		Array.prototype.duplicate = function() {
+			return this.concat(this);
+		};
+		console.log([1, 2, 3, 4, 5].duplicate());
+
+		//
+		let flag = true;
+		let hoge = flag ? true : false;
+		console.log(hoge);
 	}
 
 	//-----------------------------mosue event test-----------------------------

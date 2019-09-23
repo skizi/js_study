@@ -12,3 +12,16 @@
 * {
 	background-color: #fff;
 }
+
+.flex {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	li {
+		width: 100px;
+		display: block;
+		background-color: #ddd;
+		margin: 0 5px 5px;
+		list-style: none;
+	}
+}
