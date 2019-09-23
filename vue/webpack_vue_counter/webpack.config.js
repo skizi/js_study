@@ -2,7 +2,20 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 
+//画像圧縮用
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Imagemin = require('imagemin-webpack-plugin').default;
+const ImageminMozjpeg = require('imagemin-mozjpeg');
+const ImageminPngquant = require('imagemin-pngquant');
+const ImageminGifsicle = require('imagemin-gifsicle');
+const ImageminSvgo = require('imagemin-svgo');
+
+
+
+
 module.exports = {
+
+  mode : 'development', //production
   
   // エントリポイントのファイル
   entry: './src/vue/app.js',
@@ -55,6 +68,25 @@ module.exports = {
     extensions: ['.js', '.vue'],
   },
 
-  //vue-loaderのv15以上を扱う場合は必要
-  plugins: [new VueLoaderPlugin()],
+  plugins: [
+
+    //vue-loaderのv15以上を扱う場合は必要
+    new VueLoaderPlugin(),
+
+    //画像圧縮
+    new CopyWebpackPlugin([{
+      from: './src/_img',
+      to: 'assets/img'
+    }]),
+    
+    new Imagemin({
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      plugins: [
+        ImageminMozjpeg({ quality: 80 }),
+        ImageminPngquant({ quality: [0.5, 1] }),
+        ImageminGifsicle(),
+        ImageminSvgo()
+      ]
+    })
+  ],
 }

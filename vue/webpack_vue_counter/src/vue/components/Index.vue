@@ -12,7 +12,8 @@
 
       </div>
      </main>
-     
+    
+     <img src="/assets/img/db3ec985ddafea6bed1cb04b95337a95_600.jpg">
 
      <Modal v-if="$store.getters.showModalFlag"></Modal>
     

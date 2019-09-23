@@ -6,10 +6,22 @@ const globule = require('globule'); //ファイル検索用モジュール
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+//画像圧縮用
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Imagemin = require('imagemin-webpack-plugin').default;
+const ImageminMozjpeg = require('imagemin-mozjpeg');
+const ImageminPngquant = require('imagemin-pngquant');
+const ImageminGifsicle = require('imagemin-gifsicle');
+const ImageminSvgo = require('imagemin-svgo');
 
 
 //__dirnameはconfigファイルのある場所のディレクトリが入ってる
 // const src = path.resolve(__dirname, 'src');
+
+
+
 
 
 //.pugファイルを探し、
@@ -44,6 +56,8 @@ const getEntriesList = (targetTypes) => {
 
 const app = {
 
+  //productionでjs,cssをmini化できる。
+  //cssをmini化するにはOptimizeCSSAssetsPluginが必要。
   mode: 'development',
 
   entry: {
@@ -151,7 +165,28 @@ const app = {
       singleQuote: true,
     }),
 
+    //画像圧縮
+    new CopyWebpackPlugin([{
+      from: './src/_img',
+      to: 'assets/img'
+    }]),
+    
+    new Imagemin({
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      plugins: [
+        ImageminMozjpeg({ quality: 80 }),
+        ImageminPngquant({ quality: [0.5, 1] }),
+        ImageminGifsicle(),
+        ImageminSvgo()
+      ]
+    })
+
   ],
+  optimization: {
+    minimizer: [
+      new OptimizeCSSAssetsPlugin() // CSS の minify を行う
+    ]
+  }
 
 };
 
