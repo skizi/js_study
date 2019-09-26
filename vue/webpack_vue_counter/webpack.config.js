@@ -52,7 +52,13 @@ module.exports = {
         test: /\.scss$/,
         use: [
           'vue-style-loader',
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false, //srcを起点としたパスで背景画像を読み込まないようにする
+              sourceMap: true
+            }
+          },
           'sass-loader',
         ]
       },

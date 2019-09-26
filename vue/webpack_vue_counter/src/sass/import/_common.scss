@@ -25,7 +25,7 @@ body::-webkit-scrollbar {
 	top: 0px;
 	left:0px;
 	background-color: #fff;
-	background-image: url("/assets/img/loading.gif");
+	background-image: url("assets/img/loading.gif");
 	background-repeat: no-repeat;
 	background-position: center;
 	opacity: 0;
@@ -34,6 +34,9 @@ body::-webkit-scrollbar {
     transition-property: opacity;
 }
 
+main{
+  background-image: url("assets/img/loading.gif");
+}
 
 
 @keyframes moreBtnLoading{
