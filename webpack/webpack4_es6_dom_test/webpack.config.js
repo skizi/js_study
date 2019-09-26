@@ -115,7 +115,7 @@ const app = {
           {
             loader: 'css-loader',
             options: {
-              url: false,
+              url: false, //srcを起点としたパスで背景画像を読み込まないようにする
               sourceMap: true
             }
           },

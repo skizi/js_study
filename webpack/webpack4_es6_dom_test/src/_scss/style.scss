@@ -13,6 +13,17 @@
 	background-color: #fff;
 }
 
+.menu {
+	li {
+		&:nth-child(even) {
+			background-color: #ff0000;
+		}
+		&:last-child {
+			background-color: #00ff00;
+		}
+	}
+}
+
 .flex {
 	display: flex;
 	flex-direction: row;
@@ -23,5 +34,9 @@
 		background-color: #ddd;
 		margin: 0 5px 5px;
 		list-style: none;
+
+		&:nth-child(2) {
+			background-color: #ff0000;
+		}
 	}
 }

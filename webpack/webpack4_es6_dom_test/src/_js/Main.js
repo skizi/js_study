@@ -135,6 +135,21 @@ class Main {
 		let flag = true;
 		let hoge = flag ? true : false;
 		console.log(hoge);
+
+		//
+		var test = hoge => {
+			alert(this.test);
+		};
+
+		//
+		var fragment = document.createDocumentFragment();
+		var div = document.createElement('div');
+		div.className = 'hoge99';
+		var child = document.createElement('div');
+		child.textContent = 'documentFlagment Test';
+		fragment.appendChild(div);
+		fragment.querySelector('.hoge99').appendChild(child);
+		document.getElementsByTagName('article')[0].appendChild(fragment);
 	}
 
 	//-----------------------------mosue event test-----------------------------
