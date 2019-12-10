@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'harenosora-font';
+  src: url("/assets/font/Harenosora.otf"), format("opentype"); }
+
+.wrapper {
+  font-family: 'harenosora-font', serif;
+  width: 1024px;
+  margin: 0 auto; }
+
+* {
+  background-color: #0000ff; }
+
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc3R5bGUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDhCQUE4QjtFQUM5QiwyREFBMkQsRUFBRTs7QUFFL0Q7RUFDRSxxQ0FBcUM7RUFDckMsYUFBYTtFQUNiLGNBQWMsRUFBRTs7QUFFbEI7RUFDRSx5QkFBeUIsRUFBRSIsImZpbGUiOiJhc3NldHMvY3NzL3N0eWxlLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIkBmb250LWZhY2Uge1xuICBmb250LWZhbWlseTogJ2hhcmVub3NvcmEtZm9udCc7XG4gIHNyYzogdXJsKFwiL2Fzc2V0cy9mb250L0hhcmVub3NvcmEub3RmXCIpLCBmb3JtYXQoXCJvcGVudHlwZVwiKTsgfVxuXG4ud3JhcHBlciB7XG4gIGZvbnQtZmFtaWx5OiAnaGFyZW5vc29yYS1mb250Jywgc2VyaWY7XG4gIHdpZHRoOiAxMDI0cHg7XG4gIG1hcmdpbjogMCBhdXRvOyB9XG5cbioge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDAwMGZmOyB9XG4iXSwic291cmNlUm9vdCI6IiJ9*/
