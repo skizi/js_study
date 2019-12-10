@@ -22,26 +22,27 @@ class Main {
 		//prepend:一番最初に代入
 		var ele = document.createElement('li');
 		ele.innerHTML = 'hoge';
-		menu.prepend(ele);
+		menu.prepend(ele); //新しいブラウザのみ
 
 		//before:要素の前に代入
 		var ele2 = document.createElement('li');
 		ele2.textContent = 'hogeの前';
-		ele.before(ele2);
+		// ele.before(ele2); //新しいブラウザのみ
+		ele.parentNode.insertBefore(ele2, ele);
 
 		//after:要素の後に代入
 		var ele3 = document.createElement('li');
 		ele3.textContent = 'hogeの後';
-		ele.after(ele3);
+		ele.after(ele3); //新しいブラウザのみ
 
 		//replaceWith:差し替え
 		var ele4 = document.createElement('li');
 		ele4.textContent = 'hoge(差し替え)';
-		ele.replaceWith(ele4);
+		ele.replaceWith(ele4); //ie NG
 
 		//append:一番最後に代入
 		var ele = document.createElement('li');
-		ele.innerHTML = 'fuga';
+		ele.innerHTML = 'fuga'; //ie NG
 		menu.append(ele);
 
 		//テキストの変更
@@ -58,8 +59,17 @@ class Main {
 
 		//menuからmenu2に要素を移動
 		let btns = menu.getElementsByTagName('li');
-		let btn = menu.removeChild(btns[0]);
-		menu2.appendChild(btn);
+		// let btn = menu.removeChild(btns[0]);
+		// menu2.appendChild(btn);
+
+		//手前の要素を取得
+		console.log(menu2.previousElementSibling);
+
+		//次の要素を取得
+		console.log(menu2.parentNode.nextElementSibling);
+
+		//親の取得
+		console.log(menu2.parentNode);
 
 		//-----------------------mouse event-----------------------
 		//getElementsByTagName
@@ -141,7 +151,7 @@ class Main {
 			alert(this.test);
 		};
 
-		//
+		//コンテナにdivを使いたくない場合
 		var fragment = document.createDocumentFragment();
 		var div = document.createElement('div');
 		div.className = 'hoge99';
@@ -150,6 +160,14 @@ class Main {
 		fragment.appendChild(div);
 		fragment.querySelector('.hoge99').appendChild(child);
 		document.getElementsByTagName('article')[0].appendChild(fragment);
+
+		//コンテナにdivを使っても良い場合
+		var div = document.createElement('div');
+		div.className = 'hoge100';
+		var child = document.createElement('div');
+		child.textContent = 'dom add Test';
+		div.appendChild(child);
+		document.getElementsByTagName('article')[0].appendChild(div);
 	}
 
 	//-----------------------------mosue event test-----------------------------
