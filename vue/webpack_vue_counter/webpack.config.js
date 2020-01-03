@@ -15,7 +15,7 @@ const ImageminSvgo = require('imagemin-svgo');
 
 module.exports = {
 
-  mode : 'development', //production
+  mode : 'development', //production だとmini化される
   
   // エントリポイントのファイル
   entry: './src/vue/app.js',
@@ -40,7 +40,7 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            scss: 'vue-style-loader!css-loader!sass-loader'
+            scss: 'vue-style-loader!css-loader!sass-loader' //https://qiita.com/chillart/items/18969b85b5c53f822071
           }
         }
       },
@@ -69,9 +69,9 @@ module.exports = {
     ]
   },
 
-  resolve: {
+  resolve: { 
     // import './foo.vue' の代わりに import './foo' と書けるようになる(拡張子省略)
-    extensions: ['.js', '.vue'],
+    extensions: ['.js', '.vue'],//何をビルド対象にするか指定
   },
 
   plugins: [
