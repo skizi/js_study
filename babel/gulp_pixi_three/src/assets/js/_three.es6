@@ -78,6 +78,7 @@ export default class Three{
 		var helper = new THREE.CameraHelper( light.shadow.camera );
 		// this.scene.add( helper );
 
+		//オブジェクトに照り返しが追加される(Cubeマップが生成される？)
 		THREE.RectAreaLightUniformsLib.init();
 	}
 

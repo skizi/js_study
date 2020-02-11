@@ -6,35 +6,34 @@ export default class Pixi{
 	constructor(){
 
 		let header = document.getElementsByClassName( 'intro' )[0];
-		
 		const app = new PIXI.Application();
 		this.app = app;
 		header.appendChild(app.view);
 
 
-		var container = new PIXI.Container();
-		container.position = new PIXI.Point( 200, 200 );
-		app.stage.addChild( container );
+		this.initObjects();
+
+
+		app.ticker.add( this.animate.bind( this ) );
+
+	}
+
+
+	initObjects(){
+
+		this.container = new PIXI.Container();
+		this.container.position = new PIXI.Point( 200, 200 );
+		this.app.stage.addChild( this.container );
 
 		var g = new PIXI.Graphics();
 		g.beginFill(0xFF3300);
 		g.drawRect( -50, -50, 100, 100);
 		g.endFill();
-		container.addChild( g );
-
-
-		app.ticker.add(() => {
-
-			container.rotation += 0.1;
-
-		});
-
+		this.container.addChild( g );
 
 
         var urls = ['./assets/img/SpriteSheet.json'];
         PIXI.Loader.shared.add( 'burn', urls[0] ).load(( loader, resources )=>{
-
-        	console.log(resources.burn);
 
         	var textuers = [];
         	for( var i = 1; i < 28; i++ ){
@@ -46,7 +45,7 @@ export default class Pixi{
 	    		burn.x = window.innerWidth * Math.random();
 	    		burn.y = 600 * Math.random();
 	    		burn.play();
-				app.stage.addChild( burn );
+				this.app.stage.addChild( burn );
 			}
 
         });
@@ -58,6 +57,13 @@ export default class Pixi{
 
 		let w = window.innerWidth;
 		this.app.renderer.resize( w, 600 );
+
+	}
+
+
+	animate(){
+
+		this.container.rotation += 0.1;
 
 	}
 
