@@ -1,0 +1,45 @@
+
+@import 'import/_vars';
+
+.wrapper{
+	max-width:1024px;
+	margin:0 auto;
+}
+
+
+header{
+	height:500px;
+	background-color: #ddd;
+	background-image:url(../img/main.png);
+	background-size:cover;
+}
+
+article{
+
+	p.outline{
+		line-height: 170%;
+		text-align:center;
+		font-size:20px;
+	}
+
+	section.intro{
+		background-color: #aaa;
+		background-image:url(../img/bg.jpg);
+		background-size:cover;
+	}
+
+
+
+	section.contact{
+	}
+
+}
+
+footer{
+	height:194px;
+	background-color: #000;
+
+	p.copy{
+		color:#fff;
+	}
+}
