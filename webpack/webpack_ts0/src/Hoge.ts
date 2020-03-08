@@ -1,7 +1,7 @@
 export class Hoge{
 	
 	constructor(){
-		console.log( "hoge" );
+		console.log( "hoge2" );
 	}
 
 }

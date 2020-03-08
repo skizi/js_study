@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./htdocs/",
     "target": "esnext", 
     "module": "commonjs",
     "noImplicitAny": true, 

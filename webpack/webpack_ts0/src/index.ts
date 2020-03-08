@@ -19,4 +19,4 @@ class Main{
 
 
 var main:Main = new Main();
-main.hoge( "hoge2" );
+main.hoge( "1" );

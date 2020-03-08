@@ -106,7 +106,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nclass 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst Hoge_1 = __webpack_require__(/*! ./Hoge */ \"./src/Hoge.ts\");\nclass Main {\n    constructor() {\n        new Hoge_1.Hoge();\n    }\n    hoge(name) {\n        alert(name);\n    }\n}\nvar main = new Main();\nmain.hoge(\"hoge2\");\n\n\n//# sourceURL=webpack:///./src/index.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst Hoge_1 = __webpack_require__(/*! ./Hoge */ \"./src/Hoge.ts\");\nclass Main {\n    constructor() {\n        new Hoge_1.Hoge();\n    }\n    hoge(name) {\n        alert(name);\n    }\n}\nvar main = new Main();\nmain.hoge(\"22\");\n\n\n//# sourceURL=webpack:///./src/index.ts?");
 
 /***/ })
 
