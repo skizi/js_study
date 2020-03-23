@@ -17675,26 +17675,17 @@ module.exports = index;
 },{}],35:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.router = undefined;
-
 var _vue = require('vue');
 
 var _vue2 = _interopRequireDefault(_vue);
-
-var _vueRouter = require('vue-router');
-
-var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
 var _Store = require('./vuex/Store');
 
 var _Store2 = _interopRequireDefault(_Store);
 
-var _routes = require('./routes');
+var _router = require('./router');
 
-var _routes2 = _interopRequireDefault(_routes);
+var _router2 = _interopRequireDefault(_router);
 
 var _index = require('./components/index');
 
@@ -17705,36 +17696,63 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /* -----------------------------------------------
  * Vue本処理
  * ----------------------------------------------- */
-_vue2.default.use(_vueRouter2.default);
-
-var is_debug_console = false; // コンソールのON/OFF
-var is_devmode = Boolean(document.domain == 'localhost'); // VUEのモードを切り替える
-var router_mode = is_devmode ? 'hash' : 'history';
-
-var router = exports.router = new _vueRouter2.default({
-  mode: router_mode,
-  // mode: 'hash',
-  // mode: 'history',
-  routes: _routes2.default
-});
-
 var app = new _vue2.default({
-
-  // el: '#app',
-  router: router,
+  el: '#app',
+  router: _router2.default,
   store: _Store2.default,
   render: function render(h) {
     return h(_index2.default);
   }
+});
 
-  // mounted : function(){
+},{"./components/index":38,"./router":42,"./vuex/Store":43,"vue":31}],36:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("footer[data-v-59293273] {\n  width: 800px;\n  height: 100px;\n  margin: 0 auto; }")
+;(function(){
+'use strict';
 
-  // },
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
 
-}).$mount('#app');
+	name: 'Footer',
 
-},{"./components/index":37,"./routes":41,"./vuex/Store":42,"vue":31,"vue-router":29}],36:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("@charset \"UTF-8\";\n@font-face {\n  font-family: \"NotoSans-Regular\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"../font/NotoSansCJKjp-Regular.woff2\") format(\"woff2\"), url(\"../font/NotoSansCJKjp-Regular.woff\") format(\"woff\"), url(\"../font/NotoSansCJKjp-Regular.otf\") format(\"otf\"); }\n\n@font-face {\n  font-family: \"NotoSans-Medium\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"../font/NotoSansCJKjp-Medium.woff2\") format(\"woff2\"), url(\"../font/NotoSansCJKjp-Medium.woff\") format(\"woff\"), url(\"../font/NotoSansCJKjp-Medium.otf\") format(\"otf\"); }\n\n@font-face {\n  font-family: \"NotoSans-Bold\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"../font/NotoSansCJKjp-Bold.woff2\") format(\"woff2\"), url(\"../font/NotoSansCJKjp-Bold.woff\") format(\"woff\"), url(\"../font/NotoSansCJKjp-Bold.otf\") format(\"otf\"); }\n\n/*---------------ヘッダー---------------*/\n.header[data-v-1da46575] {\n  position: relative;\n  width: 100%;\n  height: 125px;\n  background: #fff;\n  box-shadow: #ddd 2px 0px 5px;\n  transition-property: height;\n  transition-duration: 0.3s;\n  width: 100%; }\n  .header.work[data-v-1da46575] {\n    height: 155px; }\n    .header.work .header__close[data-v-1da46575] {\n      display: none; }\n  .header.library .header__close[data-v-1da46575],\n  .header.library .header__item-tag[data-v-1da46575],\n  .header.library .header__search[data-v-1da46575] {\n    display: none; }\n  .header.workSingle .header__item-tag[data-v-1da46575],\n  .header.workSingle .header__search[data-v-1da46575],\n  .header.workSingle .header__lists[data-v-1da46575], .header.librarySingle .header__item-tag[data-v-1da46575],\n  .header.librarySingle .header__search[data-v-1da46575],\n  .header.librarySingle .header__lists[data-v-1da46575] {\n    display: none; }\n\n.header__inner[data-v-1da46575] {\n  margin-bottom: 10px;\n  padding: 28px 30px 32px; }\n  .header__inner[data-v-1da46575]:after {\n    content: \"\";\n    display: block;\n    clear: both; }\n\n.header__logo[data-v-1da46575] {\n  float: left;\n  font-size: 0rem;\n  transition-duration: 0.3s;\n  transition-property: top;\n  position: absolute;\n  top: 28px;\n  left: 30px; }\n  .header__logo a[data-v-1da46575] {\n    opacity: 1;\n    transition: opacity 0.3s; }\n    .header__logo a[data-v-1da46575]:hover {\n      opacity: 0.6; }\n\n.header.work .header__logo[data-v-1da46575] {\n  top: 44px; }\n\n.header__logo__mark[data-v-1da46575] {\n  width: 40px;\n  height: 39px;\n  position: absolute;\n  top: 12px;\n  left: 0;\n  overflow: hidden;\n  opacity: 0;\n  transform: translate(-20px, 0); }\n  .header__logo__mark img[data-v-1da46575] {\n    display: block;\n    width: 40px;\n    height: 39px; }\n\n.header__logo__name[data-v-1da46575] {\n  width: 110px;\n  height: 18px;\n  display: block;\n  position: absolute;\n  top: 22px;\n  left: 0;\n  overflow: hidden;\n  transform: translate3d(0, 0, 0);\n  opacity: 1;\n  transition: opacity 0.3s; }\n  .header__logo__name[data-v-1da46575]:hover {\n    opacity: 0.6; }\n  .header__logo__name img[data-v-1da46575] {\n    display: block;\n    width: 110px;\n    height: 18px; }\n\n.header__lists[data-v-1da46575] {\n  float: right;\n  font-size: 0rem; }\n\n.header__item[data-v-1da46575] {\n  display: inline-block;\n  vertical-align: top;\n  cursor: pointer; }\n  .header__item a[data-v-1da46575] {\n    position: relative;\n    display: block;\n    padding: 0 10px; }\n    .header__item a[data-v-1da46575]:before {\n      content: \"\";\n      position: absolute;\n      bottom: 0;\n      left: 50%;\n      transform: translateX(-50%);\n      width: 0;\n      height: 1px;\n      background-color: #000;\n      transition: width .3s; }\n    .header__item a.is-current[data-v-1da46575]:before {\n      width: 100%; }\n    .header__item a[data-v-1da46575]:hover:before {\n      width: 100%; }\n  .header__item span[data-v-1da46575] {\n    font-family: \"NotoSans-Medium\";\n    font-size: 1.3125rem; }\n  .header__item + .header__item[data-v-1da46575] {\n    margin-left: 22px; }\n  .header__item.header__item-tag[data-v-1da46575] {\n    margin-left: 48px;\n    POSITION: absolute;\n    right: 40px;\n    top: 115px; }\n    .header__item.header__item-tag span[data-v-1da46575] {\n      font-size: 1.125rem; }\n    .header__item.header__item-tag .header__item__inner[data-v-1da46575] {\n      position: relative;\n      display: block;\n      padding-right: 30px; }\n      .header__item.header__item-tag .header__item__inner[data-v-1da46575]:after {\n        content: \"\";\n        background: url(\"/img/common/icon_tag_arrow.png\") no-repeat center;\n        background-size: contain;\n        position: absolute;\n        top: 9px;\n        right: 1px;\n        width: 15px;\n        height: 15px;\n        transition: transform .2s; }\n    .header__item.header__item-tag.is-current .header__item__inner[data-v-1da46575]:after {\n      transform: rotate(180deg); }\n    .header__item.header__item-tag.is-disabled[data-v-1da46575] {\n      pointer-events: none; }\n      .header__item.header__item-tag.is-disabled .header__item__inner[data-v-1da46575]:after {\n        transform: rotate(0deg) !important; }\n  .header__item.header__item-work[data-v-1da46575], .header__item.header__item-library[data-v-1da46575] {\n    transition-duration: 0.3s;\n    transition-property: transform; }\n\n.header.library .header__item-work[data-v-1da46575],\n.header.library .header__item-library[data-v-1da46575] {\n  transform: translate(0px, 18px); }\n\n.header__close[data-v-1da46575] {\n  position: absolute;\n  top: 42px;\n  right: 26px;\n  width: 40px;\n  height: 40px;\n  cursor: pointer; }\n  .header__close[data-v-1da46575]:before, .header__close[data-v-1da46575]:after {\n    content: \"\";\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 34px;\n    height: 1px;\n    background-color: #000;\n    transition: width .3s; }\n  .header__close[data-v-1da46575]:before {\n    transform: translate(-50%, -50%) rotate(45deg); }\n  .header__close[data-v-1da46575]:after {\n    transform: translate(-50%, -50%) rotate(-45deg); }\n  .header__close[data-v-1da46575]:hover:before, .header__close[data-v-1da46575]:hover:after {\n    width: 44px; }\n\n/*---------------検索ボックス---------------*/\n.header__search[data-v-1da46575] {\n  margin: 15px 0; }\n  .header__search input[data-v-1da46575] {\n    width: 177px;\n    height: 20px;\n    border-radius: 5px;\n    border: 1px solid #ddd;\n    padding-left: 5px; }\n    .header__search input[data-v-1da46575]:focus {\n      outline: 0;\n      border-color: #ddd; }\n  .header__search span[data-v-1da46575] {\n    width: 20px;\n    height: 24px;\n    line-height: 24px;\n    display: inline-block;\n    font-size: 15px;\n    vertical-align: middle;\n    margin-right: 5px;\n    margin-left: -22px;\n    cursor: pointer; }\n\n/*---------------タグ一覧---------------*/\n.header__tags[data-v-1da46575] {\n  display: none;\n  background-color: #fafafa;\n  margin-bottom: 56px; }\n  .header__tags.is-current[data-v-1da46575] {\n    display: block; }\n  .header__tags.is-disabled[data-v-1da46575] {\n    display: none; }\n  .header__tags .header__tags__lists[data-v-1da46575] {\n    width: 100%;\n    padding: 55px 50px 50px;\n    font-size: 0rem; }\n  .header__tags .header__tag[data-v-1da46575] {\n    display: inline-block;\n    vertical-align: top;\n    width: 14.28571%;\n    padding: 2.5px;\n    text-align: center; }\n    .header__tags .header__tag.is-current .header__tag__inner[data-v-1da46575] {\n      background-color: #000; }\n      .header__tags .header__tag.is-current .header__tag__inner span[data-v-1da46575] {\n        color: #fff; }\n  .header__tags .header__tag__inner[data-v-1da46575] {\n    padding: 5px 0;\n    transition: background .3s;\n    cursor: pointer; }\n    .header__tags .header__tag__inner span[data-v-1da46575] {\n      font-family: \"NotoSans-Medium\";\n      font-size: 0.6875rem; }\n    .header__tags .header__tag__inner[data-v-1da46575]:hover {\n      background-color: #dfdfde; }")
+	data: function data() {
+
+		return {};
+	},
+	mounted: function mounted() {},
+
+
+	methods: {},
+
+	props: {
+
+		name: String
+
+	}
+
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('footer',[_c('p',[_vm._v("フッター"+_vm._s(_vm.name))])])}
+__vue__options__.staticRenderFns = []
+__vue__options__._scopeId = "data-v-59293273"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-59293273", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-59293273", __vue__options__)
+  }
+})()}
+},{"vue":31,"vue-hot-reload-api":28,"vueify/lib/insert-css":33}],37:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("@charset \"UTF-8\";\n@font-face {\n  font-family: \"NotoSans-Regular\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"../font/NotoSansCJKjp-Regular.woff2\") format(\"woff2\"), url(\"../font/NotoSansCJKjp-Regular.woff\") format(\"woff\"), url(\"../font/NotoSansCJKjp-Regular.otf\") format(\"otf\"); }\n\n@font-face {\n  font-family: \"NotoSans-Medium\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"../font/NotoSansCJKjp-Medium.woff2\") format(\"woff2\"), url(\"../font/NotoSansCJKjp-Medium.woff\") format(\"woff\"), url(\"../font/NotoSansCJKjp-Medium.otf\") format(\"otf\"); }\n\n@font-face {\n  font-family: \"NotoSans-Bold\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"../font/NotoSansCJKjp-Bold.woff2\") format(\"woff2\"), url(\"../font/NotoSansCJKjp-Bold.woff\") format(\"woff\"), url(\"../font/NotoSansCJKjp-Bold.otf\") format(\"otf\"); }\n\n/*---------------ヘッダー---------------*/\nheader[data-v-7a5b9665] {\n  width: 800px;\n  height: 100px;\n  margin: 0 auto; }\n  header h1[data-v-7a5b9665] {\n    margin: 10px 0 0 10px; }")
 ;(function(){
 'use strict';
 
@@ -17770,21 +17788,21 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('header',{staticClass:"header",class:_vm.componentName},[_c('router-link',{attrs:{"to":"/"}},[_c('h1',[_vm._v("メガドライブ　データベース")])])],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('header',[_c('router-link',{attrs:{"to":"/"}},[_c('h1',[_vm._v("メガドライブ　データベース")])])],1)}
 __vue__options__.staticRenderFns = []
-__vue__options__._scopeId = "data-v-1da46575"
+__vue__options__._scopeId = "data-v-7a5b9665"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1da46575", __vue__options__)
+    hotAPI.createRecord("data-v-7a5b9665", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-1da46575", __vue__options__)
+    hotAPI.rerender("data-v-7a5b9665", __vue__options__)
   }
 })()}
-},{"vue":31,"vue-hot-reload-api":28,"vueify/lib/insert-css":33}],37:[function(require,module,exports){
+},{"vue":31,"vue-hot-reload-api":28,"vueify/lib/insert-css":33}],38:[function(require,module,exports){
 ;(function(){
 'use strict';
 
@@ -17792,11 +17810,21 @@ var _vue = require('vue');
 
 var _vue2 = _interopRequireDefault(_vue);
 
+var _header = require('./header');
+
+var _header2 = _interopRequireDefault(_header);
+
+var _footer = require('./footer');
+
+var _footer2 = _interopRequireDefault(_footer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
 
   name: 'Index',
+
+  components: { Header: _header2.default, Footer: _footer2.default },
 
   mounted: function mounted() {},
 
@@ -17809,26 +17837,33 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('main',[_c('div',{staticClass:"wrapper"},[_c('router-view',{attrs:{"name":"common"}}),_vm._v(" "),_c('router-view',{attrs:{"works":_vm.$store.getters.works}})],1)])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('main',[_c('section',{staticClass:"wrapper"},[_c('Header'),_vm._v(" "),_c('router-view',{attrs:{"name":"common"}}),_vm._v(" "),_c('router-view',{attrs:{"works":_vm.$store.getters.works}}),_vm._v(" "),_c('Footer',{attrs:{"name":"hogege"}})],1)])])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5591accc", __vue__options__)
+    hotAPI.createRecord("data-v-7d5e1aaa", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-5591accc", __vue__options__)
+    hotAPI.rerender("data-v-7d5e1aaa", __vue__options__)
   }
 })()}
-},{"vue":31,"vue-hot-reload-api":28}],38:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("@charset \"UTF-8\";\n@font-face {\n  font-family: \"NotoSans-Regular\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"../font/NotoSansCJKjp-Regular.woff2\") format(\"woff2\"), url(\"../font/NotoSansCJKjp-Regular.woff\") format(\"woff\"), url(\"../font/NotoSansCJKjp-Regular.otf\") format(\"otf\"); }\n\n@font-face {\n  font-family: \"NotoSans-Medium\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"../font/NotoSansCJKjp-Medium.woff2\") format(\"woff2\"), url(\"../font/NotoSansCJKjp-Medium.woff\") format(\"woff\"), url(\"../font/NotoSansCJKjp-Medium.otf\") format(\"otf\"); }\n\n@font-face {\n  font-family: \"NotoSans-Bold\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"../font/NotoSansCJKjp-Bold.woff2\") format(\"woff2\"), url(\"../font/NotoSansCJKjp-Bold.woff\") format(\"woff\"), url(\"../font/NotoSansCJKjp-Bold.otf\") format(\"otf\"); }\n\n/*全ページ共通サムネール*/\n.thumbnail {\n  width: 310px;\n  display: inline-block;\n  position: relative; }\n  .thumbnail a {\n    display: block;\n    transition: opacity 0.3s; }\n    .thumbnail a:hover .thumbnail__img span.top,\n    .thumbnail a:hover .thumbnail__img span.bottom,\n    .thumbnail a:hover .thumbnail__img span.left,\n    .thumbnail a:hover .thumbnail__img span.right {\n      transform: translate(0px, 0px); }\n    .thumbnail a:hover p span {\n      color: #ba7800; }\n    .thumbnail a .thumbnail__img {\n      width: 100%;\n      height: 190px;\n      margin-bottom: 12px;\n      background: #f1f1f1;\n      position: relative;\n      overflow: hidden;\n      opacity: 0;\n      z-index: 0;\n      text-align: center;\n      /*ホバー時の枠*/ }\n      .thumbnail a .thumbnail__img img {\n        width: auto;\n        height: 100%;\n        display: inline-block;\n        opacity: 0;\n        z-index: 1;\n        position: relative; }\n      .thumbnail a .thumbnail__img:after {\n        content: \"\";\n        width: 50px;\n        height: 47px;\n        background: url(\"/img/common/logo.png\") no-repeat 0 0;\n          background-size: contain;\n        position: absolute;\n        top: 0;\n        bottom: 0;\n        left: 0;\n        right: 0;\n        z-index: 0;\n        margin: auto;\n        pointer-events: none;\n        opacity: 0.8;\n        transition: opacity 0.7s;\n        transition-delay: 0.3s; }\n      .thumbnail a .thumbnail__img .js-cover-name-1 {\n        z-index: 2;\n        transform: translate(-100%, 0); }\n      .thumbnail a .thumbnail__img span.top,\n      .thumbnail a .thumbnail__img span.bottom,\n      .thumbnail a .thumbnail__img span.right,\n      .thumbnail a .thumbnail__img span.left {\n        width: 310px;\n        height: 3px;\n        position: absolute;\n        top: 0px;\n        left: 0px;\n        display: block;\n        background-color: #d1ad5a;\n        z-index: 1;\n        transition-duration: 0.3s;\n        transition-property: transform; }\n      .thumbnail a .thumbnail__img span.left,\n      .thumbnail a .thumbnail__img span.right {\n        width: 3px;\n        height: 190px; }\n      .thumbnail a .thumbnail__img span.top {\n        transform: translate(0px, -3px); }\n      .thumbnail a .thumbnail__img span.bottom {\n        top: auto;\n        bottom: 0px;\n        transform: translate(0px, 3px); }\n      .thumbnail a .thumbnail__img span.left {\n        transform: translate(-3px, 0px); }\n      .thumbnail a .thumbnail__img span.right {\n        left: auto;\n        right: 0px;\n        transform: translate(3px, 0px); }\n    .thumbnail a p {\n      display: block; }\n      .thumbnail a p span {\n        color: #000;\n        font-family: \"NotoSans-Medium\";\n        font-size: 0.875rem;\n        line-height: 1.5;\n        position: relative;\n        overflow: hidden;\n        display: inline-block;\n        transition-property: color;\n        transition-duration: 0.3s; }\n        .thumbnail a p span br {\n          display: none; }\n    .thumbnail a .nodeBox__slide__outline {\n      min-height: 20px; }\n      .thumbnail a .nodeBox__slide__outline span {\n        display: block;\n        color: #000;\n        font-family: \"NotoSans-Medium\";\n        font-size: 0.875rem;\n        line-height: 1.5;\n        position: relative; }\n        .thumbnail a .nodeBox__slide__outline span br {\n          display: none; }\n  .thumbnail.is-scroll-active .thumbnail__img img {\n    opacity: 1; }\n  .thumbnail.is-scroll-active .thumbnail__img:after {\n    opacity: 0; }\n\n.thumbnails .thumbnail:nth-child(2n) {\n  margin-left: 15px;\n  margin-left: 2.362204%; }\n\n.thumbnails .thumbnail:nth-child(n+3) {\n  margin-top: 34px; }\n\n.thumbnails .thumbnail.swiper-slide {\n  margin: 0; }\n\n/*プライベートワーク*/\n.container__private__item + .container__private__item {\n  margin-top: 52px; }\n\n.container__privateVisual {\n  position: relative;\n  padding-bottom: 24px; }\n\n.container__privateVisual__slide img {\n  display: block;\n  width: 100%;\n  height: auto; }\n\n.container__privateVisual__pagination {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  text-align: center; }\n  .container__privateVisual__pagination .swiper-pagination-bullet {\n    width: 6px;\n    height: 6px;\n    border: 1px solid #000;\n    background-color: transparent;\n    opacity: 1; }\n    .container__privateVisual__pagination .swiper-pagination-bullet + .swiper-pagination-bullet {\n      margin-left: 10px; }\n  .container__privateVisual__pagination .swiper-pagination-bullet-active {\n    background-color: #000; }\n\n.container__privateContent {\n  margin-top: 28px; }\n\n.container__privateContent__head span {\n  color: #000;\n  font-family: \"NotoSans-Medium\";\n  font-size: 0.875rem;\n  line-height: 1;\n  letter-spacing: 0.02em; }\n\n.container__privateContent__txt {\n  margin-top: 16px; }\n  .container__privateContent__txt p {\n    color: #787878;\n    font-family: \"NotoSans-Regular\";\n    font-size: 0.875rem;\n    line-height: 1.9; }")
+},{"./footer":36,"./header":37,"vue":31,"vue-hot-reload-api":28}],39:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".thumbnails {\n  display: flex; }\n\n.thumbnail {\n  width: 100px;\n  height: 100px;\n  margin: 0 10px 10px 0;\n  background-color: #ff0000;\n  cursor: pointer; }")
 ;(function(){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = {
 
   name: 'thumbnails',
@@ -17836,7 +17871,8 @@ exports.default = {
   data: function data() {
 
     return {
-      hoverElement: this.$_hoverElement
+      hoverElement: this.$_hoverElement,
+      inputText: ''
     };
   },
 
@@ -17844,7 +17880,36 @@ exports.default = {
 
   mounted: function mounted() {},
 
-  methods: {},
+  methods: {
+    clickThumbnail: function clickThumbnail(index) {
+
+      console.log("click thumbnail num is..." + index);
+
+      this.getData().then(function (response) {
+        console.log(response);
+
+        if (response.status == 'error') {
+          console.log("error!");
+        } else {
+          console.log("success");
+        }
+      });
+    },
+    getData: async function getData() {
+
+      var response = await _axios2.default.get('http://hoge1111.jp', { params: { name: this.inputText } }).then(function (response) {
+        return { status: 'success', data: response };
+      }).catch(function (error) {
+        return { status: 'error', data: error };
+      });
+
+      if (response.status == 'success' && response.data.status >= 400) {
+        response.status = 'error';
+      }
+
+      return response;
+    }
+  },
 
   props: {
     members: Array,
@@ -17861,7 +17926,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',{staticClass:"thumbnails",class:{'swiper-wrapper':_vm.swiperFlag==true}},_vm._l((_vm.works),function(item){return _c('li',{staticClass:"thumbnail"},[_c('router-link',{attrs:{"to":{name:'workSingle', params: {id: item.id, title:item.title}}}},[_c('p',{staticClass:"title"},[_vm._v(_vm._s(item.title))]),_vm._v(" "),_c('p',{staticClass:"category"},[_vm._v(_vm._s(item.category))])])],1)}),0)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('ul',{staticClass:"thumbnails",class:{'swiper-wrapper':_vm.swiperFlag==true}},_vm._l((_vm.works),function(item,index){return _c('li',{staticClass:"thumbnail",on:{"click":function($event){return _vm.clickThumbnail(index)}}},[_c('router-link',{attrs:{"to":{name:'workSingle', params: {id: item.id, title:item.title}}}}),_vm._v(" "),_c('p',{staticClass:"title"},[_vm._v(_vm._s(item.title))]),_vm._v(" "),_c('p',{staticClass:"category"},[_vm._v(_vm._s(item.category))])],1)}),0),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.inputText),expression:"inputText"}],attrs:{"type":"text"},domProps:{"value":(_vm.inputText)},on:{"input":function($event){if($event.target.composing){ return; }_vm.inputText=$event.target.value}}}),_vm._v(" "),_c('p',[_vm._v(_vm._s(_vm.inputText))])])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -17869,12 +17934,12 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3ef19aef", __vue__options__)
+    hotAPI.createRecord("data-v-19c6d3df", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-3ef19aef", __vue__options__)
+    hotAPI.reload("data-v-19c6d3df", __vue__options__)
   }
 })()}
-},{"vue":31,"vue-hot-reload-api":28,"vueify/lib/insert-css":33}],39:[function(require,module,exports){
+},{"axios":1,"vue":31,"vue-hot-reload-api":28,"vueify/lib/insert-css":33}],40:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("@font-face {\n  font-family: \"NotoSans-Regular\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"../font/NotoSansCJKjp-Regular.woff2\") format(\"woff2\"), url(\"../font/NotoSansCJKjp-Regular.woff\") format(\"woff\"), url(\"../font/NotoSansCJKjp-Regular.otf\") format(\"otf\"); }\n\n@font-face {\n  font-family: \"NotoSans-Medium\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"../font/NotoSansCJKjp-Medium.woff2\") format(\"woff2\"), url(\"../font/NotoSansCJKjp-Medium.woff\") format(\"woff\"), url(\"../font/NotoSansCJKjp-Medium.otf\") format(\"otf\"); }\n\n@font-face {\n  font-family: \"NotoSans-Bold\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"../font/NotoSansCJKjp-Bold.woff2\") format(\"woff2\"), url(\"../font/NotoSansCJKjp-Bold.woff\") format(\"woff\"), url(\"../font/NotoSansCJKjp-Bold.otf\") format(\"otf\"); }")
 ;(function(){
 'use strict';
@@ -17934,12 +17999,13 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ede61368", __vue__options__)
+    hotAPI.createRecord("data-v-08dedb5c", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-ede61368", __vue__options__)
+    hotAPI.rerender("data-v-08dedb5c", __vue__options__)
   }
 })()}
-},{"./thumbnails.vue":38,"vue":31,"vue-hot-reload-api":28,"vueify/lib/insert-css":33}],40:[function(require,module,exports){
+},{"./thumbnails.vue":39,"vue":31,"vue-hot-reload-api":28,"vueify/lib/insert-css":33}],41:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container {\n  width: 800px;\n  height: 400px;\n  padding: 10px;\n  margin: 0 auto;\n  background-color: #ddd; }")
 ;(function(){
 'use strict';
 
@@ -17989,18 +18055,31 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5eba480e", __vue__options__)
+    hotAPI.createRecord("data-v-435cee2e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-5eba480e", __vue__options__)
+    hotAPI.rerender("data-v-435cee2e", __vue__options__)
   }
 })()}
-},{"./thumbnails.vue":38,"vue":31,"vue-hot-reload-api":28}],41:[function(require,module,exports){
+},{"./thumbnails.vue":39,"vue":31,"vue-hot-reload-api":28,"vueify/lib/insert-css":33}],42:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+
+var _vue = require('vue');
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vueRouter = require('vue-router');
+
+var _vueRouter2 = _interopRequireDefault(_vueRouter);
+
+var _Store = require('./vuex/Store');
+
+var _Store2 = _interopRequireDefault(_Store);
 
 var _header = require('./components/header');
 
@@ -18014,39 +18093,46 @@ var _workSingle = require('./components/work-single');
 
 var _workSingle2 = _interopRequireDefault(_workSingle);
 
-var _Store = require('./vuex/Store');
-
-var _Store2 = _interopRequireDefault(_Store);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = [{
-	path: "/",
-	name: "index",
-	components: {
-		common: _header2.default,
-		default: _work2.default
-	},
-	props: true
-}, {
-	path: "/work",
-	name: "work",
-	components: {
-		common: _header2.default,
-		default: _work2.default
-	},
-	props: true
-}, {
-	path: '/work/:id',
-	name: "workSingle",
-	props: true,
-	components: {
-		common: _header2.default,
-		default: _workSingle2.default
-	}
-}];
+_vue2.default.use(_vueRouter2.default);
 
-},{"./components/header":36,"./components/work":40,"./components/work-single":39,"./vuex/Store":42}],42:[function(require,module,exports){
+var is_debug_console = false; // コンソールのON/OFF
+var is_devmode = Boolean(document.domain == 'localhost'); // VUEのモードを切り替える
+var router_mode = is_devmode ? 'hash' : 'history';
+
+exports.default = new _vueRouter2.default({
+	mode: router_mode,
+	// mode: 'hash',
+	// mode: 'history',
+	routes: [{
+		path: "/",
+		name: "index",
+		components: {
+			common: _header2.default,
+			default: _work2.default
+		},
+		props: true
+	}, {
+		path: "/work",
+		name: "work",
+		components: {
+			common: _header2.default,
+			default: _work2.default
+		},
+		props: true
+	}, {
+		path: '/work/:id',
+		name: "workSingle",
+		props: true,
+		components: {
+			common: _header2.default,
+			default: _workSingle2.default
+		}
+	}]
+});
+
+},{"./components/header":37,"./components/work":41,"./components/work-single":40,"./vuex/Store":43,"vue":31,"vue-router":29}],43:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

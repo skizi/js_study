@@ -1,12 +1,12 @@
 <template>
   <div>
     <main>
-      <div class="wrapper">
-     
+      <section class="wrapper">
+        <Header></Header>
         <router-view name="common" />
         <router-view :works="$store.getters.works"" />
-
-      </div>
+        <Footer name="hogege"></Footer>
+      </section>
      </main>
     
   </div>
@@ -16,11 +16,15 @@
 
 <script>
 import Vue from 'vue';
+import Header from './header';
+import Footer from './footer';
 
 
 module.exports = {
 
   name: 'Index',
+
+  components : { Header, Footer },
 
   mounted: function() {
 

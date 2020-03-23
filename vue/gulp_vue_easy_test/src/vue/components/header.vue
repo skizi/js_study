@@ -1,5 +1,5 @@
 <template>
-  <header class="header" v-bind:class="componentName">
+  <header>
     <router-link to="/">
       <h1>メガドライブ　データベース</h1>
     </router-link>

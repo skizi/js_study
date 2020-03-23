@@ -15,6 +15,13 @@
 
 
 <style lang="sass">
+  .container{
+    width:800px;
+    height:400px;
+    padding:10px;
+    margin: 0 auto;
+    background-color: #ddd;
+  }
 </style>
 
 
@@ -37,8 +44,6 @@ export default {
   mounted : function(){
 
   },
-
-
 
 
   methods:{
