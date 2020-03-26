@@ -3,18 +3,28 @@
   <div>
 
     <!-- 案件一覧 -->
-    <ul class="thumbnails" v-bind:class="{'swiper-wrapper':swiperFlag==true}">
+    <ul class="thumbnails" v-bind:class="{'add-class':classTestFlag==true}">
       <li v-for="( item, index ) in works" class="thumbnail" @click="clickThumbnail(index)">
         <router-link :to="{name:'workSingle', params: {id: item.id, title:item.title}}">
         </router-link>
-          <p class="title">{{item.title}}</p>
+          <p class="title">{{computedTitle( item.title )}}</p>
           <p class="category">{{item.category}}</p>
       </li>
     </ul>
 
-
     <input type="text" v-model="inputText"></input>
     <p>{{inputText}}</p>
+
+    <hr>
+
+    <div>
+      <p v-html="htmlText"></p>
+    </div>
+
+    <ul v-for="item in errors" class="error-text">
+      <li>{{item}}</li>
+    </ul>
+    <!--<button>test</button>-->
   </div>
 </template>
 
@@ -31,6 +41,14 @@
     background-color: #ff0000;
     cursor:pointer;
   }
+
+  .error-text{
+    background-color: #ff0000;
+
+    li{
+      border-bottom: 1px solid #ddd;
+    }
+  }
 </style>
 
 
@@ -46,7 +64,10 @@ export default {
 
     return {
       hoverElement:this.$_hoverElement,
-      inputText:''
+      inputText:'',
+      classTestFlag : true,
+      htmlText:'',
+      errors:[]
     }
 
   },
@@ -54,11 +75,23 @@ export default {
 
   computed : {
 
+    computedTitle(){
+
+      return titleStr => {
+
+        return titleStr + "99";
+
+      };
+
+    } 
 
   },
 
 
   mounted : function(){
+
+    this.htmlText = "山田<br>田中"
+    this.errors = [ "だめ", "NG", "ぼけ" ];
 
   },
 
@@ -69,48 +102,14 @@ export default {
 
       console.log( "click thumbnail num is..." + index );
 
-      this.getData().then( response => {
-        console.log( response );
-
-        if( response.status == 'error' ){
-          console.log( "error!" );
-        }else{
-          console.log( "success" );
-        }
-
-      } );
-
     },
 
-
-    async getData(){
-
-      var response = await axios.get( 'http://hoge1111.jp', { params:{ name:this.inputText } } ).then( response => {
-          return { status : 'success', data:response };
-      } ).catch( error => {
-        return { status:'error', data: error };
-      } );
-
-
-      if( response.status == 'success' && response.data.status >= 400 ){
-        response.status = 'error';
-      }
-
-      return response;
-
-    },
 
   },
 
 
   props : {
-    members : Array,
-    works : Array,
-    cacheWorks : Array,
-    privateWorks : Array,
-    history : Array,
-    swiperFlag : Boolean,
-    componentName : String
+    works : Array
   }
 
 }

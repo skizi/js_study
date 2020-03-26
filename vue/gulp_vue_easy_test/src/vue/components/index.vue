@@ -3,8 +3,9 @@
     <main>
       <section class="wrapper">
         <Header></Header>
-        <router-view name="common" />
+        <!--<router-view name="common" />-->
         <router-view :works="$store.getters.works"" />
+        <TestForm></TestForm>
         <Footer name="hogege"></Footer>
       </section>
      </main>
@@ -18,13 +19,13 @@
 import Vue from 'vue';
 import Header from './header';
 import Footer from './footer';
-
+import TestForm from './test-form';
 
 module.exports = {
 
   name: 'Index',
 
-  components : { Header, Footer },
+  components : { Header, Footer, TestForm },
 
   mounted: function() {
 
