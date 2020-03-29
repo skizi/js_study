@@ -1,0 +1,51 @@
+/* -----------------------------------------------
+  COMMON STYLE
+  ----------------------------------------------- */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper {
+  position: relative;
+}
+
+
+.c-wrapper{
+  min-width: 1000px;
+}
+
+.c-loading{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	left:0px;
+	background-color: #fff;
+	background-image: url("assets/img/loading.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+	opacity: 0;
+	display: none;
+    transition-duration: 0.2s;
+    transition-property: opacity;
+}
+
+main{
+  background-image: url("assets/img/loading.gif");
+}
+
+
+@keyframes moreBtnLoading{
+  to,
+  from{ 
+    transform: rotate(360deg);
+    transform-origin: 50% 50% ;
+  }
+}
+
+
+
