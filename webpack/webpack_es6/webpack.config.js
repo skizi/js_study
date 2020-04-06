@@ -96,6 +96,7 @@ const app = [
         useTabs: true,
         printWidth: 80,
         singleQuote: true,
+        parser:'babel'
       })
     ],
 
