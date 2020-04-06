@@ -20,7 +20,11 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: 'build'
+    open : true, //サーバー起動時にブラウザを開くか
+    contentBase: `${__dirname}/../htdocs`, //サーバーの起点ディレクトリ
+    watchContentBase:true, //HTMLファイルなどもウォッチ対象にする場合はtrue
+    inline : true, //ライブリロードを行うか
+    port: 8080
   }
 
 }
