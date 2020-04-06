@@ -36,10 +36,8 @@ const babelify = require('babelify');
 const source = require('vinyl-source-stream');
 
 const Transform = require('stream').Transform;
-const PluginError = require('gulp-util').PluginError;
 
 const rename = require('gulp-rename');
-const gulpIf = require('gulp-if');
 
 
 // ポート番号
