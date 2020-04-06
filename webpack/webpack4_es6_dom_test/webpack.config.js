@@ -1,5 +1,4 @@
 // var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var PrettierPlugin = require("prettier-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const globule = require('globule'); //ファイル検索用モジュール
