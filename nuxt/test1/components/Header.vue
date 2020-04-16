@@ -34,7 +34,7 @@ export default {
 		console.log("header");
 
 	},
-
+	
 
 	methods : {
 
