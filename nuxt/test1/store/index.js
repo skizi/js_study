@@ -27,6 +27,10 @@ const store = () => {
 				} );
 
 
+				if( response.status == "success" && response.data.data.code >= 400 ){
+					response.status = "error";
+				}
+
 				return response;
 
 			}
