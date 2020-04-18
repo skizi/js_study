@@ -6,12 +6,13 @@ import nuxtConfig from "~/nuxt.config"
 export default async function(context, inject) {
 
   let Address = Vue.extend({
+    
     data() {
       return {
       }
     },
-    mounted() {
 
+    mounted() {
     },
     methods: {
 
