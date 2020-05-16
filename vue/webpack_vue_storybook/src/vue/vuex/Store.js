@@ -57,7 +57,7 @@ const store = new Vuex.Store({
 
 		async getAddress( context, params ){
 
-			var response = await axios.get('https://api.zipaddress.net', { params:{ 'zipcode': params.text } })
+			var response = await axios.get('https://api.zipaddress.net', { params:{ 'zipcode': params.zipcode } })
 			.then(response => {
 				return { data:response, status:"success" };
 			})
