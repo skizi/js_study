@@ -18,7 +18,7 @@ module.exports = {
   mode : 'development', //production だとmini化される
   
   // エントリポイントのファイル
-  entry: './src/vue/app.js',
+  entry:['@babel/polyfill', './src/vue/app.js'],
 
   output: {
     path: `${__dirname}/htdocs`,

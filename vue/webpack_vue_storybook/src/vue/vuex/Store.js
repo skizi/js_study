@@ -3,6 +3,7 @@
  */
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 
 
 Vue.use(Vuex);
@@ -53,6 +54,24 @@ const store = new Vuex.Store({
 	 * ステートを操作したい場合はここからミューテーションにコミットする。
 	 */
 	actions: {
+
+		async getAddress( context, params ){
+
+			var response = await axios.get('https://api.zipaddress.net', { params:{ 'zipcode': params.text } })
+			.then(response => {
+				return { data:response, status:"success" };
+			})
+			.catch(error => {
+				return { data:error, status:"error" };
+			});
+
+			if( response.status == "success" && response.data.code >= 400 ){
+				response.status = "error";
+			}
+
+	        return response;
+
+		}
 
 	},
 

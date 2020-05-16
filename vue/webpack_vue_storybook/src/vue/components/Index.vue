@@ -14,14 +14,17 @@
      </main>
 
 
-    <form @submit.prevent="postAxiosForm" >
+    <form @submit.prevent="getAddress" >
         <input type="text" name="hoge" >
         <button type="submit" >test</button>
     </form>
-    
-     <img src="/assets/img/db3ec985ddafea6bed1cb04b95337a95_600.jpg">
+    <p>{{address}}</p>
 
-     <Modal v-if="$store.getters.showModalFlag"></Modal>
+    <div class="thumbnails">
+      <Thumbnail v-for="item in thumbnails" class="thumbnail" :title="item.title" :inner-text="item.innerText"></Thumbnail>
+    </div>
+    <Modal v-if="$store.getters.showModalFlag"></Modal>
+
     
   </div>
 </template>
@@ -36,19 +39,24 @@
     }
 
   }
+
+  .thumbnails{
+    display: flex;
+  }
 </style>
 
 
 <script>
 import Modal from './Modal'
 import axios from 'axios';
+import Thumbnail from './Thumbnail';
 
 export default {
 
   name: 'Index',
 
 
-  components: { Modal },
+  components: { Modal, Thumbnail },
 
 
   mounted(){
@@ -60,7 +68,13 @@ export default {
   data: function(){
 
     return {
-      count : 0
+      count : 0,
+      thumbnails : [
+        { title:"hogeTitle0", innerText:"テキスト0" },
+        { title:"hogeTitle1", innerText:"テキスト1" },
+        { title:"hogeTitle2", innerText:"テキスト2" },
+      ],
+      address:""
     }
 
   },
@@ -78,99 +92,23 @@ export default {
       }
 
     },
+    
 
-    postJson( e ){
+    getAddress( e ){
 
-      var data = {
-        hoge : e.target.hoge.value
-      };
-      const headers = {
-        'Content-Type': 'application/json'
-      };
+      this.$store.dispatch( "getAddress", { text:e.target.hoge.value } ).then( response => {
 
-      fetch('https://example.com/profile/avatar', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers : headers
-      })
-        .then(response => console.log('Success:', JSON.stringify(response)))
-        .catch(error => console.error('Error:', error));
+        if( response.status == "success" ){
+          console.log( response.data );
+          this.address = response.data.data.data.fullAddress;
+        }else{
+          alert( "error" );
+        }
+
+      } );
 
     },
 
-    postForm( e ){
-
-      var formData = new FormData();
-      formData.append('hoge', e.target.hoge.value);
-
-      fetch('https://example.com/profile/avatar', {
-        method: 'POST',
-        body: formData
-      })
-        .then(response => console.log('Success:', JSON.stringify(response)))
-        .catch(error => console.error('Error:', error));
-
-    },
-
-    getJson( e ){
-
-      let params = new URLSearchParams();
-      params.set('hoge', e.target.hoge.value);
-
-      fetch('https://example.com/profile/avatar?' + params.toString())
-        .then(response => console.log('Success:', JSON.stringify(response)))
-        .catch(error => console.error('Error:', error));
-
-    },
-
-
-    postAxiosJson( e ){
-      
-      var data = {
-        hoge : e.target.hoge.value
-      };
-
-      axios.post('https://example.com/profile/avatar', data )
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
-    },
-
-
-    postAxiosForm( e ){
-      
-      var formData = new FormData();
-      formData.append('hoge', e.target.hoge.value);
-
-      axios.post('https://example.com/profile/avatar', formData )
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
-    },
-
-
-    getAxios( e ){
-      
-      let params = new URLSearchParams();
-      params.set('hoge', e.target.hoge.value);
-
-      axios.get('https://example.com/profile/avatar?' + params.toString())
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
-    },
 
   },
 
