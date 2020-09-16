@@ -1,4 +1,4 @@
-import LoadingToggleBtn from '../atoms/loading-toggle-btn';
+import Btn from '../atoms/btn';
 import { toggleLoading } from '~/store/current-user'
 
 import { useAppDispatch } from '~/store';
@@ -45,7 +45,7 @@ const LoadingToggle: React.FC = (props) => {
       </style>
   	  <h3>{props.title}</h3>
       <div className="loading-container">
-    	  <LoadingToggleBtn btnClick={click}>ローディングをトグル</LoadingToggleBtn>
+    	  <Btn btnClick={click}>ローディングをトグル</Btn>
     	  <p className="loading-status">{isLoading+""}</p>
       </div>
   	</>
