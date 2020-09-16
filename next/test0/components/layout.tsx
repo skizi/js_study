@@ -5,8 +5,14 @@ import { Box } from '@material-ui/core';
 const Layout: React.FC = (props) => {
   return (
     <>
+      <style jsx>{`
+        .main-container{
+          width:500px;
+          margin:30px auto 30px;
+        }
+      `}</style>
       <GlobalHeader />
-      <div>{props.children}</div>
+      <div className="main-container">{props.children}</div>
       <GlobalFooter />
     </>
   );

@@ -1,29 +1,12 @@
-import { useAppDispatch } from '~/store';
-import { toggleLoading } from '~/store/current-user'
-
-import { useSelector } from 'react-redux'
-import { AppState } from '~/store'
+import LoadingToggle from '~/components/organisms/loading-toggle';
 
 
 const Index: React.FC = () => {
 
-  const dispatch = useAppDispatch();
-
-  const click = () => {
-  	dispatch(toggleLoading())
-  }
-
-
-  const isLoadingSelector = (state: AppState): boolean => state.currentUser.isLoading;
-  const isLoading = useSelector(isLoadingSelector)
-
-
   return (
-  	<div>
-	  <p>Hello Next.js2</p>
-	  <button onClick={click}>btn</button>
-	  <p>{isLoading+""}</p>
-	</div>
+	<>
+		<LoadingToggle title="ローディングをトグルする"></LoadingToggle>
+	</>
   );
 
 };
