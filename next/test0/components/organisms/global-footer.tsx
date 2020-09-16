@@ -3,13 +3,17 @@ const GlobalFooter:React.FC = () => {
 	return(
 		<>
 	      <style jsx>{`
+	      	footer{
+	      		border-top:1px solid #ddd;
+	      	}
 	        h1 {
-	        	font-size:45px;
+	      		margin-left:30px;
+	        	font-size:25px;
 	        }
 	      `}</style>
-			<header>
+			<footer>
 				<h1>Footer</h1>
-			</header>
+			</footer>
 		</>
 	);
 

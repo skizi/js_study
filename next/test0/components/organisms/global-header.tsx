@@ -4,8 +4,12 @@ const GlobalHeader:React.FC = () => {
 	return(
 		<>
 	      <style jsx>{`
+	      	header{
+	      		border-bottom:1px solid #ddd;
+	      	}
 	        h1 {
-	        	font-size:45px;
+	      		margin-left:30px;
+	        	font-size:25px;
 	        }
 	      `}</style>
 			<header>
