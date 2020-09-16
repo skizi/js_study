@@ -17,7 +17,7 @@ const Btn: React.FC = ( props ) => {
 				}
 			`}
 		</style>
-		<button onClick={props.btnClick}>{props.children}</button>
+		<button className={props.optionClassName} onClick={props.btnClick}>{props.children}</button>
     </>
   );
 

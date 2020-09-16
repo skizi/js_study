@@ -9,15 +9,15 @@ import { AppState } from '~/store'
 
 const LoadingToggle: React.FC = (props) => {
 
-  const dispatch = useAppDispatch();
+  const dispatch:Function = useAppDispatch();
 
-  const click = () => {
+  const click:Function = ():void => {
   	dispatch(toggleLoading())
   }
 
 
-  const isLoadingSelector = (state: AppState): boolean => state.currentUser.isLoading;
-  const isLoading = useSelector(isLoadingSelector)
+  const isLoadingSelector:Function = (state: AppState): boolean => state.currentUser.isLoading;
+  const isLoading:boolean = useSelector(isLoadingSelector)
 
 
   return (
@@ -30,22 +30,24 @@ const LoadingToggle: React.FC = (props) => {
           }
           .loading-container{
             display:flex;
-          }
 
-          .btn{
-            margin-right:20px;
           }
 
           .loading-status{
             height:30px;
             line-height:30px;
-            margin:0 0 0 10px;
+            margin:0;
+          }
+
+          //:globalの左に必ずスペースがないと動作しない
+          .loading-container :global(.toggle-btn){
+            margin-right:20px;
           }
         `}
       </style>
   	  <h3>{props.title}</h3>
       <div className="loading-container">
-    	  <Btn btnClick={click}>ローディングをトグル</Btn>
+    	  <Btn optionClassName="toggle-btn" btnClick={click}>ローディングをトグル</Btn>
     	  <p className="loading-status">{isLoading+""}</p>
       </div>
   	</>
