@@ -1,15 +1,21 @@
 import { createSlice, SerializedError, PayloadAction } from '@reduxjs/toolkit';
+import { mountZipcodeToAddressThunk } from './thunks';
+
+
+export * from './thunks';
 
 
 export interface CurrentUserState {
   isRegistered: boolean;
   isLoading: boolean;
+  address: string;
   error?: Error | SerializedError;
 }
 
 const initialState: CurrentUserState = {
   isRegistered: false,
   isLoading: false,
+  address: ""
 };
 
 const currentUserSlice = createSlice({
@@ -21,6 +27,7 @@ const currentUserSlice = createSlice({
       },
   },
   extraReducers: (builder) => {
+    mountZipcodeToAddressThunk(builder);
   },
 });
 

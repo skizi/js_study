@@ -7,7 +7,6 @@ const LoginContainer: React.FC = (props) => {
 
   const { user } = useAuth0();
 
-  console.log(user);
 
   return (
     <>
