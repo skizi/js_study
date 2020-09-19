@@ -24,7 +24,7 @@ export const useAppDispatch = (): AppDispatch => useDispatch<AppDispatch>();
 export interface AppThunkApi {
   dispatch: AppDispatch;
   state: AppState;
-  rejectValue: Error | SerializedError;
+  rejectValue: Error | SerializedError; //rejectWithValueで返す値の型
   extra: {
   };
 }
