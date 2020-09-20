@@ -3,7 +3,6 @@ import {
   CurrentUser
 } from '~/vendor/zipaddress';
 import { AppThunkApi } from '../..';
-import { AxiosError } from 'axios';
 import ZipAddressApi from '~/vendor/zipaddress';
 
 import { CurrentUserState } from '..';
@@ -12,7 +11,7 @@ import { CurrentUserState } from '..';
 
 export const zipcodeToAddress = createAsyncThunk<CurrentUser, string, AppThunkApi>(
   'currentUser/address',
-  async ( code:string, thunkApi:AppThunkApi) => {
+  async ( code, thunkApi) => { //string, AppThunkApi
 
     let api = new ZipAddressApi();
 
@@ -21,11 +20,11 @@ export const zipcodeToAddress = createAsyncThunk<CurrentUser, string, AppThunkAp
       const response = await api.zipcodeToAddress( code );
 
       if( response.data.data.code == "400" ){
-        return thunkApi.rejectWithValue(response.data.data);
+        return thunkApi.rejectWithValue(response.data.data); //rejectWithValueの引数は、AppThunkApiのrejectValueで型を指定する
       }else{
         return { address:response.data.data.data.address }; //型はCurrentUser
       }
-      
+
     } catch (error) {
 
       if (!error.response) { //通信エラーの時はresponseが帰ってこない。その時はerrorを送出
@@ -51,7 +50,7 @@ export const mountZipcodeToAddressThunk = (
   builder.addCase(zipcodeToAddress.rejected, (state, action) => {
     state.isLoading = false;
     if (action.payload) {
-      state.error = action.payload; //ReduxToolKitに用意されたSerializedErrorと言う型で、一致する値だけ返す。この場合、codeとmessage
+      state.error = action.payload; //rejectValueに指定した、ReduxToolKitに用意されたSerializedErrorと言う型で、一致する値だけ返す。この場合payloadはcodeとmessageを含む
     } else {
       state.error = action.error;
     }

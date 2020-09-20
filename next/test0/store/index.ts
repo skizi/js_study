@@ -1,20 +1,21 @@
 import {
   configureStore,
-  getDefaultMiddleware,
   SerializedError,
 } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import currentUser from './current-user';
+import currentUserReducer from './current-user';
 
+//reducerをまとめる
 const store = configureStore({
   reducer: {
-    currentUser
+    currentUser:currentUserReducer
   },
   devTools: true,
 });
 
 export default store;
 
+// コンポーネント側でstate参照する時に、型注釈に使用するのでexportする
 export type AppState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;

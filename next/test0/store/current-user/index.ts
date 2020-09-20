@@ -1,8 +1,9 @@
-import { createSlice, SerializedError, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, SerializedError } from '@reduxjs/toolkit';
 import { mountZipcodeToAddressThunk } from './thunks';
 
 
 export * from './thunks';
+export * from './selectors';
 
 
 export interface CurrentUserState {
@@ -22,7 +23,7 @@ const currentUserSlice = createSlice({
   name: 'currentUser',
   initialState,
   reducers: {
-      toggleLoading (state: State, action: PayloadAction<string>) {
+      toggleLoading (state) {
           state.isLoading = !state.isLoading;
       },
   },

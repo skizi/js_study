@@ -1,6 +1,10 @@
+type Props = {
+  optionClassName : string,
+  btnClick : () => void,
+  children : React.ReactNode
+}
 
-
-const Btn: React.FC = ( props ) => {
+const Btn: React.FC<Props> = ( props ) => {
 
   return (
     <>

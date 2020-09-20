@@ -1,12 +1,11 @@
-import { Component } from 'react';
 import { useAppDispatch } from '~/store';
 import { zipcodeToAddress } from '~/store/current-user'
-import { toggleLoading } from '~/store/current-user'
 
 import {useSelector} from "react-redux";
+import { addressSelector } from '~/store/current-user';
 
 
-const ZipContainer: React.FC = (props) => {
+const ZipContainer: React.FC = () => {
 
 	var code:string = "";
   
@@ -14,6 +13,9 @@ const ZipContainer: React.FC = (props) => {
 	const exportCode = () => {
 		dispatch(zipcodeToAddress(code));
 	}
+
+
+	const address:string = useSelector( addressSelector );
 
 
 	return (
@@ -33,7 +35,7 @@ const ZipContainer: React.FC = (props) => {
 			<h3>郵便番号から住所を取得</h3>
 			<input type="text" name="zip-code" placeholder="郵便番号を入力" pattern="\d{3}-?\d{4}" onChange={ e => code = e.target.value }></input>
 			<button onClick={exportCode}>変換</button>
-			<p>{useSelector(state => state.currentUser.address)}</p>
+			<p>{address}</p>
 		</>
 	);
 

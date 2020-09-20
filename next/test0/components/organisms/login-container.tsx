@@ -1,12 +1,13 @@
 
 import LoginButton from '../atoms/login-button';
-import { useAuth0 } from "@auth0/auth0-react";
+
+type Props = {
+  title : string
+}
 
 
-const LoginContainer: React.FC = (props) => {
 
-  const { user } = useAuth0();
-
+const LoginContainer: React.FC<Props> = (props) => {
 
   return (
     <>

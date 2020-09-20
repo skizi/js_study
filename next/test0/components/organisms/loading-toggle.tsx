@@ -1,24 +1,26 @@
 import Btn from '../atoms/btn';
-import { toggleLoading } from '~/store/current-user'
+import { toggleLoading } from '~/store/current-user';
 
 import { useAppDispatch } from '~/store';
-import { useSelector } from 'react-redux'
-import { AppState } from '~/store'
+import { useSelector } from 'react-redux';
+import { isLoadingSelector } from '~/store/current-user';
 
 
+type Props = {
+  title : string
+}
 
 
-const LoadingToggle: React.FC = (props) => {
+const LoadingToggle: React.FC<Props> = (props) => {
 
   const dispatch:Function = useAppDispatch();
 
-  const click:Function = ():void => {
+  const click:() => void = ():void => {
   	dispatch(toggleLoading())
   }
 
 
-  const isLoadingSelector:Function = (state: AppState): boolean => state.currentUser.isLoading;
-  const isLoading:boolean = useSelector(isLoadingSelector)
+  const isLoading:boolean = useSelector( isLoadingSelector )
 
 
   return (

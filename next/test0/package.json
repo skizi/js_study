@@ -6,6 +6,7 @@
   "dependencies": {
     "@auth0/auth0-react": "^1.0.0",
     "@reduxjs/toolkit": "^1.4.0",
+    "@types/react-redux": "^7.1.9",
     "axios": "^0.20.0",
     "next": "^9.5.3",
     "react": "^16.13.1",
@@ -23,6 +24,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next",
     "build": "next build",
+    "export": "next export",
     "start": "next start"
   },
   "keywords": [],
