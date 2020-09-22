@@ -1,9 +1,11 @@
 import Link from "next/link";
-import fetch from "isomorphic-unfetch"; //SSRでも動作するfetch
+import fetch from "node-fetch";
 
 type Props = {
-  id : number,
-  name : string
+  shows : {
+    id : number,
+    name : string
+  }[]
 }
 
 
@@ -23,11 +25,13 @@ const Index: React.FC<Props> = props => (
   </div>
 );
 
-Index.getInitialProps = async function() {
-  const res:Promise = await fetch("https://api.tvmaze.com/search/shows?q=batman");
-  const data:object = await res.json();
+
+
+export const getStaticProps = async () => {
+  const res = await fetch("https://api.tvmaze.com/search/shows?q=batman");
+  const data:any[] = await res.json();
   console.log(`Show data fetched. Count: ${data.length}`);
-  return { shows: data.map(entry => entry.show) };
+  return { props : { shows: data.map(entry => entry.show) } };
 };
 
 export default Index;
