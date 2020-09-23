@@ -24,7 +24,7 @@ const Post: React.FC<Props> = props => (
     <h1>{props.show.name}</h1>
     <p>{props.show.summary.replace(/<[/]?[pb]>/g, "")}</p>
     {props.show.image ? <img src={props.show.image.medium} /> : null}
-    <Link href="/show_top">
+    <Link href="/show">
       <a className="return-btn">一覧に戻る</a>
     </Link>
   </div>
