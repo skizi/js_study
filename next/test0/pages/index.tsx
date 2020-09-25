@@ -3,6 +3,7 @@ import LoginContainer from '~/components/organisms/login-container';
 import ZipContainer from '~/components/organisms/zip-container';
 
 import RefTest from '~/components/organisms/ref-test'
+import UseStateTest from '~/components/organisms/use-state-test'
 
 
 const Index: React.FC = () => {
@@ -13,6 +14,7 @@ const Index: React.FC = () => {
 		<LoginContainer title="ログイン"></LoginContainer>
 		<ZipContainer></ZipContainer>
 		<RefTest></RefTest>
+		<UseStateTest></UseStateTest>
 	</>
   );
 
