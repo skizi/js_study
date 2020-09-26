@@ -1,6 +1,6 @@
 import Link from "next/link";
 import fetch from "isomorphic-unfetch"; //SSRでも動作するfetch
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const RedLink = styled.a`
   color: red;
