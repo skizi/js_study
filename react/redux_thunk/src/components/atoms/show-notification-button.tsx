@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { showNotificationWithTimeout } from '../../store/hoge/actions';
-import { State } from '../../store/hoge';
+import { showNotificationWithTimeout, getAddress } from '../../store/hoge/actions';
+import { HogeState } from '../../store/hoge';
+import { RootState } from '../../store';
 
 
 
 
 interface ButtonsProps {
-  onShowNotification?: () => void
+  onShowNotification?: () => void,
+  getAddress?: () => any,
+  address:string
 }
 
 
@@ -21,23 +24,29 @@ class ShowNotificationButton extends Component<ButtonsProps> {
 
   render() {
     return (
-      <button onClick={this.props.onShowNotification}>Show Notification</button>
+      <>
+	      <button onClick={this.props.onShowNotification}>Show Notification</button>
+	      <button onClick={this.props.getAddress}>Get Address</button>
+	      <p>{this.props.address+""}</p>
+      </>
     )
   }
 }
 
-const mapStateToProps = (state:State) => {
-  return { state }
+const mapStateToProps = (state:RootState) => {
+  return { address:state.hoge.address }
 };
 
 
 type DispatchProps = {
     onShowNotification: () => void;
+    getAddress: () => any;
 };
 
 const mapDispatchToProps = (dispatch:Function):DispatchProps => {
   return {
-    onShowNotification: () => dispatch(showNotificationWithTimeout('foo'))
+    onShowNotification: () => dispatch(showNotificationWithTimeout('foo')),
+    getAddress:() => dispatch(getAddress('4250041'))
   }
 };
 

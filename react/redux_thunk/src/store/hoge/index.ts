@@ -1,35 +1,52 @@
 // import { Reducer } from 'redux'
 import { ActionType } from 'redux-actions-type'
-import { SHOW_NOTIFICATION, HIDE_NOTIFICATION } from './actions'
+import { SHOW_NOTIFICATION, HIDE_NOTIFICATION, SET_ADDRESS } from './actions'
 import * as actions from './actions'
 
 
 export type HogeAction = ActionType<typeof actions>
 
-export type State = {
+export type HogeState = {
   showFlag: boolean,
-  text : string
+  text : string,
+  address : string
 }
 
-export const initialState: State = {
+export const initialState: HogeState = {
   showFlag: false,
-  text: ""
+  text: "",
+  address : ""
 }
 
-const hogeReducer/*: Reducer<State, HogeAction>*/ = (
-  state = initialState,
+const hogeReducer/*: Reducer<HogeState, HogeAction>*/ = (
+  state:HogeState = initialState,
   action: any
 ) => {
   switch (action.type) {
     case SHOW_NOTIFICATION:
       console.log("SHOW_NOTIFICATION");
-      return { showFlag: true, text:action.payload }
+      return Object.assign({}, state, {
+        showFlag:true
+      });
+      break;
     case HIDE_NOTIFICATION:
       console.log("HIDE_NOTIFICATION");
-      return { showFlag: false, text:action.payload }
+      return Object.assign({}, state, {
+        showFlag:false
+      });
+      break;
+    case SET_ADDRESS:
+      console.log("SET_ADDRESS");
+      return Object.assign({}, state, {
+        address:action.address
+      });
+      break;
+
     default:
-      return state
+      return state;
+      break;
   }
+
 }
 
 export default hogeReducer

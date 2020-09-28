@@ -1,10 +1,10 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import hogeReducer, {State as notificationState} from './hoge';
+import hogeReducer, {HogeState, initialState} from './hoge';
 
 
 export type RootState = {
-  hoge:notificationState
+  hoge:HogeState
 }
 
 const reducers = combineReducers<RootState>({
@@ -13,6 +13,7 @@ const reducers = combineReducers<RootState>({
 
 const store = createStore(
   reducers,
+  { hoge:initialState },
   applyMiddleware(thunk)
 );
 
