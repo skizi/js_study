@@ -1,3 +1,12 @@
+
+## `About`
+Middlewareを利用せずに非同期処理などの実装を行う検証
+
+
+### `node Version`
+v12.18.0
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

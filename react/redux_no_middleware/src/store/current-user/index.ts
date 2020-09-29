@@ -23,16 +23,12 @@ const userReducer/*: Reducer<HogeState, HogeAction>*/ = (
 
   	case CHANGE_USER_NAME:
 		console.log("CHANGE_USER_NAME");
-		return Object.assign({}, state, {
-			name:action.name
-		});
+		return { ...state, name:action.name };
 		break;
 
   	case CHANGE_USER_ADDRESS:
 		console.log("CHANGE_USER_ADDRESS");
-		return Object.assign({}, state, {
-			address:action.address
-		});
+		return { ...state, address:action.address };
 		break;
 
   	default:

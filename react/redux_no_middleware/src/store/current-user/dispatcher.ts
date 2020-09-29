@@ -26,6 +26,7 @@ export default class Dispatcher {
 
 
   async changeUserAddress( zipcode:string ): Promise<void> {
+
     this.dispatch({type: CHANGE_USER_ADDRESS_START});
 
     try {
@@ -48,5 +49,7 @@ export default class Dispatcher {
     } finally {
       this.dispatch({type: CHANGE_USER_ADDRESS_FINISH})
     }
+
   }
+
 }

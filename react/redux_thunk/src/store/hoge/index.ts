@@ -25,21 +25,15 @@ const hogeReducer/*: Reducer<HogeState, HogeAction>*/ = (
   switch (action.type) {
     case SHOW_NOTIFICATION:
       console.log("SHOW_NOTIFICATION");
-      return Object.assign({}, state, {
-        showFlag:true
-      });
+      return { ...state, showFlag:true };
       break;
     case HIDE_NOTIFICATION:
       console.log("HIDE_NOTIFICATION");
-      return Object.assign({}, state, {
-        showFlag:false
-      });
+      return { ...state, showFlag:false };
       break;
     case SET_ADDRESS:
       console.log("SET_ADDRESS");
-      return Object.assign({}, state, {
-        address:action.address
-      });
+      return { ...state, address:action.address };
       break;
 
     default:
