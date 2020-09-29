@@ -1,16 +1,18 @@
 import { ActionType } from 'redux-actions-type'
-import { CHANGE_USER_NAME } from './actions'
+import { CHANGE_USER_NAME, CHANGE_USER_ADDRESS } from './actions'
 import * as actions from './actions'
 
 
 export type UserAction = ActionType<typeof actions>
 
 export type UserState = {
-  name: string
+  name: string,
+  address: string
 }
 
 export const initialState: UserState = {
   name: "",
+  address: ""
 }
 
 const userReducer/*: Reducer<HogeState, HogeAction>*/ = (
@@ -23,6 +25,13 @@ const userReducer/*: Reducer<HogeState, HogeAction>*/ = (
 		console.log("CHANGE_USER_NAME");
 		return Object.assign({}, state, {
 			name:action.name
+		});
+		break;
+
+  	case CHANGE_USER_ADDRESS:
+		console.log("CHANGE_USER_ADDRESS");
+		return Object.assign({}, state, {
+			address:action.address
 		});
 		break;
 
