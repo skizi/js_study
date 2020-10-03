@@ -7,6 +7,7 @@ import UseStateTest from '~/components/organisms/use-state-test'
 import UseFormTest from '~/components/organisms/use-form-test'
 
 import ApiTest from '~/components/organisms/api-test'
+import RestTest from '~/components/organisms/rest-test';
 
 
 const Index: React.FC = () => {
@@ -20,6 +21,7 @@ const Index: React.FC = () => {
 		<UseStateTest />
 		<UseFormTest />
 		<ApiTest />
+		<RestTest hoge0="hoge0" hoge1="hoge1" hoge2="hoge2" />
 	</>
   );
 
