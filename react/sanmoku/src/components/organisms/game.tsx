@@ -26,7 +26,7 @@ class Game extends React.Component<Props, State> {
   }
 
 
-  calculateWinner(squares:string[]) {
+  calculateWinner(squares:(number|string)[]):number|string|null {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -37,7 +37,7 @@ class Game extends React.Component<Props, State> {
       [0, 4, 8],
       [2, 4, 6],
     ];
-    for (let i = 0; i < lines.length; i++) {
+    for (let i:number = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
         return squares[a];
@@ -49,15 +49,15 @@ class Game extends React.Component<Props, State> {
 
   handleClick( i:number ){
 
-    const history = this.state.history;
-    const current = history[history.length - 1];
-    const squares = current.squares.slice();
+    const history:any[] = this.state.history;
+    const current:any = history[history.length - 1];
+    const squares:(number|string)[] = current.squares.slice();
     if (this.calculateWinner(squares) || squares[i]) {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
-      history: history.concat([{
+      history: history.concat([{ //historyに結合
         squares: squares,
       }]),
       stepNumber: history.length,
@@ -76,14 +76,14 @@ class Game extends React.Component<Props, State> {
 
 
   render() {
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
-    const winner = this.calculateWinner(current.squares);
+    const history:any[] = this.state.history;
+    const current:any = history[this.state.stepNumber];
+    const winner:number|string|null = this.calculateWinner(current.squares);
 
     //step = 配列
     //move = index番号
-    const moves = history.map((step, move) => {
-      const desc = move ?
+    const moves:JSX.Element[] = history.map((step:any, move:number) => {
+      const desc:string = move ?
         'Go to move #' + move :
         'Go to game start';
       return (
@@ -94,7 +94,7 @@ class Game extends React.Component<Props, State> {
       );
     });
 
-    let status;
+    let status:string;
     if (winner) {
       status = 'Winner: ' + winner;
     } else {

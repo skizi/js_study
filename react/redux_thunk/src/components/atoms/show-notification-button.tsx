@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { showNotificationWithTimeout, getAddress } from '../../store/hoge/actions';
-import { HogeState } from '../../store/hoge';
 import { RootState } from '../../store';
 
 
