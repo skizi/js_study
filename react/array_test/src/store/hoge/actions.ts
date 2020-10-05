@@ -5,6 +5,7 @@ export const HIDE_NOTIFICATION = "HIDE_NOTIFICATION";
 export const SET_ADDRESS = "SET_ADDRESS";
 export const DELETE_ADDRESS = "DELETE_ADDRESS";
 export const SWITCH_ADDRESS = "SWITCH_ADDRESS";
+export const SORT_ADDRESS = "SORT_ADDRESS";
 
 
 function showNotification(id:any, text:string) {
@@ -39,6 +40,12 @@ export function switchAddress(a:number, b:number){
     type:"SWITCH_ADDRESS",
     a,
     b
+  }
+}
+
+export function sortAddress(){
+  return{
+    type:"SORT_ADDRESS"
   }
 }
 

@@ -1,6 +1,6 @@
 // import { Reducer } from 'redux'
 // import { ActionType } from 'redux-actions-type'
-import { SHOW_NOTIFICATION, HIDE_NOTIFICATION, SET_ADDRESS, DELETE_ADDRESS, SWITCH_ADDRESS } from './actions'
+import { SHOW_NOTIFICATION, HIDE_NOTIFICATION, SET_ADDRESS, DELETE_ADDRESS, SWITCH_ADDRESS, SORT_ADDRESS } from './actions'
 import * as actions from './actions'
 
 
@@ -57,6 +57,20 @@ const hogeReducer/*: Reducer<HogeState, HogeAction>*/ = (
       var addresses:string[] = [ ...state.addresses ];
       addresses.splice( action.a, 1, addressB );
       addresses.splice( action.b, 1, addressA );
+      return { ...state, addresses:addresses };
+      break;
+
+    case SORT_ADDRESS:
+      var addresses:string[] = [ ...state.addresses ];
+      addresses.sort((a, b)=>{
+        if( a < b ){
+          return -1;
+        }
+        if( a > b ){
+          return 1;
+        }
+        return 0;
+      });
       return { ...state, addresses:addresses };
       break;
 

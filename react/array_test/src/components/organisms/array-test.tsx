@@ -1,8 +1,9 @@
 import React from "react";
 import {useState} from 'react';
 import { connect } from 'react-redux';
-import { showNotificationWithTimeout, setAddress, deleteAddress, switchAddress } from '../../store/hoge/actions';
+import { showNotificationWithTimeout, setAddress, deleteAddress, switchAddress, sortAddress } from '../../store/hoge/actions';
 import { RootState } from '../../store';
+
 
 
 
@@ -11,7 +12,8 @@ interface ButtonsProps {
   onShowNotification: () => void,
   onSetAddress: (address:string) => void,
   onDeleteAddress: (i:number) => void,
-  onSwitchAddress: (a:number, b:number) => void
+  onSwitchAddress: (a:number, b:number) => void,
+  onSortAddress : () => void,
   addresses:string[]
 }
 
@@ -49,6 +51,13 @@ const ArrayTest:React.FC<ButtonsProps> = (props:ButtonsProps) => {
   }
 
 
+  const sortItemHandler = () => {
+
+    props.onSortAddress();
+
+  }
+
+
   const checkIndex = ( i:number ):boolean => {
 
     var flag:boolean = false;
@@ -60,15 +69,18 @@ const ArrayTest:React.FC<ButtonsProps> = (props:ButtonsProps) => {
 
 
 
+
 	return (
 		<>
       <style jsx>{`
         h3{
           padding-left:4px;
-          border-left:2px solid #333;
+          border-bottom:1px solid #ddd;
         }
       `}</style>
       <h2>Reactでの配列操作 検証</h2>
+
+      <h3>配列に値追加</h3>
 			<input type="text" onChange={(e) => setAddress(e.target.value)} />
 			<button onClick={()=>props.onSetAddress(address)}>追加</button>
 
@@ -123,6 +135,8 @@ const ArrayTest:React.FC<ButtonsProps> = (props:ButtonsProps) => {
       <label htmlFor="switch-item-b">b</label><input type="text" onChange={(e) => setSwitchItemB(e.target.value)} id="switch-item-b" />
       <button onClick={switchItemHandler}>入れ替え</button>
 
+      <h3>配列を012...順で整頓</h3>
+      <button onClick={sortItemHandler}>ソート</button>
  		</>
 	);
 
@@ -139,6 +153,7 @@ type DispatchProps = {
     onSetAddress: (address:string) => void;
     onDeleteAddress: (i:number) => void;
     onSwitchAddress:(a:number, b:number) => void;
+    onSortAddress:() => void;
 };
 
 const mapDispatchToProps = (dispatch:Function):DispatchProps => {
@@ -146,7 +161,8 @@ const mapDispatchToProps = (dispatch:Function):DispatchProps => {
     onShowNotification: () => dispatch(showNotificationWithTimeout('foo')),
     onSetAddress : (address:string) => dispatch(setAddress(address)),
     onDeleteAddress : (i:number) => dispatch(deleteAddress(i)),
-    onSwitchAddress : (a:number, b:number) => dispatch(switchAddress(a, b))
+    onSwitchAddress : (a:number, b:number) => dispatch(switchAddress(a, b)),
+    onSortAddress : () => dispatch(sortAddress())
   }
 };
 
