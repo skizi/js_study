@@ -62,6 +62,12 @@ const ArrayTest:React.FC<ButtonsProps> = (props:ButtonsProps) => {
 
 	return (
 		<>
+      <style jsx>{`
+        h3{
+          padding-left:4px;
+          border-left:2px solid #333;
+        }
+      `}</style>
       <h2>Reactでの配列操作 検証</h2>
 			<input type="text" onChange={(e) => setAddress(e.target.value)} />
 			<button onClick={()=>props.onSetAddress(address)}>追加</button>

@@ -6,7 +6,7 @@ interface Props{
 }
 
 interface State{
-  history:any[],
+  history:{squares:(number|string|null)[]}[],
   xIsNext:boolean,
   stepNumber:number
 }
