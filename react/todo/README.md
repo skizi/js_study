@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Todoリストを作ってみた
+参考
+https://qiita.com/mikan3rd/items/20152cdd63a708264a9e
+
+上記の参考サイトの記事をReactHooksを使ってアレンジした
+
+
 ## Available Scripts
 
 In the project directory, you can run:
