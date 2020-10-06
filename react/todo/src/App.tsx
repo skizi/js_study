@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import TodoList from './components/organisms/todo-list';
 import Form from './components/organisms/form';
+import CountApp from './components/organisms/count-app';
 
 
 const App = () => {
@@ -73,6 +74,8 @@ const App = () => {
         onClick={switchTodoHandler}
         deleteHandler={deleteHandler}
         />
+
+      <CountApp />
     </div>
   );
 }
