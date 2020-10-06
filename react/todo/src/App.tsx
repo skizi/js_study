@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import TodoList from './components/organisms/todo-list';
+import Form from './components/organisms/form';
 
 
 const App = () => {
@@ -32,19 +33,41 @@ const App = () => {
 
   }
 
+
   const deleteHandler = ( id:number ) => {
 
     let todos = [ ...state.todos ];
-    let newTodos = todos.filter(( item, _index )=>{
+    todos = todos.filter(( item, _index )=>{
       return item.id != id;
     });
-    setState( { todos:newTodos } );
+    todos = todos.map(( item, _index )=>{
+      item.id = _index+1;
+      return item;
+    });
+    setState( { todos:todos } );
 
   }
+
+
+  const addTodoHandler = ( title:string, text:string ) => {
+
+    let todos = [ ...state.todos ];
+    console.log(title);
+    todos.push({
+        id: todos.length+1,
+        title: title,
+        desc: text,
+        done: false
+    });
+    setState( { todos:todos } );
+
+  }
+
 
   return (
     <div className="app">
       <h1>todoアプリを作ってみた</h1>
+      <Form addTodoHandler={addTodoHandler} />
       <TodoList
         todos={state.todos}
         onClick={switchTodoHandler}
