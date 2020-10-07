@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 
 type Props = {
-  id:number;
   title:string;
   done:boolean;
   desc:string;
-  onClick:(id:number) => void;
-  deleteHandler:(id:number) => void;
+  index:number;
+  toggleTodoHandler:(index:number) => void;
+  deleteHandler:(index:number) => void;
 }
 
 const Todo:React.FC<Props> = ( props:Props ) => {
@@ -16,10 +16,9 @@ const Todo:React.FC<Props> = ( props:Props ) => {
 
   return(
     <li className={className}>
-      <span>{props.id}</span>
-      <span>：{props.title}　　</span>
-      <button onClick={()=>props.onClick( props.id )}>{props.done ? '元に戻す' : '完了！'}</button>
-      { props.done ? (<button onClick={()=>props.deleteHandler(props.id)}>削除</button>) : null }
+      <span>{props.title}　　</span>
+      <button onClick={()=>props.toggleTodoHandler( props.index )}>{props.done ? '元に戻す' : '完了！'}</button>
+      { props.done ? (<button onClick={()=>props.deleteHandler(props.index)}>削除</button>) : null }
       <p>{props.desc}</p>
     </li>
   );

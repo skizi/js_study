@@ -3,13 +3,12 @@ import Todo from '../molecules/todo';
 
 type Props = {
   todos : {
-    id:number,
     title:string,
     desc:string,
     done:boolean
   }[],
-  onClick:(id:number) => void;
-  deleteHandler:(id:number) => void;
+  toggleTodoHandler:(index:number) => void;
+  deleteHandler:(index:number) => void;
 }
 
 
@@ -17,11 +16,12 @@ const TodoList:React.FC<Props> = (props:Props) => {
 
   return(
     <ul>
-      {props.todos.map( todo =>
+      {props.todos.map(( todo, index ) =>
         <Todo
-          key={todo.id}
+          key={index}
           {...todo}
-          onClick={props.onClick}
+          index = {index}
+          toggleTodoHandler={props.toggleTodoHandler}
           deleteHandler={props.deleteHandler}
         />
       )}

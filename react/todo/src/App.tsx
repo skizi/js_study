@@ -9,13 +9,11 @@ const App = () => {
   let [ state, setState ] = useState({
     todos: [
       {
-        id: 1,
         title: "Hello, React!",
         desc: "React始めました",
         done: false
       },
       {
-        id: 2,
         title: "Hello, Redux!",
         desc: "Reduxも始めました",
         done: false
@@ -23,28 +21,22 @@ const App = () => {
     ]
   });
 
-  const switchTodoHandler = ( id:number ) => {
+  const toggleTodoHandler = ( index:number ) => {
 
     let todos = [ ...state.todos ];
-    todos.map(( item, _index )=>{
-      if( item.id == id ) item.done = !item.done;
-      return item;
-    });
+    todos[index].done = !todos[index].done;
     setState( { todos:todos } );
 
   }
 
 
-  const deleteHandler = ( id:number ) => {
+  const deleteHandler = ( index:number ) => {
 
     let todos = [ ...state.todos ];
-    todos = todos.filter(( item, _index )=>{
-      return item.id != id;
-    });
-    todos = todos.map(( item, _index )=>{
-      item.id = _index+1;
-      return item;
-    });
+    // todos = todos.filter(( item, _index )=>{
+    //   return _index != index;
+    // });
+    todos.splice( index, 1 ); //スマートな書き方
     setState( { todos:todos } );
 
   }
@@ -52,15 +44,11 @@ const App = () => {
 
   const addTodoHandler = ( title:string, text:string ) => {
 
-    let todos = [ ...state.todos ];
-    console.log(title);
-    todos.push({
-        id: todos.length+1,
+    setState( { todos:state.todos.concat({
         title: title,
         desc: text,
         done: false
-    });
-    setState( { todos:todos } );
+    }) } );
 
   }
 
@@ -71,7 +59,7 @@ const App = () => {
       <Form addTodoHandler={addTodoHandler} />
       <TodoList
         todos={state.todos}
-        onClick={switchTodoHandler}
+        toggleTodoHandler={toggleTodoHandler}
         deleteHandler={deleteHandler}
         />
 
