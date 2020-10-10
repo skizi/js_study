@@ -4,6 +4,14 @@ const sleep = (sec) => {
 	return new Promise(resolve => setTimeout(resolve, sec * 1000));
 }
 
+let users = [
+  { name:"yoshida", outline:"よろしくね！", id:0 },
+  { name:"yamada", outline:"今年は暑い", id:1 },
+  { name:"suzuki", outline:"今年は寒い", id:2 },
+  { name:"oota", outline:"来年は暑い", id:3 },
+];
+let idCount = 3;
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   await sleep(1);
@@ -13,35 +21,51 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'GET': {
       res.status(200).json({
         status:"success",
-  	    users:[
-          { name:"yoshida", outline:"よろしくね！" },
-          { name:"yamada", outline:"今年は暑い" },
-          { name:"suzuki", outline:"今年は寒い" },
-          { name:"oota", outline:"来年は暑い" },
-        ]
+  	    users:users
   	  });
       break
     }
     case 'POST': {
+      idCount += 1;
+      let user = {
+        name:req.body.params.name,
+        outline:req.body.params.outline,
+        id:idCount
+      };
+      users.push(user);
       res.status(200).json({
         status:"success",
-        name:req.body.params.name,
-        outline:req.body.params.outline
+        name:user.name,
+        outline:user.outline,
+        id:user.id
       })
       break
     }
     case 'PUT': {
+      const { name, outline, id } = req.body.params;
+      users = users.map((item, i)=>{
+        if( item.id === id ){
+          item.name = name;
+          item.outline = outline;
+        }
+        return item;
+      });
       res.status(200).json({
         status:"success",
-        name:req.body.params.name,
-        outline:req.body.params.outline
+        name:name,
+        outline:outline,
+        id:id
       })
       break
     }
     case 'DELETE': {
+      const id = req.query.id;
+      users = users.filter((item, i)=>{
+        return item.id != id;
+      });
       res.status(200).json({
         status:"success",
-        outline:"delete user id:" + req.query.id
+        outline:"delete user id:" + id
       })
       break
     }

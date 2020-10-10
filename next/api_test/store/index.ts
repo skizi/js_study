@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
-import HogeReducer, { HogeState } from "./hoge";
+import UserReducer, { UserState } from "./user";
 
 export type RootState = {
-	hoge:HogeState
+	user:UserState
 };
 
 const reducers = combineReducers<RootState>({
-	hoge:HogeReducer
+	user:UserReducer
 });
 
 const store = createStore(

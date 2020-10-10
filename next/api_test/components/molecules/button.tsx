@@ -1,53 +1,53 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
-import { getAddress } from '../../store/hoge/actions';
+import { asyncGetUsers, asyncCreateUser, asyncUpdateUser, asyncDeleteUser, User } from '../../store/user/actions';
 import { RootState } from '../../store';
 
 import axios from "axios";
 
 
 type Props = {
-	getAddress:() => void;
-	address:string;
+	asyncGetUsers:() => void;
+	asyncCreateUser:() => void;
+	asyncUpdateUser:() => void;
+	asyncDeleteUser:() => void;
+	users:User[];
 }
 
 const Button:React.FC<Props> = (props:Props) =>{
 
-	const [ address, setAddress ] = useState("");
-
-	axios.get( "/api/users" ).then( response => {
-		console.log(response);
-	} ).catch( error => {
-		console.log(error);
-	} );
-
-
-	axios.post( "/api/users", { params:{ name:"hogeo", outline:"mouyada" } } ).then( response => {
-		console.log(response);
-	} ).catch( error => {
-		console.log(error);
-	} );
-
-
-	axios.put( "/api/users", { params:{ name:"hogeo2", outline:"mouyada2" } } ).then( response => {
-		console.log(response);
-	} ).catch( error => {
-		console.log(error);
-	} );
-
-
-	axios.delete( "/api/users", { params:{ id:11 } } ).then( response => {
-		console.log(response);
-	} ).catch( error => {
-		console.log(error);
-	} );
-
+	const [ name, setName ] = useState("");
+	const [ outline, setOutline ] = useState("");
+	const [ id, setId ] = useState(0);
 
 	return(
 		<>
-			<input type="text" onChange={ (e)=>setAddress( e.target.value ) } />
-			<button onClick={()=>props.getAddress(address)}>アドレス取得</button>
-			<p>{props.address}</p>
+			<button onClick={()=>props.asyncGetUsers()}>ユーザー一覧取得</button>
+			<ul>
+			{(()=>{
+				return props.users.map(( item, i ) => {
+					return (<li key={i}>name:{item.name} outline:{item.outline} id:{item.id}</li>);
+				})
+			})()}
+			</ul>
+
+
+			<h3>ユーザー登録</h3>
+			<label htmlFor="nameInput">名前：</label><input type="text" onChange={(e)=>setName(e.target.value)} id="nameInput" />
+			<label htmlFor="outlineInput">紹介文：</label><input type="text" onChange={(e)=>setOutline(e.target.value)} id="outlineInput" />
+			<button onClick={()=>props.asyncCreateUser(name, outline)}>ユーザー登録</button>
+
+
+			<h3>ユーザー情報更新</h3>
+			<label htmlFor="nameUpdateInput">名前：</label><input type="text" onChange={(e)=>setName(e.target.value)} id="nameUpdateInput" />
+			<label htmlFor="outlineUpdateInput">紹介文：</label><input type="text" onChange={(e)=>setOutline(e.target.value)} id="outlineUpdateInput" />
+			<label htmlFor="idUpdateInput">id：</label><input type="text" onChange={(e)=>setId(e.target.value)} id="idUpdateInput" />
+			<button onClick={()=>props.asyncUpdateUser(name, outline, id)}>ユーザー登録</button>
+
+
+			<h3>ユーザー削除</h3>
+			<label htmlFor="idDeleteInput">名前：</label><input type="text" onChange={(e)=>setId(e.target.value)} id="idDeleteInput" />
+			<button onClick={()=>props.asyncDeleteUser(id)}>ユーザー削除</button>
 		</>
 	);
 
@@ -55,17 +55,23 @@ const Button:React.FC<Props> = (props:Props) =>{
 
 
 const mapStateToProps = (state:RootState) => {
-  return { address:state.hoge.address }
+  return { users:state.user.users }
 };
 
 
 type DispatchProps = {
-    getAddress: () => any;
+    asyncGetUsers: () => any,
+    asyncCreateUser: () => any,
+    asyncUpdateUser: () => any,
+    asyncDeleteUser: () => any
 };
 
 const mapDispatchToProps = (dispatch:Function):DispatchProps => {
   return {
-    getAddress:() => dispatch(getAddress('4250041'))
+    asyncGetUsers:() => dispatch(asyncGetUsers()),
+	asyncCreateUser:(name:string, outline:string) => dispatch(asyncCreateUser( name, outline )),
+	asyncUpdateUser:(name:string, outline:string, id:number) => dispatch( asyncUpdateUser( name, outline, id ) ),
+	asyncDeleteUser:(id:number) => dispatch(asyncDeleteUser(id))
   }
 };
 
