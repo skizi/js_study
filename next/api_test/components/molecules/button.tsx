@@ -6,6 +6,7 @@ import { RootState } from '../../store';
 import axios from "axios";
 
 
+
 type Props = {
 	asyncGetUsers:() => void;
 	asyncCreateUser:() => void;
@@ -22,7 +23,10 @@ const Button:React.FC<Props> = (props:Props) =>{
 
 	return(
 		<>
+			{/*
 			<button onClick={()=>props.asyncGetUsers()}>ユーザー一覧取得</button>
+			*/}
+			<h3>ユーザー一覧</h3>
 			<ul>
 			{(()=>{
 				return props.users.map(( item, i ) => {
