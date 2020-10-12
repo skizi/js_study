@@ -17,29 +17,23 @@ type Props = {
 
 const Button:React.FC<Props> = (props:Props) =>{
 
-	console.log("Button render");
+	console.log("button component render----------------");
 
 	const [ name, setName ] = useState("");
 	const [ outline, setOutline ] = useState("");
 	const [ id, setId ] = useState(0);
 
 
-	const [ hoge, setHoge ] = useState( 0 );
-	// useEffect(() => {
-	// 	//ユーザー登録するたびにhogeが変更されたら実行される
-	// 	console.log("useEffect:hoge");
-	// }, [ hoge ]);
+	useEffect(() => {
+		//ユーザー登録,更新,削除するたびprops.usersが変更されると実行される
+		console.log("useEffect:change users");
+	}, [ props.users ]);
 
-	// useEffect(() => {
-	// 	//ユーザー登録,更新,削除するたびprops.usersが変更されると実行される
-	// 	console.log("useEffect:users");
-	// }, [ props.users ]);
-
-	// const users = useSelector<UserState, User[]>((state) => state.user.users );
-	// useEffect(() => {
-	// 	//ユーザー登録,更新,削除するたびprops.usersが変更されると実行される
-	// 	console.log("useEffect:users useSelector");
-	// }, [ users ]);
+	const users = useSelector<UserState, User[]>((state) => state.user.users );
+	useEffect(() => {
+		//ユーザー登録,更新,削除するたびprops.usersが変更されると実行される
+		console.log("useEffect:change users2");
+	}, [ users ]);
 
 	return(
 		<>
@@ -61,7 +55,6 @@ const Button:React.FC<Props> = (props:Props) =>{
 			<label htmlFor="outlineInput">紹介文：</label><input type="text" onChange={(e)=>setOutline(e.target.value)} id="outlineInput" />
 			<button onClick={()=>{
 				props.asyncCreateUser(name, outline);
-				setHoge(hoge+1); 
 			} }>ユーザー登録</button>
 
 

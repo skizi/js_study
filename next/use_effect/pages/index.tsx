@@ -18,36 +18,23 @@ type Props = {
 
 const Index:React.FC<Props> = ( props:Props ) =>{
 
-	const dispatch = useDispatch();
-	// dispatch(getUsers( props.users ));
+	console.log("Index render----------------");
 
-	const users = useSelector<UserState, User[]>((state) => state.user.users );
-	// useGetUser( props.users );
+	useGetUser();
 
-	// const users = useSelector<UserState, User[]>((state) => state.user.users );
-	// useEffect(() => {
-	// 	//ユーザー登録,更新,削除するたびprops.usersが変更されると実行される
-	// 	console.log("useEffect:users useSelector2");
-	// }, [ users ]);
+	let [ count, setCount ] = useState( 0 );
+	useEffect(() => {
+		console.log("useEffect:count up");
+	}, [ count ]);
 
-	console.log("Index render");
 
 	return(
 		<>
+			<button onClick={()=>setCount(count+1)} >Effectボタン</button>
 			<Button />
 		</>
 	);
 }
-
-
-// 先に実行される
-export const getServerSideProps:GetServerSideProps = async () => {
-  const res = await fetch('http://localhost:3000/api/users', { method: 'GET' });
-  const json = await res.json();
-  const users = json.users;
-  return { props:{ users:users } };
-}
-
 
 
 export default Index;

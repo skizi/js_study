@@ -12,13 +12,13 @@ export type UserState = {
 }
 
 
-export const initialState: UserState = {
+export const initialUserState: UserState = {
   users:[]
 }
 
 
 const userReducer/*: Reducer<HogeState, HogeAction>*/ = (
-  state:UserState = initialState,
+  state:UserState = initialUserState,
   action: any
 ) => {
 

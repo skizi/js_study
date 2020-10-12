@@ -10,9 +10,9 @@ import { UserState } from '~/store/user';
 // }
 
 
-const useGetUser = ( _users:User[] ) =>{
+const useGetUser = () =>{
 
-	console.log("useCreateUser----");
+	console.log("useGetUser");
 
 	let isUnmounted = false;
 	const dispatch = useDispatch();
@@ -48,7 +48,7 @@ const useGetUser = ( _users:User[] ) =>{
 		//この戻り値の関数は、コンポーネントがアンマウントされた時に実行される
 		return () => { isUnmounted = true; };
 
-	},[ _users ]);
+	},[]);
 
 
 	return {users};
