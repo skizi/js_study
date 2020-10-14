@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UserManager from "../components/molecules/user-manager";
+import UserManager from "../components/organisms/user-manager";
 
 import { User, getUsers, createUser } from '../store/user/actions';
 import {GetServerSideProps} from "next";
