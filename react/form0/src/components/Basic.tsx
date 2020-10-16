@@ -10,6 +10,7 @@ import profileActions from "../store/profile/actions";
 import { PROFILE } from "../domain/services/profile";
 
 import Address from "./Address";
+import Career from "./Career";
 
 
 const Basic = () => {
@@ -56,6 +57,18 @@ const Basic = () => {
 				住所
 			</Typography>
 			<Address />
+
+
+			<Typography
+			variant="h4"
+			component="h2"
+			className={classes.title}
+			color="primary"
+			>
+				職歴
+			</Typography>
+			<Career />
+		
 		</Container>
 	);
 
