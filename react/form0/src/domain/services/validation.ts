@@ -31,7 +31,7 @@ export const calculateValidation = (profile: Profile) => {
     },
     careers: careerValidation(profile.careers)
   };
-
+console.log(message);
   return message;
 };
 
@@ -68,8 +68,8 @@ const isTooLong = (str: string, maxLen: number) => str.trim().length >= maxLen;
 export const isValid = (message: Validation) => {
   const falttenValues = Object.values(message)
     .map(extractValues)
-    .flat() as string[];
-
+    .flat(2) as string[]; //yoshida edit
+console.log(falttenValues);
   return falttenValues.every(fv => !fv);
 };
 
