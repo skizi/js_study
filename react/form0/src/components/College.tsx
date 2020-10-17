@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem, FormHelperText } from "@material-ui/core";
 import { College as ICollege } from "../domain/entity/college";
 import { PROFILE } from "../domain/services/profile";
 import profileActions from "../store/profile/actions";
-import collegesActions from "../store/colleges/actions";
 import { RootState } from "../domain/entity/rootState";
 import useStyles from "./styles";
-import { searchColleges } from "../store/colleges/effects";
+import { searchColleges } from "../store/profile/effects";
 
 import { calculateValidation } from "../domain/services/validation";
 import validationActions from "../store/validation/actions";
@@ -24,26 +23,27 @@ const College:React.FC = () => {
 	    recalculateValidation(member);
 	}
 
-	const colleges = useSelector( ( state:RootState ) => state.colleges );
 
 	const profile = useSelector( ( state:RootState ) => state.profile );
 
+	const [ searchWord, setSearchWord ] = useState("");
+
 	const handleChange = ( name:string ) => {
-		dispatch( collegesActions.setSearchWord( name ) );
+		setSearchWord( name )
 	}
 
 
 	const handleClick = () => {
 
-		dispatch( searchColleges( colleges.search ) );
+		dispatch( searchColleges( searchWord ) );
 
 	}
 
 	const handleReset = () => {
 
 		handleCollegeChange( { name:"", faculty:"", department:"" } );
-		dispatch(collegesActions.setSearchWord(""));
-		dispatch(collegesActions.searchCollege.done({ result: [], params: {} }));
+		setSearchWord("");
+		dispatch(profileActions.searchCollege.done({ result: [], params: {} }));
 
 	}
 
@@ -60,7 +60,7 @@ const College:React.FC = () => {
 
 
 
-	const currentCollege = colleges.result.filter(
+	const currentCollege = profile.college.result.filter(
 		c => c.name === profile.college.name
 	)[0];
 
@@ -82,7 +82,6 @@ const College:React.FC = () => {
 				className={classes.formField}
 				fullWidth
 				label="大学名を検索"
-				value={colleges.search}
 				onChange={e => handleChange(e.target.value)}
 				/>
 				<Button
@@ -91,13 +90,13 @@ const College:React.FC = () => {
 				fullWidth
 				variant="outlined"
 				color="primary"
-	            disabled={!colleges.search}
+	            disabled={!searchWord}
 				>
 				検索
 				</Button>
 
 				<Grid spacing={1} container>
-					{colleges.result.map(c => (
+					{profile.college.result.map(c => (
 					  <Grid key={c.name} item>
 					    <Button
 					      variant="outlined"

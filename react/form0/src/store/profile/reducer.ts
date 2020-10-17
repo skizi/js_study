@@ -22,7 +22,8 @@ const initializeState:Profile = {
 	college:{
 	  name: "",
 	  faculty: "",
-	  department: ""
+	  department: "",
+	  result:[]
 	}
 };
 
@@ -84,7 +85,12 @@ const profileReducers = reducerWithInitialState(initializeState).case(
 		...state,
 		college: { ...state.college, ...payload }
 	}
-});
+}).case(
+	profileActions.searchCollege.done, (state, payload) => ({
+    ...state,
+    college: { ...state.college, result : payload.result }
+  })
+);
 
 
 export default profileReducers;

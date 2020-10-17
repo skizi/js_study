@@ -8,6 +8,7 @@ import {
 } from "../../domain/services/address";
 
 
+
 export const searchAddressFromPostalcode = (code: string) => async( dispach: Dispatch ) => {
 
   if (!isCompletePostalcode(code)) return;
@@ -25,4 +26,24 @@ export const searchAddressFromPostalcode = (code: string) => async( dispach: Dis
   };
 
   dispach(profileActions.searchAddress.done({ result: address, params: {} }));
+};
+
+
+
+
+
+
+export const searchColleges = (name: string) => async (dispach: Dispatch) => {
+
+console.log( name );
+  const url = `http://localhost:18001/colleges?name=${name}`;
+
+  const result = await fetch(url).then(res => res.json());
+console.log( result );
+  dispach(
+    profileActions.searchCollege.done({
+      result: result.results.school,
+      params: {}
+    })
+  );
 };

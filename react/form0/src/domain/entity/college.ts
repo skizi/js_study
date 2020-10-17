@@ -7,12 +7,14 @@ export type College = {
 
   // 学科
   department: string;
-};
-
-export type Colleges = {
-  search: string;
+  
   result: CollegeResult[];
 };
+
+// export type Colleges = {
+//   search: string;
+//   result: CollegeResult[];
+// };
 
 export type CollegeResult = {
   name: string;
