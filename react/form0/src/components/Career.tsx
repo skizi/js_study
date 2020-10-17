@@ -10,6 +10,10 @@ import profileActions from "../store/profile/actions";
 
 import { exitEmptyCareers } from "../domain/services/career";
 
+import { calculateValidation } from "../domain/services/validation";
+import validationActions from "../store/validation/actions";
+
+
 
 
 const Career:React.FC = () =>{
@@ -19,8 +23,13 @@ const Career:React.FC = () =>{
 	const dispatch = useDispatch();
 	const careers = useSelector( ( state:RootState) => state.profile.careers );
 
+  const profile = useSelector((state: RootState) => state.profile);
+
+
+
   const handleChange = (member: Partial<ICareer>, i: number) => {
     dispatch(profileActions.setCareer({ career: member, index: i }));
+    recalculateValidation(member, i);
   };
 
   const handleAddCareer = () => {
@@ -32,6 +41,26 @@ const Career:React.FC = () =>{
   const handleDeleteCareer = ( i:number ) => {
     dispatch(profileActions.deleteCareer(i));
   };
+
+
+  const recalculateValidation = (member: Partial<ICareer>, i: number) => {
+    if (!validation.isStartValidation) return;
+
+    const newProfile = {
+      ...profile,
+      career: profile.careers.map((c, _i) =>
+        _i === i ? { ...c, ...member } : c
+      )
+    };
+    const message = calculateValidation(newProfile);
+    dispatch(validationActions.setValidation(message));
+  };
+
+
+
+  const validation = useSelector((state: RootState) => state.validation);
+
+  const isAbleToAddCarrer = exitEmptyCareers(careers);
 
 	return(
 		<>
@@ -46,6 +75,8 @@ const Career:React.FC = () =>{
             label={PROFILE.CAREERS.COMPANY}
             value={c.company}
             onChange={ e=>{ handleChange( { company:e.target.value }, i ) } }
+            error={!!validation.message.careers[i]?.company}
+            helperText={validation.message.careers[i]?.company}
           />
           <TextField
             className={classes.formField}
@@ -53,6 +84,8 @@ const Career:React.FC = () =>{
             label={PROFILE.CAREERS.POSITION}
             value={c.position}
             onChange={ e=>{ handleChange( { position:e.target.value }, i ) } }
+            error={!!validation.message.careers[i]?.position}
+            helperText={validation.message.careers[i]?.position}
           />
           <div className={classes.careerSpan}>
             <InputLabel shrink>{PROFILE.CAREERS.SPAN}</InputLabel>
@@ -71,6 +104,8 @@ const Career:React.FC = () =>{
                   }}
                   value={c.startAt}
                   onChange={ e=>{ handleChange( { startAt:e.target.value }, i ) } }
+                  error={!!validation.message.careers[i]?.startAt}
+                  helperText={validation.message.careers[i]?.startAt}
                 />
               </Grid>
               <Grid item xs={2}>
@@ -85,6 +120,8 @@ const Career:React.FC = () =>{
                   }}
                   value={c.endAt}
                   onChange={ e=>{ handleChange( { endAt:e.target.value }, i ) } }
+                  error={!!validation.message.careers[i]?.endAt}
+                  helperText={validation.message.careers[i]?.endAt}
                 />
               </Grid>
             </Grid>
@@ -106,6 +143,7 @@ const Career:React.FC = () =>{
         onClick={handleAddCareer}
         fullWidth
         variant="outlined"
+        disabled={isAbleToAddCarrer}
       >
         職歴を追加
       </Button>
