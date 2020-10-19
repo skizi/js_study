@@ -18,15 +18,34 @@ import { calculateValidation } from "../domain/services/validation";
 import validationActions from "../store/validation/actions";
 
 
+type Props = {
+	gender:string;
+	changeGender:( gender:string ) => void;
+	birthDay:string;
+	changeBirthDay:( birthDay:string ) => void;
+	name:string;
+	changeName:( name:string ) => void;
+	description:string;
+	changeDescription:( name:string ) => void;
+	postalcode:string;
+	changePostalcode:( postalcode:string ) => void;
+	prefecture:string;
+	changePrefecture:( prefecture:string ) => void;
+	city:string;
+	changeCity:( city:string ) => void;
+	restAddress:string;
+	changeRestAddress:( restAddress:string ) => void;
+}
 
-const Basic = () => {
+const Basic = ( props:Props ) => {
 
 	const classes = useStyles();
 
 	const dispatch = useDispatch();
 	const profile = useSelector( ( state:RootState) => state.profile );
 	const validation = useSelector((state: RootState) => state.validation);
- 
+ 	
+
 
 	const handleChange = ( member:Partial<Profile> ) => {
 		dispatch( profileActions.setProfile( member ) );
@@ -57,26 +76,29 @@ const Basic = () => {
 			>
 	        	基本情報
 			</Typography>
-			<TextField fullWidth className={classes.textField} label={ PROFILE.NAME } value={profile.name} onChange={ e => handleChange( {name:e.target.value} ) }
+			<TextField fullWidth className={classes.textField} label={ PROFILE.NAME } value={props.name} onChange={ e => props.changeName( e.target.value ) }
 	        required
 	        error={!!validation.message.name}
 	        helperText={validation.message.name} />
-			<TextField fullWidth multiline className={classes.textField} rows={5} label={ PROFILE.DESCRIPTION } value={profile.description} onChange={ e => handleChange( { description:e.target.value } ) }
+			
+			<TextField fullWidth multiline className={classes.textField} rows={5} label={ PROFILE.DESCRIPTION } value={props.description} onChange={ e => props.changeDescription( e.target.value ) }
 		    error={!!validation.message.description}
 		    helperText={validation.message.description} />
+			
 			<FormControl className={classes.formField}
 	        error={!!validation.message.gender}
 	        required>
 				<FormLabel>{PROFILE.GENDER}</FormLabel>
-				<RadioGroup value={profile.gender} onChange={e=>handleChange( { gender:e.target.value as Gender } )}>
+				<RadioGroup value={props.gender} onChange={e=>props.changeGender( e.target.value )}>
 					<FormControlLabel value="male" label="男性" control={<Radio color="primary" />} />
 					<FormControlLabel value="female" label="女性" control={<Radio color="primary" />} />
 				</RadioGroup>
 			</FormControl>
 
-			<TextField fullWidth className={classes.formField} label={PROFILE.BIRTHDAY} type="date" InputLabelProps={{shrink:true}} value={profile.birthday} onChange={ e => handleChange( { birthday:e.target.value } ) }
+			<TextField fullWidth className={classes.formField} label={PROFILE.BIRTHDAY} type="date" InputLabelProps={{shrink:true}} value={props.birthDay} onChange={ e => props.changeBirthDay( e.target.value ) }
 	        required
 	        error={!!validation.message.birthday} />
+
 
 			<Typography
 			variant="h4"
@@ -86,7 +108,12 @@ const Basic = () => {
 			>
 				住所
 			</Typography>
-			<Address />
+
+			<Address postalcode={props.postalcode} changePostalcode={props.changePostalcode}
+					 prefecture={props.prefecture} changePrefecture={props.changePrefecture}
+					 city={props.city} changeCity={props.changeCity}
+					 restAddress={props.restAddress} changeRestAddress={props.changeRestAddress}
+			/>
 
 
 			<Typography

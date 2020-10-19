@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Typography, Button } from "@material-ui/core";
 
 import Basic from "./Basic";
@@ -17,6 +17,54 @@ const Profile = () => {
 
   const dispatch = useDispatch();
   const profile = useSelector((state: RootState) => state.profile);
+
+  const [ gender, setGender ] = useState( "" );
+  const changeGender = ( gender:string ) => {
+    setGender( gender );
+  }
+
+
+  const [ birthDay, setBirthDay ] = useState( "" );
+  const changeBirthDay = ( birthDay:string ) => {
+    setBirthDay( birthDay );
+  }
+
+
+  const [ name, setName ] = useState( "" );
+  const changeName = ( name:string ) => {
+    setName( name );
+  }
+
+
+  const [ description, setDescription ] = useState( "" );
+  const changeDescription = ( description:string ) => {
+    setDescription( description );
+  }
+
+
+  const [ postalcode, setPostalcode ] = useState( "" );
+  const changePostalcode = ( postalcode:string ) => {
+    setPostalcode( postalcode );
+  }
+
+
+  const [ prefecture, setPrefecture ] = useState( "" );
+  const changePrefecture = ( prefecture:string ) => {
+    setPrefecture( prefecture );
+  }
+
+
+  const [ city, setCity ] = useState( "" );
+  const changeCity = ( city:string ) => {
+    setCity( city );
+  }
+
+
+  const [ restAddress, setRestAddress ] = useState( "" );
+  const changeRestAddress = ( restAddress:string ) => {
+    setRestAddress( restAddress );
+  }
+
 
   const handleSave = () => {
     const message = calculateValidation(profile);
@@ -53,7 +101,16 @@ const Profile = () => {
       >
         基本情報
       </Typography>
-      <Basic />
+      <Basic
+        changeGender={changeGender} gender={gender}
+        birthDay={birthDay} changeBirthDay={changeBirthDay}
+        name={name} changeName={changeName}
+        description={description} changeDescription={changeDescription}
+        postalcode={postalcode} changePostalcode={changePostalcode}
+        prefecture={prefecture} changePrefecture={changePrefecture}
+        city={city} changeCity={changeCity}
+        restAddress={restAddress} changeRestAddress={changeRestAddress}
+      />
 
        <Button
       fullWidth

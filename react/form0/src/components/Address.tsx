@@ -18,9 +18,19 @@ import { calculateValidation } from "../domain/services/validation";
 import validationActions from "../store/validation/actions";
 
 
+type Props = {
+	postalcode:string;
+	changePostalcode:( postalcode:string ) => void;
+	prefecture:string;
+	changePrefecture:( prefecture:string ) => void;
+	city:string;
+	changeCity:( city:string ) => void;
+	restAddress:string;
+	changeRestAddress:( restAddress:string ) => void;
+}
 
 
-const Address:React.FC = () => {
+const Address:React.FC<Props> = ( props:Props ) => {
 
 	const dispatch = useDispatch();
 	const profile = useSelector( (state:RootState)=> state.profile );
@@ -33,10 +43,11 @@ const Address:React.FC = () => {
 	    recalculateValidation({ address: { ...profile.address, ...member } });
   	}
 
+
 	const handlePostalcodeChange = (code: string) => {
 		if (!isPostalcode( code )) return; // エラーになるのでコードには転写しないでください。
 
-		dispatch(profileActions.setAddress({ postalcode: code }));
+		props.changePostalcode( code );
 
 	    dispatch(searchAddressFromPostalcode(code));
 
@@ -44,6 +55,7 @@ const Address:React.FC = () => {
 	      address: { ...profile.address, postalcode: code }
 	    });
 	};
+
 
 	const recalculateValidation = (member: Partial<Profile>) => {
 	    if (!validation.isStartValidation) return;
@@ -61,19 +73,19 @@ const Address:React.FC = () => {
 
 	return(
 		<>
-			<TextField fullWidth className={classes.formField} label={PROFILE.ADDRESS.POSTALCODE} value={profile.address.postalcode} onChange={e=>handlePostalcodeChange( e.target.value )}
+			<TextField fullWidth className={classes.formField} label={PROFILE.ADDRESS.POSTALCODE} onChange={e=>handlePostalcodeChange( e.target.value )}
 	        required
 	        error={!!validation.message.address.postalcode}
 	        helperText={validation.message.address.postalcode} />
-			<TextField fullWidth className={classes.formField} label={PROFILE.ADDRESS.PREFECTURE} value={profile.address.prefecture} onChange={e=>handleAddressChange( { prefecture:e.target.value } )}
+			<TextField fullWidth className={classes.formField} label={PROFILE.ADDRESS.PREFECTURE} value={props.prefecture} onChange={e=>handleAddressChange( { prefecture:e.target.value } )}
 	        required
 	        error={!!validation.message.address.prefecture}
 	        helperText={validation.message.address.prefecture} />
-			<TextField fullWidth className={classes.formField} label={PROFILE.ADDRESS.CITY} value={profile.address.city} onChange={e=>handleAddressChange( { city:e.target.value } )}
+			<TextField fullWidth className={classes.formField} label={PROFILE.ADDRESS.CITY} value={props.city} onChange={e=>handleAddressChange( { city:e.target.value } )}
 	        required
 	        error={!!validation.message.address.city}
 	        helperText={validation.message.address.city} />
-			<TextField fullWidth className={classes.formField} label={PROFILE.ADDRESS.RESTADDRESS} value={profile.address.restAddress} onChange={e=>handleAddressChange( { restAddress:e.target.value } )}
+			<TextField fullWidth className={classes.formField} label={PROFILE.ADDRESS.RESTADDRESS} value={props.restAddress} onChange={e=>props.changeRestAddress( e.target.value )}
 	        error={!!validation.message.address.restAddress}
 	        helperText={validation.message.address.restAddress} />
 		</>
