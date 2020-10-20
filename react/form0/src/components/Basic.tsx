@@ -20,24 +20,6 @@ import validationActions from "../store/validation/actions";
 import { ProfileContext } from "../store/profile/contexts";
 
 
-type Props = {
-	gender:string;
-	changeGender:( gender:string ) => void;
-	birthDay:string;
-	changeBirthDay:( birthDay:string ) => void;
-	name:string;
-	changeName:( name:string ) => void;
-	description:string;
-	changeDescription:( name:string ) => void;
-	// postalcode:string;
-	// changePostalcode:( postalcode:string ) => void;
-	// prefecture:string;
-	// changePrefecture:( prefecture:string ) => void;
-	// city:string;
-	// changeCity:( city:string ) => void;
-	// restAddress:string;
-	// changeRestAddress:( restAddress:string ) => void;
-}
 
 const Basic = () => {
 
