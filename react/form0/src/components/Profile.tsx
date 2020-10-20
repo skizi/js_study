@@ -9,6 +9,13 @@ import { calculateValidation, isValid } from "../domain/services/validation";
 import validationActions from "../store/validation/actions";
 import alertActions from "../store/alert/actions";
 
+//address
+import { ProfileContext, ProfileOnContext } from "../store/profile/contexts";
+import { searchAddressFromPostalcode } from "../store/profile/effects";
+import profileActions from "../store/profile/actions";
+import { Address as IAddress } from "../domain/entity/address";
+import { isPostalcode } from "../domain/services/address";
+import { Profile as IProfile } from "../domain/entity/profile";
 
 
 
@@ -17,53 +24,47 @@ const Profile = () => {
 
   const dispatch = useDispatch();
   const profile = useSelector((state: RootState) => state.profile);
+  const validation = useSelector((state: RootState) => state.validation);
 
-  const [ gender, setGender ] = useState( "" );
-  const changeGender = ( gender:string ) => {
-    setGender( gender );
+  const changeProfile = (member:Partial<ProfileOnContext>) => {
+    const key:string = Object.keys(member)[0];
+    console.log( member );
   }
-
-
-  const [ birthDay, setBirthDay ] = useState( "" );
-  const changeBirthDay = ( birthDay:string ) => {
-    setBirthDay( birthDay );
-  }
-
-
-  const [ name, setName ] = useState( "" );
-  const changeName = ( name:string ) => {
-    setName( name );
-  }
-
-
-  const [ description, setDescription ] = useState( "" );
-  const changeDescription = ( description:string ) => {
-    setDescription( description );
-  }
-
-
-  const [ postalcode, setPostalcode ] = useState( "" );
-  const changePostalcode = ( postalcode:string ) => {
-    setPostalcode( postalcode );
-  }
-
-
-  const [ prefecture, setPrefecture ] = useState( "" );
-  const changePrefecture = ( prefecture:string ) => {
-    setPrefecture( prefecture );
-  }
-
-
-  const [ city, setCity ] = useState( "" );
-  const changeCity = ( city:string ) => {
-    setCity( city );
-  }
-
 
   const [ restAddress, setRestAddress ] = useState( "" );
-  const changeRestAddress = ( restAddress:string ) => {
-    setRestAddress( restAddress );
+  const handleAddressChange = (member:Partial<IAddress>) => {
+
+    if( member.restAddress ){
+      setRestAddress( member.restAddress );
+      return;
+    }
+
+    dispatch(profileActions.setAddress( member ));
+    recalculateValidation({ address: { ...profile.address, ...member } });
   }
+
+
+  const handlePostalcodeChange = (code: string) => {
+    if (!isPostalcode( code )) return; // エラーになるのでコードには転写しないでください。
+
+      dispatch(searchAddressFromPostalcode(code));
+
+      recalculateValidation({
+        address: { ...profile.address, postalcode: code }
+      });
+  };
+
+
+  const recalculateValidation = (member: Partial<IProfile>) => {
+      if (!validation.isStartValidation) return;
+
+      const newProfile = {
+        ...profile,
+        ...member
+      };
+      const message = calculateValidation(newProfile);
+      dispatch(validationActions.setValidation(message));
+  };
 
 
   const handleSave = () => {
@@ -101,16 +102,10 @@ const Profile = () => {
       >
         基本情報
       </Typography>
-      <Basic
-        changeGender={changeGender} gender={gender}
-        birthDay={birthDay} changeBirthDay={changeBirthDay}
-        name={name} changeName={changeName}
-        description={description} changeDescription={changeDescription}
-        postalcode={postalcode} changePostalcode={changePostalcode}
-        prefecture={prefecture} changePrefecture={changePrefecture}
-        city={city} changeCity={changeCity}
-        restAddress={restAddress} changeRestAddress={changeRestAddress}
-      />
+
+      <ProfileContext.Provider value={{ prefecture:profile.address.prefecture, city:profile.address.city, restAddress:restAddress, handleAddressChange, handlePostalcodeChange, changeProfile }}>
+        <Basic />
+      </ProfileContext.Provider>
 
        <Button
       fullWidth
