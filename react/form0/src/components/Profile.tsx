@@ -16,6 +16,7 @@ import profileActions from "../store/profile/actions";
 import { Address as IAddress } from "../domain/entity/address";
 import { isPostalcode } from "../domain/services/address";
 import { Profile as IProfile } from "../domain/entity/profile";
+// import { Gender } from "../domain/entity/gender";
 
 
 
@@ -26,9 +27,17 @@ const Profile = () => {
   const profile = useSelector((state: RootState) => state.profile);
   const validation = useSelector((state: RootState) => state.validation);
 
+  const [ localProfile, setLocalProfile ] = useState( {
+    name:"",
+    description:"",
+    birthday:"",
+    gender:""
+  } );
   const changeProfile = (member:Partial<ProfileOnContext>) => {
     const key:string = Object.keys(member)[0];
-    console.log( member );
+    const _member:any = member as any;
+
+    setLocalProfile( { ...localProfile, [key]:_member[key] } );
   }
 
   const [ restAddress, setRestAddress ] = useState( "" );
