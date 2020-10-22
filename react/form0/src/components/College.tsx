@@ -1,28 +1,16 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useContext } from "react";
+import { useSelector } from "react-redux";
 import { TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem, FormHelperText } from "@material-ui/core";
-import { College as ICollege } from "../domain/entity/college";
+
 import { PROFILE } from "../domain/services/profile";
-import profileActions from "../store/profile/actions";
 import { RootState } from "../domain/entity/rootState";
 import useStyles from "./styles";
-import { searchColleges } from "../store/profile/effects";
 
-import { calculateValidation } from "../domain/services/validation";
-import validationActions from "../store/validation/actions";
-
+import { ProfileContext } from "../store/profile/contexts";
 
 
 
 const College:React.FC = () => {
-
-	const dispatch = useDispatch();
-	const college = useSelector( ( state:RootState ) => state.profile.college );
-	const handleCollegeChange = ( member:Partial<ICollege> ) => {
-		dispatch( profileActions.setCollege( member ) );
-	    recalculateValidation(member);
-	}
-
 
 	const profile = useSelector( ( state:RootState ) => state.profile );
 
@@ -32,31 +20,7 @@ const College:React.FC = () => {
 		setSearchWord( name )
 	}
 
-
-	const handleClick = () => {
-
-		dispatch( searchColleges( searchWord ) );
-
-	}
-
-	const handleReset = () => {
-
-		handleCollegeChange( { name:"", faculty:"", department:"" } );
-		setSearchWord("");
-		dispatch(profileActions.searchCollege.done({ result: [], params: {} }));
-
-	}
-
-
-	const recalculateValidation = (member: Partial<ICollege>) => {
-		if (!validation.isStartValidation) return;
-		const newProfile = {
-		...profile,
-		college: { ...profile.college, ...member }
-		};
-		const message = calculateValidation(newProfile);
-		dispatch(validationActions.setValidation(message));
-	};
+    const { handleChangeCollege, handleSearchCollege, handleResetCollege, validation } = useContext(ProfileContext);
 
 
 
@@ -70,7 +34,6 @@ const College:React.FC = () => {
 
   	const classes = useStyles();
 
-	const validation = useSelector((state: RootState) => state.validation);
   
 
 
@@ -86,7 +49,7 @@ const College:React.FC = () => {
 				/>
 				<Button
 				className={classes.button}
-				onClick={ handleClick }
+				onClick={ () => handleSearchCollege( searchWord ) }
 				fullWidth
 				variant="outlined"
 				color="primary"
@@ -101,7 +64,7 @@ const College:React.FC = () => {
 					    <Button
 					      variant="outlined"
 					      color="primary"
-					      onClick={() => handleCollegeChange({ name: c.name })}
+					      onClick={() => handleChangeCollege({ name: c.name })}
 					    >
 					      {c.name}
 					    </Button>
@@ -126,7 +89,7 @@ const College:React.FC = () => {
 					<Select
 					  value={profile.college.faculty}
 					  onChange={e =>
-					    handleCollegeChange({
+					    handleChangeCollege({
 					      faculty: e.target.value as string,
 		                  department: ""
 					    })
@@ -146,7 +109,7 @@ const College:React.FC = () => {
 					  <Select
 					    value={profile.college.department}
 					    onChange={e =>
-					      handleCollegeChange({ department: e.target.value as string })
+					      handleChangeCollege({ department: e.target.value as string })
 					    }
 					  >
 					    {currentFaculty.department.map(d => (
@@ -162,7 +125,10 @@ const College:React.FC = () => {
 				<Button
 				fullWidth
 				className={classes.button}
-				onClick={handleReset}
+				onClick={()=>{
+					handleResetCollege();
+					setSearchWord("");
+				}}
 				variant="outlined"
 				color="secondary"
 				>

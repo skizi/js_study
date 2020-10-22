@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { TextField } from "@material-ui/core";
 
 import { PROFILE } from "../domain/services/profile";
@@ -7,22 +7,16 @@ import useStyles from "./styles";
 
 import { RootState } from "../domain/entity/rootState";
 
-
-
-
 import { ProfileContext } from "../store/profile/contexts";
 
 
 
 const Address:React.FC = () => {
 
-	const dispatch = useDispatch();
-	const profile = useSelector( (state:RootState)=> state.profile );
-	const { prefecture, city, restAddress, handleAddressChange, handlePostalcodeChange } = useContext(ProfileContext);
+	const { prefecture, city, restAddress, handleAddressChange, handlePostalcodeChange, validation } = useContext(ProfileContext);
 
   	const classes = useStyles();
 
-	const validation = useSelector((state: RootState) => state.validation);
   
 
 	return(
