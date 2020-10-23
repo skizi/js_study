@@ -1,28 +1,38 @@
 import React, { useState } from "react";
-import { Container, Typography, Button } from "@material-ui/core";
-
-import Basic from "./Basic";
-import useStyles from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../domain/entity/rootState";
+
+import useStyles from "./styles";
+import { Container, Typography, Button } from "@material-ui/core";
+
+import { Profile as ProfileType } from "../domain/entity/profile";
+
+import Basic from "./Basic";
+
+import Address from "./Address";
+import { ProfileContext, ProfileOnContext } from "../store/profile/contexts";
+import { searchAddressFromPostalcode } from "../store/profile/effects";
+import profileActions from "../store/profile/actions";
+import { Address as AddressType } from "../domain/entity/address";
+import { isPostalcode } from "../domain/services/address";
+
+import Career from "./Career";
+import { Career as CareerType } from "../domain/entity/career";
+import { exitEmptyCareers } from "../domain/services/career";
+
+import College from "./College";
+import { College as CollegeType } from "../domain/entity/college";
+import { searchColleges } from "../store/profile/effects";
+
 import { calculateValidation, isValid } from "../domain/services/validation";
 import validationActions from "../store/validation/actions";
 import alertActions from "../store/alert/actions";
 
-//address
-import { ProfileContext, ProfileOnContext } from "../store/profile/contexts";
-import { searchAddressFromPostalcode } from "../store/profile/effects";
-import profileActions from "../store/profile/actions";
-import { Address as IAddress } from "../domain/entity/address";
-import { isPostalcode } from "../domain/services/address";
-import { Profile as IProfile } from "../domain/entity/profile";
-// import { Gender } from "../domain/entity/gender";
 
-import { Career } from "../domain/entity/career";
-import { exitEmptyCareers } from "../domain/services/career";
 
-import { College } from "../domain/entity/college";
-import { searchColleges } from "../store/profile/effects";
+
+
+
 
 
 const Profile = () => {
@@ -50,7 +60,7 @@ const Profile = () => {
     recalculateBasicValidation(member);
   }
 
-  const recalculateBasicValidation = (member: Partial<IProfile>) => {
+  const recalculateBasicValidation = (member: Partial<ProfileType>) => {
     // バリデーションのエラーを表示し始めてたらメッセージを計算して更新
     if (!validation.isStartValidation) return;
 
@@ -66,7 +76,7 @@ const Profile = () => {
 
   //--------------------Address-------------------------
   const [ restAddress, setRestAddress ] = useState( "" );
-  const handleAddressChange = (member:Partial<IAddress>) => {
+  const handleAddressChange = (member:Partial<AddressType>) => {
 
     if( member.restAddress ){
       setRestAddress( member.restAddress );
@@ -89,7 +99,7 @@ const Profile = () => {
   };
 
 
-  const recalculateAddressValidation = (member: Partial<IProfile>) => {
+  const recalculateAddressValidation = (member: Partial<ProfileType>) => {
       if (!validation.isStartValidation) return;
 
       const newProfile = {
@@ -104,7 +114,7 @@ const Profile = () => {
 
   //--------------------Career------------------------
   const careers = useSelector( ( state:RootState) => state.profile.careers );
-  const handleChangeCareer = (member: Partial<Career>, i: number) => {
+  const handleChangeCareer = (member: Partial<CareerType>, i: number) => {
     dispatch(profileActions.setCareer({ career: member, index: i }));
     recalculateCareerValidation(member, i);
   };
@@ -120,7 +130,7 @@ const Profile = () => {
   };
 
 
-  const recalculateCareerValidation = (member: Partial<Career>, i: number) => {
+  const recalculateCareerValidation = (member: Partial<CareerType>, i: number) => {
     if (!validation.isStartValidation) return;
 
     const newProfile = {
@@ -135,7 +145,7 @@ const Profile = () => {
 
 
   //-------------------College----------------------
-  const handleChangeCollege = ( member:Partial<College> ) => {
+  const handleChangeCollege = ( member:Partial<CollegeType> ) => {
     dispatch( profileActions.setCollege( member ) );
       recalculateCollegeValidation(member);
   }
@@ -155,7 +165,7 @@ const Profile = () => {
   }
 
 
-  const recalculateCollegeValidation = (member: Partial<College>) => {
+  const recalculateCollegeValidation = (member: Partial<CollegeType>) => {
     if (!validation.isStartValidation) return;
     const newProfile = {
     ...profile,
@@ -215,7 +225,14 @@ const Profile = () => {
 
         validation
       }}>
-        <Basic />
+
+        <Container maxWidth="sm">
+          <Basic />
+          <Address />
+          <Career />
+          <College />
+        </Container>
+
       </ProfileContext.Provider>
 
        <Button

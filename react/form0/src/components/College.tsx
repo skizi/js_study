@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useSelector } from "react-redux";
-import { TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem, FormHelperText } from "@material-ui/core";
+import { TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem, FormHelperText, Typography } from "@material-ui/core";
 
 import { PROFILE } from "../domain/services/profile";
 import { RootState } from "../domain/entity/rootState";
@@ -39,6 +39,15 @@ const College:React.FC = () => {
 
 	return (
 	  <>
+        <Typography
+        variant="h4"
+        component="h2"
+        className={classes.title}
+        color="primary"
+        >
+          学歴
+        </Typography>
+
 	    {!profile.college.name && (
 	      	<>
 				<TextField

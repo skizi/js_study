@@ -22,6 +22,15 @@ const Career:React.FC = () =>{
 
 	return(
 		<>
+      <Typography
+      variant="h4"
+      component="h2"
+      className={classes.title}
+      color="primary"
+      >
+        職歴
+      </Typography>
+      
       {careers.map((c, i) => (
         <Fragment key={i}>
           <Typography variant="h5" component="h3" className={classes.title}>

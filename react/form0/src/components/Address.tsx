@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useSelector } from "react-redux";
-import { TextField } from "@material-ui/core";
+import { TextField, Typography } from "@material-ui/core";
 
 import { PROFILE } from "../domain/services/profile";
 import useStyles from "./styles";
@@ -21,6 +21,15 @@ const Address:React.FC = () => {
 
 	return(
 		<>
+	        <Typography
+	        variant="h4"
+	        component="h2"
+	        className={classes.title}
+	        color="primary"
+	        >
+	          住所
+	        </Typography>
+	        
 			<TextField fullWidth className={classes.formField} label={PROFILE.ADDRESS.POSTALCODE} onChange={e=>handlePostalcodeChange( e.target.value )}
 	        required
 	        error={!!validation.message.address.postalcode}

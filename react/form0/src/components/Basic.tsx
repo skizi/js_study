@@ -1,15 +1,12 @@
 import React, { useContext } from "react";
 import { useSelector } from "react-redux";
-import {TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Typography, Container, FormHelperText} from "@material-ui/core";
+import {TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Typography, FormHelperText} from "@material-ui/core";
 import useStyles from "./styles";
 import { RootState } from "../domain/entity/rootState";
 
 import { Gender } from "../domain/entity/gender";
 import { PROFILE } from "../domain/services/profile";
 
-import Address from "./Address";
-import Career from "./Career";
-import College from "./College";
 
 import { ProfileContext } from "../store/profile/contexts";
 
@@ -24,7 +21,7 @@ const Basic = () => {
 
 
 	return (
-    	<Container maxWidth="sm">
+		<>
 			<Typography
 			variant="h4"
 			component="h2"
@@ -55,42 +52,7 @@ const Basic = () => {
 			<TextField fullWidth className={classes.formField} label={PROFILE.BIRTHDAY} type="date" InputLabelProps={{shrink:true}} onChange={ e => handleBasicProfileChange( { birthday:e.target.value } ) }
 	        required
 	        error={!!validation.message.birthday} />
-
-
-			<Typography
-			variant="h4"
-			component="h2"
-			className={classes.title}
-			color="primary"
-			>
-				住所
-			</Typography>
-
-			<Address />
-
-
-			<Typography
-			variant="h4"
-			component="h2"
-			className={classes.title}
-			color="primary"
-			>
-				職歴
-			</Typography>
-			<Career />
-
-
-			<Typography
-			variant="h4"
-			component="h2"
-			className={classes.title}
-			color="primary"
-			>
-				学歴
-			</Typography>
-			<College />
-		
-		</Container>
+		</>
 	);
 
 }
