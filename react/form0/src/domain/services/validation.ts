@@ -6,10 +6,12 @@ import { Career } from "../entity/career";
 
 export const calculateValidation = (profile: Profile) => {
   const message: Validation = {
-    name: emptyValidation(profile.name, PROFILE.NAME),
-    description: lengthValidation(profile.description, 1000),
-    birthday: emptyValidation(profile.birthday, PROFILE.BIRTHDAY),
-    gender: emptyValidation(profile.gender, PROFILE.GENDER),
+    basic: {
+      name: emptyValidation(profile.name, PROFILE.NAME),
+      description: lengthValidation(profile.description, 1000),
+      birthday: emptyValidation(profile.birthday, PROFILE.BIRTHDAY),
+      gender: emptyValidation(profile.gender, PROFILE.GENDER),
+    },
     address: {
       postalcode: emptyValidation(
         profile.address.postalcode,
@@ -68,7 +70,7 @@ const isTooLong = (str: string, maxLen: number) => str.trim().length >= maxLen;
 export const isValid = (message: Validation) => {
   const falttenValues = Object.values(message)
     .map(extractValues)
-    .flat(2) as string[]; //yoshida edit
+    .flat(Infinity) as string[]; //yoshida edit
 console.log(falttenValues);
   return falttenValues.every(fv => !fv);
 };

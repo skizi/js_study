@@ -41,7 +41,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const profile = useSelector((state: RootState) => state.profile);
   const validation = useSelector((state: RootState) => state.validation);
-
+  const addressValidation = useSelector((state: RootState) => state.validation.message.address);
 
 
   //---------------------Basic---------------------------
@@ -75,6 +75,7 @@ const Profile = () => {
 
 
   //--------------------Address-------------------------
+  const address = useSelector( ( state:RootState) => state.profile.address );
   const [ restAddress, setRestAddress ] = useState( "" );
   const handleAddressChange = (member:Partial<AddressType>) => {
 
@@ -84,7 +85,7 @@ const Profile = () => {
     }
 
     dispatch(profileActions.setAddress( member ));
-    recalculateAddressValidation({ address: { ...profile.address, ...member } });
+    recalculateAddressValidation({ address: { ...address, ...member } });
   }
 
 
@@ -94,7 +95,7 @@ const Profile = () => {
       dispatch(searchAddressFromPostalcode(code));
 
       recalculateAddressValidation({
-        address: { ...profile.address, postalcode: code }
+        address: { ...address, postalcode: code }
       });
   };
 
@@ -135,7 +136,7 @@ const Profile = () => {
 
     const newProfile = {
       ...profile,
-      career: profile.careers.map((c, _i) =>
+      career: careers.map((c, _i) =>
         _i === i ? { ...c, ...member } : c
       )
     };
@@ -209,8 +210,8 @@ const Profile = () => {
       <ProfileContext.Provider value={{
         handleBasicProfileChange,
 
-        prefecture:profile.address.prefecture,
-        city:profile.address.city,
+        prefecture:address.prefecture,
+        city:address.city,
         restAddress:restAddress,
         handleAddressChange,
         handlePostalcodeChange,
@@ -235,6 +236,7 @@ const Profile = () => {
 
       </ProfileContext.Provider>
 
+
        <Button
       fullWidth
       className={classes.button}
@@ -248,4 +250,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default React.memo(Profile);

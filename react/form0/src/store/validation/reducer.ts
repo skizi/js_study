@@ -5,10 +5,12 @@ import validationActions from "./actions";
 const init: ValidationState = {
   isStartValidation: false,
   message: {
-    name: "",
-    description: "",
-    birthday: "",
-    gender: "",
+    basic:{
+      name: "",
+      description: "",
+      birthday: "",
+      gender: "",
+    },
     address: {
       postalcode: "",
       prefecture: "",

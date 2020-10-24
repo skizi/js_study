@@ -7,19 +7,6 @@ import { College } from "../../domain/entity/college";
 import { ValidationState } from "../../domain/entity/validation";
 
 
-type Address= {
-	prefecture:string; //都道府県
-	city:string; //市区町村
-	restAddress:string; //残りの住所
-	handleAddressChange:(member:Partial<IAddress>)=>void;
-	handlePostalcodeChange:(code: string)=>void;
-}
-
-
-export const AddressContext = createContext<Address>(
-	(null as any) as Address
-);
-
 export type ProfileOnContext = {
 	name:string;
 	description:string;
@@ -27,7 +14,7 @@ export type ProfileOnContext = {
 	gender:Gender;
 }
 
-export type Profile= {
+export type ProfileContextType = {
 	//Profile
 	handleBasicProfileChange:(member:Partial<ProfileOnContext>)=>void;
 
@@ -52,8 +39,8 @@ export type Profile= {
 }
 
 
-export const ProfileContext = createContext<Profile>(
-	(null as any) as Profile
+export const ProfileContext = createContext<ProfileContextType>(
+	(null as any) as ProfileContextType
 );
 
 

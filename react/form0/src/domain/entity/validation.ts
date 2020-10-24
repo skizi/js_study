@@ -1,8 +1,10 @@
 export type Validation = {
-  name: string;
-  description: string;
-  birthday: string;
-  gender: string;
+  basic:{
+    name: string;
+    description: string;
+    birthday: string;
+    gender: string;
+  };
   address: {
     postalcode: string;
     prefecture: string;
