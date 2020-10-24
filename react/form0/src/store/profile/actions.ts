@@ -1,5 +1,5 @@
 import actionCreatorFactory from "typescript-fsa";
-import { Profile } from "../../domain/entity/profile";
+import { Basic } from "../../domain/entity/basic";
 import { Address } from "../../domain/entity/address";
 import { Career } from "../../domain/entity/career";
 import { College } from "../../domain/entity/college";
@@ -11,7 +11,7 @@ const actionCreator = actionCreatorFactory();
 //reducer に渡す値（payload）の型（Profile）を指定
 //Partial<Profile>はProfileの項目のうち、一部の値のみReducer内でpayloadとして渡すことができる
 const profileActions = {
-	setProfile: actionCreator<Partial<Profile>>("SET_PROFILE"),
+	setBasic: actionCreator<Partial<Basic>>("SET_BASIC"),
 	setAddress: actionCreator<Partial<Address>>("SET_ADDRESS"),
 	searchAddress: actionCreator.async<{}, Partial<Address>, {}>("SEARCH_ADDRESS"),
 	setCareer: actionCreator<{ career: Partial<Career>; index: number }>("SET_CAREER"),

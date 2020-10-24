@@ -13,6 +13,9 @@ export const searchAddressFromPostalcode = (code: string) => async( dispach: Dis
 
   if (!isCompletePostalcode(code)) return;
 
+  dispach(profileActions.setAddress({ postalcode: code }));
+
+
   const res = await fetch(
     `https://apis.postcode-jp.com/api/v3/postcodes?apikey=lcuwhB4B0wdE0Rx7wB7BfEl5flLYzjs7NJmtFpw&postcode=${sanitizePostalcode(code)}`
   );

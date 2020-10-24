@@ -42,7 +42,7 @@ const Address:React.FC = () => {
 		        required
 		        error={!!validation.message.address.city}
 		        helperText={validation.message.address.city} />
-				<TextField fullWidth className={classes.formField} label={PROFILE.ADDRESS.RESTADDRESS} value={restAddress} onChange={e=>handleAddressChange( { restAddress:e.target.value } )}
+				<TextField fullWidth className={classes.formField} label={PROFILE.ADDRESS.RESTADDRESS} onBlur={e=>handleAddressChange( { restAddress:e.target.value } )}
 		        error={!!validation.message.address.restAddress}
 		        helperText={validation.message.address.restAddress} />
 			</>

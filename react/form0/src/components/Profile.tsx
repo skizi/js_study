@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../domain/entity/rootState";
 
@@ -6,6 +6,7 @@ import useStyles from "./styles";
 import { Container, Typography, Button } from "@material-ui/core";
 
 import { Profile as ProfileType } from "../domain/entity/profile";
+import { Basic as BasicType } from "../domain/entity/basic";
 
 import Basic from "./Basic";
 
@@ -56,11 +57,12 @@ const Profile = () => {
     // const _member:any = member as any;
 
     // setLocalProfile( { ...localProfile, [key]:_member[key] } );
-    setLocalProfile( { ...localProfile, ...member } );
+    // setLocalProfile( { ...localProfile, ...member } );
+    dispatch(profileActions.setBasic(member));
     recalculateBasicValidation(member);
   }
 
-  const recalculateBasicValidation = (member: Partial<ProfileType>) => {
+  const recalculateBasicValidation = useCallback(( member: Partial<BasicType> ) => {
     // バリデーションのエラーを表示し始めてたらメッセージを計算して更新
     if (!validation.isStartValidation) return;
 
@@ -70,7 +72,7 @@ const Profile = () => {
     };
     const message = calculateValidation(newProfile);
     dispatch(validationActions.setValidation(message));
-  };
+  }, [validation.isStartValidation, profile.basic ]);
 
 
 
@@ -78,12 +80,6 @@ const Profile = () => {
   const address = useSelector( ( state:RootState) => state.profile.address );
   const [ restAddress, setRestAddress ] = useState( "" );
   const handleAddressChange = (member:Partial<AddressType>) => {
-
-    if( member.restAddress ){
-      setRestAddress( member.restAddress );
-      return;
-    }
-
     dispatch(profileActions.setAddress( member ));
     recalculateAddressValidation({ address: { ...address, ...member } });
   }
@@ -183,13 +179,13 @@ const Profile = () => {
     const message = calculateValidation(profile);
 
     if (isValid(message)) {
+
       dispatch(
         alertActions.openAlert({
           severity: "success",
           message: "保存に成功しました！"
         })
       );
-
       return;
     }
 

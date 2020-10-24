@@ -5,10 +5,12 @@ import { College } from "../../domain/entity/college";
 import profileActions from "./actions";
 
 const initializeState:Profile = {
-	name:"",
-	description:"",
-	birthday:"",
-	gender:"",
+	basic:{
+		name:"",
+		description:"",
+		birthday:"",
+		gender:"",
+	},
 
 	address:{
 		postalcode:"",
@@ -36,12 +38,10 @@ const initCareer: Career = {
 
 
 const profileReducers = reducerWithInitialState(initializeState).case(
-	profileActions.setProfile,
-	( state, payload ) => ({
+profileActions.setBasic, ( state, payload ) => ({
 		...state,
-		...payload
-	})
-).case(profileActions.setAddress,( state, payload ) => ({
+		basic:{ ...state.basic, ...payload }
+})).case(profileActions.setAddress,( state, payload ) => ({
 	...state,
 	address:{ ...state.address, ...payload }
 })).case(profileActions.searchAddress.done, (state, payload) => ({

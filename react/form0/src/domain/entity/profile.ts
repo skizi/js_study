@@ -1,13 +1,10 @@
-import { Gender } from "./gender";
+import { Basic } from "./basic";
 import { Address } from "./address";
 import { Career } from "./career";
 import { College } from "./college";
 
 export type Profile = {
-	name:string;
-	description:string;
-	birthday:string;
-	gender:Gender;
+	basic:Basic;
 	address:Address;
 	careers:Career[];
 	college:College;

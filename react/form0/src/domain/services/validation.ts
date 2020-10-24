@@ -7,10 +7,10 @@ import { Career } from "../entity/career";
 export const calculateValidation = (profile: Profile) => {
   const message: Validation = {
     basic: {
-      name: emptyValidation(profile.name, PROFILE.NAME),
-      description: lengthValidation(profile.description, 1000),
-      birthday: emptyValidation(profile.birthday, PROFILE.BIRTHDAY),
-      gender: emptyValidation(profile.gender, PROFILE.GENDER),
+      name: emptyValidation(profile.basic.name, PROFILE.BASIC.NAME),
+      description: lengthValidation(profile.basic.description, 1000),
+      birthday: emptyValidation(profile.basic.birthday, PROFILE.BASIC.BIRTHDAY),
+      gender: emptyValidation(profile.basic.gender, PROFILE.BASIC.GENDER),
     },
     address: {
       postalcode: emptyValidation(
