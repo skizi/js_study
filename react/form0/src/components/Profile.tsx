@@ -57,8 +57,8 @@ const Profile = () => {
     // const _member:any = member as any;
 
     // setLocalProfile( { ...localProfile, [key]:_member[key] } );
-    // setLocalProfile( { ...localProfile, ...member } );
-    dispatch(profileActions.setBasic(member));
+    setLocalProfile( { ...localProfile, ...member } );
+    // dispatch(profileActions.setBasic(member));
     recalculateBasicValidation(member);
   }
 
