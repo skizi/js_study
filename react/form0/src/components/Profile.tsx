@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../domain/entity/rootState";
 
@@ -46,21 +46,23 @@ const Profile = () => {
 
 
   //---------------------Basic---------------------------
-  const [ localProfile, setLocalProfile ] = useState( {
+  console.log("reload-------------");
+  const [ basic, setBasic ] = useState<BasicType>( {
     name:"",
     description:"",
     birthday:"",
     gender:""
   } );
-  const handleBasicProfileChange = (member:Partial<ProfileOnContext>) => {
+  const handleBasicProfileChange = (member:Partial<BasicType>) => {
     // const key:string = Object.keys(member)[0];
     // const _member:any = member as any;
 
-    // setLocalProfile( { ...localProfile, [key]:_member[key] } );
-    setLocalProfile( { ...localProfile, ...member } );
+    // setBasic( { ...basic, [key]:_member[key] } );
+    setBasic( { ...basic, ...member } );
     // dispatch(profileActions.setBasic(member));
     recalculateBasicValidation(member);
   }
+
 
   const recalculateBasicValidation = useCallback(( member: Partial<BasicType> ) => {
     // バリデーションのエラーを表示し始めてたらメッセージを計算して更新
@@ -68,7 +70,7 @@ const Profile = () => {
 
     const newProfile = {
     ...profile,
-    ...member
+    basic:{ ...basic, ...member }
     };
     const message = calculateValidation(newProfile);
     dispatch(validationActions.setValidation(message));
@@ -176,6 +178,10 @@ const Profile = () => {
 
   //--------------------保存------------------------
   const handleSave = () => {
+
+    dispatch(profileActions.setBasic(basic));
+    console.log(profile.basic);
+
     const message = calculateValidation(profile);
 
     if (isValid(message)) {
@@ -198,6 +204,7 @@ const Profile = () => {
         message: "入力に誤りがあります。"
       })
     );
+
   };
 
   return (
@@ -205,6 +212,7 @@ const Profile = () => {
 
       <ProfileContext.Provider value={{
         handleBasicProfileChange,
+        basic,
 
         prefecture:address.prefecture,
         city:address.city,
@@ -231,7 +239,6 @@ const Profile = () => {
         </Container>
 
       </ProfileContext.Provider>
-
 
        <Button
       fullWidth

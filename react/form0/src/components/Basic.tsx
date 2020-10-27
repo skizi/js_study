@@ -16,10 +16,10 @@ const Basic = () => {
 
 	const classes = useStyles();
  	
-	const { handleBasicProfileChange, validation } = useContext(ProfileContext);
+	const { handleBasicProfileChange, validation, basic } = useContext(ProfileContext);
 
 
-
+	//useMemoの影響でProfileのsetBasicが機能していなかった模様
   	return useMemo(() => {
 		return (
 			<>
@@ -55,7 +55,7 @@ const Basic = () => {
 		        error={!!validation.message.basic.birthday} />
 			</>
 		);
-	}, [validation.message.basic]);
+	}, [validation.message.basic, basic]);
 }
 
 

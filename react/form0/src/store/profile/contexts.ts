@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import { Address as IAddress } from "../../domain/entity/address";
+import { Basic } from "../../domain/entity/basic";
 // import { Address } from "../../domain/entity/address";
 import { Gender } from "../../domain/entity/gender";
 import { Career } from "../../domain/entity/career";
@@ -17,6 +18,7 @@ export type ProfileOnContext = {
 export type ProfileContextType = {
 	//Profile
 	handleBasicProfileChange:(member:Partial<ProfileOnContext>)=>void;
+	basic:Basic,
 
 	//Address
 	prefecture:string; //都道府県
