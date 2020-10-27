@@ -1,3 +1,4 @@
+import { useState, useCallback, useRef, useEffect } from "react";
 import { Dispatch } from "redux";
 import profileActions from "./actions";
 import { Address } from "../../domain/entity/address";
@@ -9,26 +10,52 @@ import {
 
 
 
-export const searchAddressFromPostalcode = (code: string) => async( dispach: Dispatch ) => {
+export const useSearchAddress = ( address:Address, setAddress:React.Dispatch<React.SetStateAction<Address>> ) => {
 
-  if (!isCompletePostalcode(code)) return;
+  //メモリリーク対策
+  const mountedRef = useRef<boolean>(false);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => { mountedRef.current = false; };
+  },[]);
 
-  dispach(profileActions.setAddress({ postalcode: code }));
 
+  const [loadingFlag, setLoadingFlag] = useState(false);
+  const getAddress = ( code:string )=>{
 
-  const res = await fetch(
-    `https://apis.postcode-jp.com/api/v3/postcodes?apikey=lcuwhB4B0wdE0Rx7wB7BfEl5flLYzjs7NJmtFpw&postcode=${sanitizePostalcode(code)}`
-  );
-  const result = await res.json();
+    if (!isCompletePostalcode(code)){
+      setLoadingFlag( false );
+      return;
+    }
 
-  if (!result.data[0]) return;
+    setLoadingFlag( true );
+    const load = async ():Promise<void> => {
 
-  const address: Partial<Address> = {
-    prefecture: result.data[0].pref,
-    city: result.data[0].city + result.data[0].town
+      try{
+        const res = await fetch(`https://apis.postcode-jp.com/api/v3/postcodes?apikey=lcuwhB4B0wdE0Rx7wB7BfEl5flLYzjs7NJmtFpw&postcode=${sanitizePostalcode(code)}`);
+        const result = await res.json();
+
+        if (result.data[0] && mountedRef.current){
+          const _address: Partial<Address> = {
+            prefecture: result.data[0].pref,
+            city: result.data[0].city + result.data[0].town
+          };
+          setAddress({ ...address, ..._address });
+        }
+
+      }catch( error ){
+        throw error;
+      }finally{
+        setLoadingFlag( false );
+      }
+
+    }
+    void load();
+
   };
 
-  dispach(profileActions.searchAddress.done({ result: address, params: {} }));
+  return { getAddress, loadingFlag };
+
 };
 
 

@@ -23,7 +23,6 @@ export type ProfileContextType = {
 	//Address
 	prefecture:string; //都道府県
 	city:string; //市区町村
-	restAddress:string; //残りの住所
 	handleAddressChange:(member:Partial<IAddress>)=>void;
 	handlePostalcodeChange:(code: string)=>void;
 

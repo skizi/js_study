@@ -12,7 +12,7 @@ import Basic from "./Basic";
 
 import Address from "./Address";
 import { ProfileContext, ProfileOnContext } from "../store/profile/contexts";
-import { searchAddressFromPostalcode } from "../store/profile/effects";
+import { useSearchAddress } from "../store/profile/effects";
 import profileActions from "../store/profile/actions";
 import { Address as AddressType } from "../domain/entity/address";
 import { isPostalcode } from "../domain/services/address";
@@ -46,7 +46,6 @@ const Profile = () => {
 
 
   //---------------------Basic---------------------------
-  console.log("reload-------------");
   const [ basic, setBasic ] = useState<BasicType>( {
     name:"",
     description:"",
@@ -79,22 +78,26 @@ const Profile = () => {
 
 
   //--------------------Address-------------------------
-  const address = useSelector( ( state:RootState) => state.profile.address );
-  const [ restAddress, setRestAddress ] = useState( "" );
+  const [address, setAddress] = useState<AddressType>({
+    postalcode:"",
+    prefecture:"",
+    city:"",
+    restAddress:""
+  });
   const handleAddressChange = (member:Partial<AddressType>) => {
-    dispatch(profileActions.setAddress( member ));
+    setAddress( { ...address, ...member } );
     recalculateAddressValidation({ address: { ...address, ...member } });
   }
 
-
+  const { getAddress, loadingFlag } = useSearchAddress(address, setAddress);
   const handlePostalcodeChange = (code: string) => {
     if (!isPostalcode( code )) return; // エラーになるのでコードには転写しないでください。
 
-      dispatch(searchAddressFromPostalcode(code));
+    getAddress( code );
 
-      recalculateAddressValidation({
-        address: { ...address, postalcode: code }
-      });
+    recalculateAddressValidation({
+      address: { ...address, postalcode: code }
+    });
   };
 
 
@@ -179,9 +182,6 @@ const Profile = () => {
   //--------------------保存------------------------
   const handleSave = () => {
 
-    dispatch(profileActions.setBasic(basic));
-    console.log(profile.basic);
-
     const message = calculateValidation(profile);
 
     if (isValid(message)) {
@@ -216,7 +216,6 @@ const Profile = () => {
 
         prefecture:address.prefecture,
         city:address.city,
-        restAddress:restAddress,
         handleAddressChange,
         handlePostalcodeChange,
 

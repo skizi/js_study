@@ -38,16 +38,7 @@ const initCareer: Career = {
 
 
 const profileReducers = reducerWithInitialState(initializeState).case(
-profileActions.setBasic, ( state, payload ) => ({
-		...state,
-		basic:{ ...state.basic, ...payload }
-})).case(profileActions.setAddress,( state, payload ) => ({
-	...state,
-	address:{ ...state.address, ...payload }
-})).case(profileActions.searchAddress.done, (state, payload) => ({
-	...state,
-	address: { ...state.address, ...payload.result }
-})).case(profileActions.setCareer, ( state, payload ) => {
+profileActions.setCareer, ( state, payload ) => {
 
 	const careers = state.careers.map(( item, i )=>{
 		return i == payload.index ? { ...item, ...payload.career } : item;

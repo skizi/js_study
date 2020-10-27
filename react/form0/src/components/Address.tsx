@@ -13,7 +13,7 @@ import { ProfileContext } from "../store/profile/contexts";
 
 const Address:React.FC = () => {
 
-	const { prefecture, city, restAddress, handleAddressChange, handlePostalcodeChange, validation } = useContext(ProfileContext);
+	const { prefecture, city, handleAddressChange, handlePostalcodeChange, validation } = useContext(ProfileContext);
 
   	const classes = useStyles();
 
@@ -47,7 +47,7 @@ const Address:React.FC = () => {
 		        helperText={validation.message.address.restAddress} />
 			</>
 		);
-	}, [validation.message.address, prefecture, city, restAddress]);
+	}, [validation.message.address, city, prefecture]);
 
 }
 
