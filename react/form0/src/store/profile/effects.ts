@@ -2,6 +2,7 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { Dispatch } from "redux";
 import profileActions from "./actions";
 import { Address } from "../../domain/entity/address";
+import { College } from "../../domain/entity/college";
 
 import {
   isCompletePostalcode,
@@ -21,7 +22,7 @@ export const useSearchAddress = ( address:Address, setAddress:React.Dispatch<Rea
 
 
   const [loadingFlag, setLoadingFlag] = useState(false);
-  const getAddress = ( code:string )=>{
+  const searchAddress = ( code:string )=>{
 
     if (!isCompletePostalcode(code)){
       setLoadingFlag( false );
@@ -54,7 +55,7 @@ export const useSearchAddress = ( address:Address, setAddress:React.Dispatch<Rea
 
   };
 
-  return { getAddress, loadingFlag };
+  return { searchAddress, loadingFlag };
 
 };
 
@@ -63,17 +64,40 @@ export const useSearchAddress = ( address:Address, setAddress:React.Dispatch<Rea
 
 
 
-export const searchColleges = (name: string) => async (dispach: Dispatch) => {
+export const useSearchColleges = ( college:College, setCollege:React.Dispatch<React.SetStateAction<College>> ) => {
 
-console.log( name );
-  const url = `http://localhost:18001/colleges?name=${name}`;
+  const mountedRef = useRef<boolean>(false);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => { mountedRef.current = false; };
+  },[]);
 
-  const result = await fetch(url).then(res => res.json());
-console.log( result );
-  dispach(
-    profileActions.searchCollege.done({
-      result: result.results.school,
-      params: {}
-    })
-  );
+
+  const [loadingFlag, setLoadingFlag] = useState(false);
+  const searchColleges = ( name: string )=>{
+
+    setLoadingFlag( true );
+
+    const load = async ():Promise<void> => {
+      try{
+        const url = `http://localhost:18001/colleges?name=${name}`;
+        const result = await fetch(url).then(res => res.json());
+
+        if( !mountedRef.current ) return;
+        
+        setCollege({ ...college, result:result.results.school });
+
+      }catch( error ){
+        throw error;
+      }finally{
+        setLoadingFlag( false );
+      }
+
+    }
+    void load();
+
+  };
+
+
+  return { searchColleges, loadingFlag };
 };

@@ -1,13 +1,13 @@
 import React, { Fragment, useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
 import {TextField, Typography, InputLabel, Grid, Button} from "@material-ui/core";
-import useStyles from "./styles";
-import { RootState } from "../domain/entity/rootState";
-import { PROFILE } from "../domain/services/profile";
+import useStyles from "../styles";
+import { RootState } from "../../domain/entity/rootState";
+import { PROFILE } from "../../domain/services/profile";
 
-import { exitEmptyCareers } from "../domain/services/career";
+import { exitEmptyCareers } from "../../domain/services/career";
 
-import { ProfileContext } from "../store/profile/contexts";
+import { ProfileContext } from "../../store/profile/contexts";
 
 
 
@@ -15,9 +15,8 @@ const Career:React.FC = () =>{
 	
 	const classes = useStyles();
 
-  const { handleChangeCareer, handleAddCareer, handleDeleteCareer, validation } = useContext(ProfileContext);
+  const { handleChangeCareer, handleAddCareer, handleDeleteCareer, validation, careers } = useContext(ProfileContext);
 
-  const careers = useSelector( ( state:RootState) => state.profile.careers );
   const isAbleToAddCarrer = exitEmptyCareers(careers);
 
 

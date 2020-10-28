@@ -1,9 +1,9 @@
 import actionCreatorFactory from "typescript-fsa";
-import { AlertState } from "../../domain/entity/alert";
+import { Alert } from "../../domain/entity/alert";
 
 const actionCreator = actionCreatorFactory();
 
-type AlertPayload = Omit<AlertState, "open">;
+type AlertPayload = Omit<Alert, "open">;
 
 const alertActions = {
   openAlert: actionCreator<AlertPayload>("OPEN_ALERT"),

@@ -1,14 +1,14 @@
 import React, { useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
 import {TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Typography, FormHelperText} from "@material-ui/core";
-import useStyles from "./styles";
-import { RootState } from "../domain/entity/rootState";
+import useStyles from "../styles";
+import { RootState } from "../../domain/entity/rootState";
 
-import { Gender } from "../domain/entity/gender";
-import { PROFILE } from "../domain/services/profile";
+import { Gender } from "../../domain/entity/gender";
+import { PROFILE } from "../../domain/services/profile";
 
 
-import { ProfileContext } from "../store/profile/contexts";
+import { ProfileContext } from "../../store/profile/contexts";
 
 
 

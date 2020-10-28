@@ -1,14 +1,11 @@
 import React from 'react';
 
-import Basic from "./Basic";
-import Profile from "./Profile";
-import Alert from "./Alert";
+import Profile from "./organisms/Profile";
 
 function App() {
   return (
     <>
       <Profile />
-      <Alert />
     </>
   );
 }

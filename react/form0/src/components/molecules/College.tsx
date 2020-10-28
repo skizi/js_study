@@ -2,17 +2,15 @@ import React, { useState, useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem, FormHelperText, Typography } from "@material-ui/core";
 
-import { PROFILE } from "../domain/services/profile";
-import { RootState } from "../domain/entity/rootState";
-import useStyles from "./styles";
+import { PROFILE } from "../../domain/services/profile";
+import { RootState } from "../../domain/entity/rootState";
+import useStyles from "../styles";
 
-import { ProfileContext } from "../store/profile/contexts";
+import { ProfileContext } from "../../store/profile/contexts";
 
 
 
 const College:React.FC = () => {
-
-	const college = useSelector( ( state:RootState ) => state.profile.college );
 
 	const [ searchWord, setSearchWord ] = useState("");
 
@@ -20,7 +18,7 @@ const College:React.FC = () => {
 		setSearchWord( name )
 	}
 
-    const { handleChangeCollege, handleSearchCollege, handleResetCollege, validation } = useContext(ProfileContext);
+    const { handleChangeCollege, handleSearchCollege, handleResetCollege, validation, college } = useContext(ProfileContext);
 
 
 
@@ -39,7 +37,7 @@ const College:React.FC = () => {
   
 
 
-  	return useMemo(() => {
+  	// return useMemo(() => {
 		return (
 		  <>
 	        <Typography
@@ -151,7 +149,7 @@ const College:React.FC = () => {
 
 		  </>
 		);
-	}, [validation.message.college, college, searchWord]);
+	// }, [validation.message.college, college, searchWord]);
 
 }
 

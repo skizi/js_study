@@ -1,4 +1,4 @@
-export type AlertState = {
+export type Alert = {
   // alertの種類
   severity: AlertSeverity;
 

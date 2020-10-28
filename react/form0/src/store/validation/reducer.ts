@@ -1,8 +1,8 @@
-import { ValidationState } from "../../domain/entity/validation";
+import { Validation } from "../../domain/entity/validation";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 import validationActions from "./actions";
 
-const init: ValidationState = {
+const init: Validation = {
   isStartValidation: false,
   message: {
     basic:{

@@ -1,11 +1,11 @@
 import { Profile } from "./profile";
-import { ValidationState } from "./validation";
-import { AlertState } from "./alert";
+import { Validation } from "./validation";
+import { Alert } from "./alert";
 
 
 
 export type RootState = {
 	profile:Profile;
-	validation: ValidationState;
-	alert: AlertState;
+	validation: Validation;
+	alert: Alert;
 }

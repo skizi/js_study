@@ -1,11 +1,11 @@
 import { Profile } from "../entity/profile";
-import { Validation } from "../entity/validation";
+import { ValidationMessage } from "../entity/validation";
 import { PROFILE } from "./profile";
 import { College } from "../entity/college";
 import { Career } from "../entity/career";
 
 export const calculateValidation = (profile: Profile) => {
-  const message: Validation = {
+  const message: ValidationMessage = {
     basic: {
       name: emptyValidation(profile.basic.name, PROFILE.BASIC.NAME),
       description: lengthValidation(profile.basic.description, 1000),
@@ -67,7 +67,7 @@ const isTooLong = (str: string, maxLen: number) => str.trim().length >= maxLen;
 
 
 
-export const isValid = (message: Validation) => {
+export const isValid = (message: ValidationMessage) => {
   const falttenValues = Object.values(message)
     .map(extractValues)
     .flat(Infinity) as string[]; //yoshida edit

@@ -11,11 +11,9 @@ const actionCreator = actionCreatorFactory();
 //reducer に渡す値（payload）の型（Profile）を指定
 //Partial<Profile>はProfileの項目のうち、一部の値のみReducer内でpayloadとして渡すことができる
 const profileActions = {
-	setCareer: actionCreator<{ career: Partial<Career>; index: number }>("SET_CAREER"),
-	deleteCareer: actionCreator<number>("DELETE_CAREER"),
-	addCareer: actionCreator<{}>("ADD_CAREER"),
-	setCollege: actionCreator<Partial<College>>("SET_COLLEGE"),
-	searchCollege: actionCreator.async<{}, CollegeResult[], {}>("SEARCH_COLLEGE")
+	// setCareer: actionCreator<{ career: Partial<Career>; index: number }>("SET_CAREER"),
+	// deleteCareer: actionCreator<number>("DELETE_CAREER"),
+	// addCareer: actionCreator<{}>("ADD_CAREER"),
 };
 
 

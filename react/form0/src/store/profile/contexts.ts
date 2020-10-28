@@ -5,7 +5,8 @@ import { Basic } from "../../domain/entity/basic";
 import { Gender } from "../../domain/entity/gender";
 import { Career } from "../../domain/entity/career";
 import { College } from "../../domain/entity/college";
-import { ValidationState } from "../../domain/entity/validation";
+import { Validation } from "../../domain/entity/validation";
+import { Alert } from "../../domain/entity/alert";
 
 
 export type ProfileOnContext = {
@@ -30,13 +31,18 @@ export type ProfileContextType = {
     handleChangeCareer:(member: Partial<Career>, i: number)=>void;
     handleAddCareer:()=>void;
     handleDeleteCareer:(i:number)=>void;
+    careers:Career[];
 
     //College
     handleChangeCollege:(member:Partial<College>)=>void;
     handleSearchCollege:(searchWord:string)=>void;
     handleResetCollege:()=>void;
+    college:College;
 
-    validation:ValidationState;
+    validation:Validation;
+
+    handleAlertClose:()=>void;
+    alert:Alert;
 }
 
 

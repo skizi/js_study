@@ -1,4 +1,4 @@
-export type Validation = {
+export type ValidationMessage = {
   basic:{
     name: string;
     description: string;
@@ -22,7 +22,7 @@ export type Validation = {
   }[];
 };
 
-export type ValidationState = {
+export type Validation = {
   isStartValidation: boolean;
-  message: Validation;
+  message: ValidationMessage;
 };

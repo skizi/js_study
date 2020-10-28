@@ -37,51 +37,25 @@ const initCareer: Career = {
 };
 
 
-const profileReducers = reducerWithInitialState(initializeState).case(
-profileActions.setCareer, ( state, payload ) => {
+const profileReducers = reducerWithInitialState(initializeState);
+// .case(
+// profileActions.setCareer, ( state, payload ) => {
 
-	const careers = state.careers.map(( item, i )=>{
-		return i == payload.index ? { ...item, ...payload.career } : item;
-	});
+// 	const careers = state.careers.map(( item, i )=>{
+// 		return i == payload.index ? { ...item, ...payload.career } : item;
+// 	});
 
-	return {
-		...state,
-		careers: careers
-	}
-}).case(profileActions.deleteCareer, (state, payload) => { 
-	
-	const careers = state.careers.filter(( item, i )=>{
-		return i != payload;
-	});
+// 	return {
+// 		...state,
+// 		careers: careers
+// 	}
+// }).case(profileActions.addCareer, (state, payload) => { 
 
-	return {
-		...state,
-		careers: careers
-	}
-}).case(profileActions.addCareer, (state, payload) => { 
-
-	return {
-		...state,
-		careers: [ ...state.careers, initCareer ]
-	}
-}).case(profileActions.setCollege, (state, payload) => { 
-
-	return {
-		...state,
-		college: { ...state.college, ...payload }
-	}
-}).case(profileActions.setCollege, (state, payload) => { 
-
-	return {
-		...state,
-		college: { ...state.college, ...payload }
-	}
-}).case(
-	profileActions.searchCollege.done, (state, payload) => ({
-    ...state,
-    college: { ...state.college, result : payload.result }
-  })
-);
+// 	return {
+// 		...state,
+// 		careers: [ ...state.careers, initCareer ]
+// 	}
+// });
 
 
 export default profileReducers;
