@@ -1,8 +1,9 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { Dispatch } from "redux";
 import profileActions from "./actions";
+import { Profile } from "../../domain/entity/profile";
 import { Address } from "../../domain/entity/address";
-import { College } from "../../domain/entity/college";
+import { isPostalcode } from "../../domain/services/address";
 
 import {
   isCompletePostalcode,
@@ -11,7 +12,25 @@ import {
 
 
 
-export const useSearchAddress = ( address:Address, setAddress:React.Dispatch<React.SetStateAction<Address>> ) => {
+export const useAddress = ( profile:Profile, recalculateValidation:(profile:Profile)=>void ) => {
+
+  const [address, setAddress] = useState<Address>({
+    postalcode:"",
+    prefecture:"",
+    city:"",
+    restAddress:""
+  });
+
+
+  //------------------郵便番号から住所検索------------------
+  const handlePostalcodeChange = (code: string) => {
+    if (!isPostalcode( code )) return;
+
+    searchAddress( code );
+    recalculateValidation({ ...profile, address: { ...address, postalcode: code } });
+
+  };
+
 
   //メモリリーク対策
   const mountedRef = useRef<boolean>(false);
@@ -32,65 +51,24 @@ export const useSearchAddress = ( address:Address, setAddress:React.Dispatch<Rea
     setLoadingFlag( true );
     const load = async ():Promise<void> => {
 
+      let _address = { ...address, postalcode:code };
       try{
         const res = await fetch(`https://apis.postcode-jp.com/api/v3/postcodes?apikey=lcuwhB4B0wdE0Rx7wB7BfEl5flLYzjs7NJmtFpw&postcode=${sanitizePostalcode(code)}`);
         const result = await res.json();
 
         if (result.data[0] && mountedRef.current){
-          const _address: Partial<Address> = {
+          const partial: Partial<Address> = {
             prefecture: result.data[0].pref,
             city: result.data[0].city + result.data[0].town
           };
-          setAddress({ ...address, ..._address });
+          _address = { ..._address, ...partial };
         }
 
       }catch( error ){
         throw error;
       }finally{
         setLoadingFlag( false );
-      }
-
-    }
-    void load();
-
-  };
-
-  return { searchAddress, loadingFlag };
-
-};
-
-
-
-
-
-
-export const useSearchColleges = ( college:College, setCollege:React.Dispatch<React.SetStateAction<College>> ) => {
-
-  const mountedRef = useRef<boolean>(false);
-  useEffect(() => {
-    mountedRef.current = true;
-    return () => { mountedRef.current = false; };
-  },[]);
-
-
-  const [loadingFlag, setLoadingFlag] = useState(false);
-  const searchColleges = ( name: string )=>{
-
-    setLoadingFlag( true );
-
-    const load = async ():Promise<void> => {
-      try{
-        const url = `http://localhost:18001/colleges?name=${name}`;
-        const result = await fetch(url).then(res => res.json());
-
-        if( !mountedRef.current ) return;
-        
-        setCollege({ ...college, result:result.results.school });
-
-      }catch( error ){
-        throw error;
-      }finally{
-        setLoadingFlag( false );
+        setAddress( _address );
       }
 
     }
@@ -99,5 +77,12 @@ export const useSearchColleges = ( college:College, setCollege:React.Dispatch<Re
   };
 
 
-  return { searchColleges, loadingFlag };
+  //------------------住所更新------------------
+  const handleAddressChange = (member:Partial<Address>) => {
+    setAddress({ ...address, ...member });
+    recalculateValidation({ ...profile, address: { ...address, ...member } });
+  }
+
+  return { address, handleAddressChange, handlePostalcodeChange, loadingFlag };
+
 };

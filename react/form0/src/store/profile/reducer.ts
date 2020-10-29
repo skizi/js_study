@@ -37,7 +37,13 @@ const initCareer: Career = {
 };
 
 
-const profileReducers = reducerWithInitialState(initializeState);
+const profileReducers = reducerWithInitialState(initializeState).case(
+	profileActions.setProfile, (state, payload) => { 
+	return {
+		...state,
+		...payload
+	}
+});
 // .case(
 // profileActions.setCareer, ( state, payload ) => {
 
