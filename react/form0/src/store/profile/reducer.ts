@@ -29,12 +29,12 @@ const initializeState:Profile = {
 	}
 };
 
-const initCareer: Career = {
-  company: "",
-  position: "",
-  startAt: "",
-  endAt: ""
-};
+// const initCareer: Career = {
+//   company: "",
+//   position: "",
+//   startAt: "",
+//   endAt: ""
+// };
 
 
 const profileReducers = reducerWithInitialState(initializeState).case(
