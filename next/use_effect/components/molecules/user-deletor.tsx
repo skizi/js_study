@@ -7,15 +7,11 @@ type Props = {
 
 const UserDeletor:React.FC = React.memo(( props:Props ) => {
 	
-	console.log("UserDeletor component render----------------");
-
-	const [ id, setId ] = useState(0);
-
 	return(
 		<>
 			<h3>ユーザー削除</h3>
-			<label htmlFor="idDeleteInput">名前：</label><input type="text" onChange={(e)=>setId(e.target.value)} id="idDeleteInput" />
-			<button onClick={()=>props.clickHandler(id)}>ユーザー削除</button>
+			<label htmlFor="idDeleteInput">名前：</label><input type="text" onChange={(e)=>props.changeHandler(e.target.value)} id="idDeleteInput" />
+			<button onClick={props.clickHandler}>ユーザー削除</button>
 		</>
 	);
 

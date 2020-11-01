@@ -20,20 +20,22 @@ const Index:React.FC<Props> = ( props:Props ) =>{
 
 	console.log("Index render----------------");
 
-	useGetUser();
-	const {postUser, loadingFlag } = usePostUser();
+	// useGetUser();
+	// const {postUser, loadingFlag } = usePostUser();
 
-	let [ count, setCount ] = useState( 0 );
-	useEffect(() => {
-		console.log("useEffect:count up");
-	}, [ count ]);
+	// let [ count, setCount ] = useState( 0 );
+	// useEffect(() => {
+	// 	console.log("useEffect:count up");
+	// }, [ count ]);
 
 
 	return(
 		<>
-			{loadingFlag?(<p>loading...</p>):null}
+			{/*loadingFlag?(<p>loading...</p>):null*/}
+		{/*
 			<button onClick={()=>postUser( "hoge" + count, "fuga" )} >postボタン</button>
 			<button onClick={()=>setCount(count+1)} >Effectボタン</button>
+		*/}
 			<UserManager />
 		</>
 	);

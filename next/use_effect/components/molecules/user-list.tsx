@@ -9,8 +9,6 @@ type Props = {
 
 const UserList:React.FC = ( props:Props ) => {
 	
-	console.log("UserList component render----------------");
-
 	return(
 		<>
 			<h3>ユーザー一覧</h3>
@@ -27,4 +25,4 @@ const UserList:React.FC = ( props:Props ) => {
 };
 
 
-export default UserList;
+export default React.memo(UserList);

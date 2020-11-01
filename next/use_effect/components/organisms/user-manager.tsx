@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { connect, useSelector } from 'react-redux';
+import React, { useEffect, useState, useCallback } from "react";
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { asyncGetUsers, asyncCreateUser, asyncUpdateUser, asyncDeleteUser, User } from '../../store/user/actions';
 import { RootState } from '../../store';
 
@@ -9,71 +9,67 @@ import UserEditor from "~/components/molecules/user-editor";
 import UserDeletor from "~/components/molecules/user-deletor";
 
 
-type Props = {
-	asyncGetUsers:() => void;
-	asyncCreateUser:() => void;
-	asyncUpdateUser:() => void;
-	asyncDeleteUser:() => void;
-	users:User[];
-}
 
-const UserManager:React.FC<Props> = (props:Props) =>{
+const UserManager:React.FC = () =>{
 
-	console.log("UserManager component render----------------");
+	const dispatch = useDispatch();
+	const users = useSelector( state => state.user.users );
 
-	useEffect(() => {
-		//ユーザー登録,更新,削除するたびprops.usersが変更されると実行される
-		console.log("useEffect:change users");
-	}, [ props.users ]);
 
-	const users = useSelector<UserState, User[]>((state) => state.user.users );
-	useEffect(() => {
-		//ユーザー登録,更新,削除するたびprops.usersが変更されると実行される
-		console.log("useEffect:change users2");
-	}, [ users ]);
+	//ユーザー作成
+	const [ createUser, setCreateUser ] = useState({
+		name:"",
+		outline:""
+	});
+	const changeCreateUserHandler = useCallback(( member:Partial<User> ) =>{
+		setCreateUser({ ...createUser, ...member });
+	}, [createUser.name, createUser.outline] );
+	const createUserHandler = useCallback(() =>{
+		dispatch(asyncCreateUser( createUser.name, createUser.outline ));
+	}, [createUser.name, createUser.outline]);
+
+
+	//ユーザー情報更新
+	const [ updateUser, setUpdateUser ] = useState<User>({
+		name:"",
+		outline:"",
+		id:""
+	});
+	const changeUpdateUserHandler = useCallback(( member:Partial<User> ) =>{
+		setUpdateUser({ ...updateUser, ...member });
+	}, [updateUser.name, updateUser.outline, updateUser.id]);
+
+	const updateUserHandler = useCallback(() =>{
+		dispatch(asyncUpdateUser( updateUser.name, updateUser.outline, updateUser.id ));
+	}, [updateUser.name, updateUser.outline, updateUser.id]);
+
+
+	//ユーザー削除
+	const [ deleteId, setDeleteId ] = useState(0);
+	const deleteUserHandler = useCallback(() => {
+		dispatch(asyncDeleteUser(deleteId));
+	}, [deleteId]);
+	const deleteChangeHandler = useCallback((id:number) => {
+		setDeleteId( id );
+	}, [deleteId]);
 
 
 	return(
-		<>
-			{/*
-			<button onClick={()=>props.asyncGetUsers()}>ユーザー一覧取得</button>
-			*/}
-			<UserList users={props.users} />
+		<div>
 
-			<UserCreator clickHandler={props.asyncCreateUser} />
+			<button onClick={()=>dispatch(asyncGetUsers())}>ユーザー一覧取得</button>
 
-			<UserEditor clickHandler={props.asyncUpdateUser} />
+			<UserList users={users} />
+
+			<UserCreator changeHandler={changeCreateUserHandler} clickHandler={createUserHandler} />
+
+			<UserEditor changeHandler={changeUpdateUserHandler} clickHandler={updateUserHandler} />
 			
-			<UserDeletor clickHandler={props.asyncDeleteUser} />			
+			<UserDeletor clickHandler={deleteUserHandler} changeHandler={deleteChangeHandler} />			
 
-
-			{/*<p>{JSON.stringify(users)}</p>*/}
-		</>
+		</div>
 	);
 
 }
 
-
-const mapStateToProps = (state:RootState) => {
-  return { users:state.user.users }
-};
-
-
-type DispatchProps = {
-    asyncGetUsers: () => any,
-    asyncCreateUser: () => any,
-    asyncUpdateUser: () => any,
-    asyncDeleteUser: () => any
-};
-
-const mapDispatchToProps = (dispatch:Function):DispatchProps => {
-  return {
-    asyncGetUsers:() => dispatch(asyncGetUsers()),
-	asyncCreateUser:(name:string, outline:string) => dispatch(asyncCreateUser( name, outline )),
-	asyncUpdateUser:(name:string, outline:string, id:number) => dispatch( asyncUpdateUser( name, outline, id ) ),
-	asyncDeleteUser:(id:number) => dispatch(asyncDeleteUser(id))
-  }
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserManager);
+export default UserManager;
