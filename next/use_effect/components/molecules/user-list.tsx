@@ -12,6 +12,7 @@ const UserList:React.FC = ( props:Props ) => {
 	return(
 		<>
 			<h3>ユーザー一覧</h3>
+			<button onClick={props.clickHandler}>ユーザー一覧取得</button>
 			<ul>
 			{(()=>{
 				return props.users.map(( item, i ) => {
