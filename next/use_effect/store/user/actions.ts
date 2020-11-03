@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const CREATE_USER = "CREATE_USER";
 export const GET_USERS = "GET_USERS";
-export const UPDATE_USER = "UPDATE_USER";
+export const EDIT_USER = "EDIT_USER";
 export const DELETE_USER = "DELETE_USER";
 
 
@@ -72,15 +72,15 @@ export function asyncCreateUser( name:string, outline:string ){
 
 
 
-export function updateUser(user:User) {
+export function editUser(user:User) {
   return {
-    type: 'UPDATE_USER',
+    type: 'EDIT_USER',
     user
   }
 }
 
 
-export function asyncUpdateUser(name:string, outline:string, id:number){
+export function asyncEditUser(name:string, outline:string, id:number){
 
   return async ( dispatch:Function ) => {
 
@@ -89,7 +89,7 @@ export function asyncUpdateUser(name:string, outline:string, id:number){
 
       console.log( response );
       const _user:User = { name:response.data.name, outline:response.data.outline, id:response.data.id };
-      dispatch( updateUser(_user) );
+      dispatch( editUser(_user) );
 
     }catch( error ){
       throw error;

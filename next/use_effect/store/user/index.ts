@@ -1,7 +1,7 @@
 // import { Reducer } from 'redux'
 import { ActionType } from 'redux-actions-type'
 import * as actions from './actions'
-import { CREATE_USER, GET_USERS, UPDATE_USER, DELETE_USER } from './actions'
+import { CREATE_USER, GET_USERS, EDIT_USER, DELETE_USER } from './actions'
 
 
 export type UserAction = ActionType<typeof actions>
@@ -36,8 +36,8 @@ const userReducer/*: Reducer<HogeState, HogeAction>*/ = (
       return { users:[ ...action.users] };
       break;
 
-    case UPDATE_USER:
-      console.log("UPDATE_USER");
+    case EDIT_USER:
+      console.log("EDIT_USER");
       let { name, outline, id } = action.user;
       console.log("update id:" + id);
       users = state.users.map((item, i)=>{

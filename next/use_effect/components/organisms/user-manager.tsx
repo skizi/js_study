@@ -8,7 +8,7 @@ import UserCreator from "~/components/molecules/user-creator";
 import UserEditor from "~/components/molecules/user-editor";
 import UserDeletor from "~/components/molecules/user-deletor";
 
-import useGetUser, { usePostUser } from '~/hooks/users';
+import { useGetUser, usePostUser, useCreateUser, useEditUser, useDeleteUser } from '~/hooks/users';
 
 
 
@@ -18,57 +18,29 @@ const UserManager:React.FC = () =>{
 	const users = useSelector( state => state.user.users );
 
 
-	//カスタムフックの例
-	useGetUser();
-	const {postUser, loadingFlag } = usePostUser();
+	//初期ユーザー一覧ロード
+	const { loadingFlag } = useGetUser();
+	const {postUser } = usePostUser();
 
 
 	//ユーザー作成
-	const [ createUser, setCreateUser ] = useState({
-		name:"",
-		outline:""
-	});
-	const changeCreateUserHandler = useCallback(( member:Partial<User> ) =>{
-		setCreateUser({ ...createUser, ...member });
-	}, [createUser.name, createUser.outline] );
-	const clickCreateUserHandler = useCallback(() =>{
-		dispatch(asyncCreateUser( createUser.name, createUser.outline ));
-	}, [createUser.name, createUser.outline]);
-
+	const { changeCreateUserHandler, clickCreateUserHandler } = useCreateUser();
 
 	//ユーザー情報更新
-	const [ updateUser, setUpdateUser ] = useState<User>({
-		name:"",
-		outline:"",
-		id:""
-	});
-	const changeEditUserHandler = useCallback(( member:Partial<User> ) =>{
-		setUpdateUser({ ...updateUser, ...member });
-	}, [updateUser.name, updateUser.outline, updateUser.id]);
-
-	const clickEditUserHandler = useCallback(() =>{
-		dispatch(asyncUpdateUser( updateUser.name, updateUser.outline, updateUser.id ));
-	}, [updateUser.name, updateUser.outline, updateUser.id]);
-
+	const { changeEditUserHandler, clickEditUserHandler } = useEditUser();
 
 	//ユーザー削除
-	const [ deleteUserId, setDeleteUserId ] = useState(0);
-	const clickDeleteUserHandler = useCallback(() => {
-		dispatch(asyncDeleteUser(deleteUserId));
-	}, [deleteUserId]);
-	const changeDeleteUserHandler = useCallback((id:number) => {
-		setDeleteUserId( id );
-	}, [deleteUserId]);
+	const { clickDeleteUserHandler, changeDeleteUserHandler } = useDeleteUser();
 
 
 
 	return(
 		<div>
 
-			{loadingFlag?(<p>loading...</p>):null}
 			<button onClick={()=>postUser( "hoge", "fuga" )} >postボタン</button>
 		
 			<UserList users={users} clickHandler={()=>dispatch(asyncGetUsers())} />
+			{loadingFlag?(<p>loading...</p>):null}
 
 			<UserCreator changeHandler={changeCreateUserHandler} clickHandler={clickCreateUserHandler} />
 
