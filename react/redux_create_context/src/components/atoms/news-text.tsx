@@ -1,14 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { ResourceContext } from '../../store';
 
 
 const NewsText:React.FC = () => {
 
-	//useContextを利用して値を受け取る例
-	const { newsText } = useContext(ResourceContext);
-	
+	//ResourceContext.Consumerを利用して値を受け取る例
 	return(
-        <p>{newsText}</p>
+	    <ResourceContext.Consumer>
+	      { (data) => (
+	        <p>{data.newsText}</p>
+	      )}
+	    </ResourceContext.Consumer>
 	);
 
 }
