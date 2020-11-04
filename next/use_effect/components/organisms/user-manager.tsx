@@ -20,7 +20,7 @@ const UserManager:React.FC = () =>{
 
 	//初期ユーザー一覧ロード
 	const { loadingFlag } = useGetUser();
-	const {postUser } = usePostUser();
+	const { postUser } = usePostUser();
 
 
 	//ユーザー作成

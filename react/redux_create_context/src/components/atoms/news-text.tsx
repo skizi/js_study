@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ResourceContext } from '../../store';
 
 
 const NewsText:React.FC = () => {
+
+	//useContextを利用して値を受け取る例
+	const { newsText } = useContext(ResourceContext);
 	
 	return(
-	    <ResourceContext.Consumer>
-	      { (newsText) => (
-	        <p>{newsText}</p>
-	      )}
-	    </ResourceContext.Consumer>
+        <p>{newsText}</p>
 	);
 
 }

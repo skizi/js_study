@@ -21,7 +21,12 @@ const store = createStore(
 export type AppDispatch = typeof store.dispatch;
 
 
-export const ResourceContext = React.createContext("");
+type newsType = {
+	newsText:string
+};
+export const ResourceContext = React.createContext<newsType>(
+	( null as any ) as newsType
+);
 
 
 
