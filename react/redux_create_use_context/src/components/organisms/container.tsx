@@ -18,12 +18,12 @@ const Container:React.FC = (props) =>{
 	const newsText:string = "〜Containerから渡された値:ReactContextの練習〜";
 
 	return(
-			<div>
-				<Title>郵便番号から住所検索</Title>
-			    <ResourceContext.Provider value={{newsText:newsText}}>
-					<SearchAddress clickHandler={clickHandler} address={address} loadingFlag={loadingFlag} />
-			    </ResourceContext.Provider>
-			</div>
+		<div>
+			<Title>郵便番号から住所検索</Title>
+		    <ResourceContext.Provider value={{newsText:newsText}}>
+				<SearchAddress clickHandler={clickHandler} address={address} loadingFlag={loadingFlag} />
+		    </ResourceContext.Provider>
+		</div>
 	);
 
 }

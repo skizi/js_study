@@ -13,25 +13,23 @@ type Props = {
   loadingFlag:boolean;
 }
 
-const ShowNotificationButton:React.FC<Props> = (props:Props)=>{
+const SearchAddress:React.FC<Props> = React.memo((props:Props)=>{
 
 	var zipcode = "";
 	
-  return useMemo(()=>{
-  	return (
-  		<div>
-        <h4>郵便番号を入力してね！</h4>
-  			<input type="text" required onBlur={(e)=> zipcode = e.target.value } />
-        <Button getAddress={()=>props.clickHandler(zipcode)}>検索</Button>
-        {props.loadingFlag ? <p>loading...</p> : <></> }
-  			<p>{props.address}</p>
-        <NewsText />
-  		</div>
-  	);
-  }, [props.address, zipcode, props.loadingFlag]);
+	return (
+		<div>
+      <h4>郵便番号を入力してね！</h4>
+			<input type="text" required onBlur={(e)=> zipcode = e.target.value } />
+      <Button getAddress={()=>props.clickHandler(zipcode)}>検索</Button>
+      {props.loadingFlag ? <p>loading...</p> : <></> }
+			<p>{props.address}</p>
+      <NewsText />
+		</div>
+	);
 
-}
+});
 
 
 
-export default ShowNotificationButton;
+export default SearchAddress;
