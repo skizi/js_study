@@ -1,11 +1,8 @@
 import React, { useContext, useMemo } from "react";
-import { useSelector } from "react-redux";
 import { TextField, Typography } from "@material-ui/core";
 
 import { PROFILE } from "../../domain/services/profile";
 import useStyles from "../styles";
-
-import { RootState } from "../../domain/entity/rootState";
 
 import { ProfileContext } from "../../store/profile/contexts";
 

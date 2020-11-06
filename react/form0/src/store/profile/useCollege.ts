@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { College } from "../../domain/entity/college";
 import { Profile } from "../../domain/entity/profile";
 

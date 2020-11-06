@@ -1,6 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from "react";
-import { Dispatch } from "redux";
-import profileActions from "./actions";
+import { useState, useRef, useEffect } from "react";
 import { Profile } from "../../domain/entity/profile";
 import { Address } from "../../domain/entity/address";
 import { isPostalcode } from "../../domain/services/address";

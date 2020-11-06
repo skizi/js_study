@@ -2,12 +2,12 @@ import React, { useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../domain/entity/rootState";
 
-import { Container, Typography, Button } from "@material-ui/core";
+import { Container, Button } from "@material-ui/core";
 import useStyles from "../styles";
 
 import { Profile as ProfileType } from "../../domain/entity/profile";
 import profileActions from "../../store/profile/actions";
-import { ProfileContext, ProfileOnContext } from "../../store/profile/contexts";
+import { ProfileContext } from "../../store/profile/contexts";
 
 import Basic from "../molecules/Basic";
 import { useBasic } from "../../store/profile/useBasic";
@@ -22,11 +22,9 @@ import College from "../molecules/College";
 import { useCollege } from "../../store/profile/useCollege";
 
 import { calculateValidation, isValid } from "../../domain/services/validation";
-import validationActions from "../../store/validation/actions";
 
 import Alert from "../molecules/Alert";
 import { Alert as AlertType } from "../../domain/entity/alert";
-import alertActions from "../../store/alert/actions";
 
 import { Validation as ValidationType } from "../../domain/entity/validation";
 

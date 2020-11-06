@@ -1,8 +1,6 @@
 import React, { Fragment, useContext, useMemo } from "react";
-import { useSelector } from "react-redux";
 import {TextField, Typography, InputLabel, Grid, Button} from "@material-ui/core";
 import useStyles from "../styles";
-import { RootState } from "../../domain/entity/rootState";
 import { PROFILE } from "../../domain/services/profile";
 
 import { exitEmptyCareers } from "../../domain/services/career";

@@ -18,7 +18,7 @@ export const useCareer = ( profile:Profile, recalculateValidation:(profile:Profi
 
   const handleChangeCareer = (member: Partial<Career>, index: number) => {
     const _careers = careers.map(( item, i )=>{
-      return i == index ? { ...item, ...member } : item;
+      return i === index ? { ...item, ...member } : item;
     });
     setCareer(_careers);
     recalculateValidation({ ...profile, careers:_careers });
@@ -31,7 +31,7 @@ export const useCareer = ( profile:Profile, recalculateValidation:(profile:Profi
 
   const handleDeleteCareer = ( index:number ) => {
     const _careers = careers.filter(( item, i )=>{
-      return i != index;
+      return i !== index;
     });
     setCareer(_careers);
   };

@@ -1,9 +1,7 @@
 import React, { useState, useContext, useMemo } from "react";
-import { useSelector } from "react-redux";
-import { TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem, FormHelperText, Typography } from "@material-ui/core";
+import { TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem, Typography } from "@material-ui/core";
 
 import { PROFILE } from "../../domain/services/profile";
-import { RootState } from "../../domain/entity/rootState";
 import useStyles from "../styles";
 
 import { ProfileContext } from "../../store/profile/contexts";
@@ -22,7 +20,7 @@ const College:React.FC = () => {
 
 
 
-	const currentCollege = React.useMemo(() => {
+	const currentCollege = useMemo(() => {
 		return college.result.filter(
 			c => c.name === college.name
 		)[0];

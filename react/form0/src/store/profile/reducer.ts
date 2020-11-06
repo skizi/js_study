@@ -1,7 +1,6 @@
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 import { Profile } from "../../domain/entity/profile";
-import { Career } from "../../domain/entity/career";
-import { College } from "../../domain/entity/college";
+// import { Career } from "../../domain/entity/career";
 import profileActions from "./actions";
 
 const initializeState:Profile = {
