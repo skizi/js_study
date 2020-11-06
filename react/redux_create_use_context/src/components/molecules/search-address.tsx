@@ -1,7 +1,4 @@
-import React, { Component, useMemo } from 'react';
-import { connect } from 'react-redux';
-import { HogeState } from '../../store/hoge';
-
+import React from 'react';
 import Button from '../atoms/button';
 import NewsText from '../atoms/news-text';
 

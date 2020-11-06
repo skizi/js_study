@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export const SHOW_NOTIFICATION = "SHOW_NOTIFICATION";
 export const HIDE_NOTIFICATION = "HIDE_NOTIFICATION";
 export const SET_ADDRESS = "SET_ADDRESS";

@@ -1,8 +1,5 @@
-import React, {useMemo, useCallback} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useCallback} from 'react';
 import SearchAddress from '../molecules/search-address';
-import { RootState } from '../../store';
-import { showNotificationWithTimeout } from '../../store/hoge/actions';
 import Title from '../atoms/title';
 import { useAddress } from '../../hooks/useAddress';
 
@@ -10,9 +7,8 @@ import { ResourceContext } from '../../store';
 
 const Container:React.FC = (props) =>{
 
-	const dispatch = useDispatch();
 	const { loadingFlag, address, getAddress } = useAddress();
-	const clickHandler = (zipcode:string)=>getAddress(zipcode);
+	const clickHandler = useCallback((zipcode:string)=>getAddress(zipcode), [getAddress]);
 
 
 	const newsText:string = "〜Containerから渡された値:ReactContextの練習〜";
