@@ -37,7 +37,11 @@ const Basic = () => {
 				<TextField fullWidth className={classes.textField} label={ PROFILE.BASIC.NAME } onChange={ e => handleBasicProfileChange( { name:e.target.value } ) }
 		        required
 		        error={!!validation.message.basic.name}
-		        helperText={validation.message.basic.name} />
+		        helperText={validation.message.basic.name}
+			    inputProps={{
+			        "data-testid": "name",
+			    }}
+		        />
 				
 				<TextField fullWidth multiline className={classes.textField} rows={5} label={ PROFILE.BASIC.DESCRIPTION } onChange={ e => handleBasicProfileChange( { description:e.target.value } ) }
 			    error={!!validation.message.basic.description}

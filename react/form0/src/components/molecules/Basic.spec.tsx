@@ -10,7 +10,8 @@ import { ProfileContext } from "../../store/profile/contexts";
 import { useBasic } from "../../store/profile/useBasic";
 
 
-
+/*
+//このコード追記するとエラー出る
 let realUseContext;
 let useContextMock;
 // Setup mock
@@ -22,7 +23,7 @@ beforeEach(() => {
 afterEach(() => {
     React.useContext = realUseContext;
 });
-
+*/
 
 //describe ブロックを使って複数のテストをグループ化することができます - https://jestjs.io/docs/ja/setup-teardown#%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97
 //it ブロックの中で実際にテストが行われます - https://tech.bitbank.cc/lets-test-by-jest/
@@ -54,40 +55,43 @@ const customRender = (ui, { providerProps, ...renderOptions }) => {
 
 describe('<Basic>', () => {
 
-    describe('イベントハンドラが呼ばれるか', () => {
-
-		const handleBasicProfileChange = jest.fn();
-		const validation = {
+	const handleBasicProfileChange = jest.fn();
+	const validation = {
+		message:{
 			basic:{
 				name:"",
 				description:"",
 				gender:"",
 				birthday:""
 			}
-		};
-		const basic = {
-			name:"",
-			description:"",
-			birthday:"",
-			gender:""
-		};
-		const providerProps = {
-			handleBasicProfileChange:handleBasicProfileChange,
-			validation:validation,
-			basic:basic
 		}
-		// customRender(<Basic />, { providerProps });
-	  	// const wrapper = render(<Basic />);
-	  	
-	    beforeEach(() => {
-	      render(
-	    	<ProfileContext handleBasicProfileChange={handleBasicProfileChange} validation={validation} basic={basic} >
-	    		<Basic />
-	    	</ProfileContext>
-	      );
-	    });
+	};
+	const basic = {
+		name:"",
+		description:"",
+		birthday:"",
+		gender:""
+	};
+	// customRender(<Basic />, { providerProps });
+  	// const wrapper = render(<Basic />);
 
-        fireEvent.change(screen.find('input').at(0), { target: { value: 'よしお' } });
+  	const theme = {
+  		handleBasicProfileChange:handleBasicProfileChange,
+  		validation:validation,
+  		basic:basic
+  	}
+
+	// beforeEach(() => {
+		render(
+			<ProfileContext.Provider value={theme} >
+				<Basic />
+			</ProfileContext.Provider>
+		);
+	// });
+
+    it('イベントハンドラが呼ばれるか', () => {
+
+        fireEvent.change(screen.getByTestId('name'), { target: { value: 'よしお' } });
         expect(handleBasicProfileChange).toHaveBeenCalled()
 
     });
