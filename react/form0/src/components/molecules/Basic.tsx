@@ -12,7 +12,12 @@ import { ProfileContext } from "../../store/profile/contexts";
 
 const Basic = () => {
 
-	const classes = useStyles();
+	// const classes = useStyles();
+	const classes = {
+		title:"",
+		textField:"",
+		formField:""
+	}
  	
 	const { handleBasicProfileChange, validation, basic } = useContext(ProfileContext);
 
