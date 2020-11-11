@@ -8,6 +8,7 @@ import Basic from './Basic'
 import { ProfileContext } from "../../store/profile/contexts";
 
 import { useBasic } from "../../store/profile/useBasic";
+import { TextField } from '@material-ui/core'
 
 
 /*
@@ -39,6 +40,7 @@ afterEach(() => {
 //renderHook関数の中で、カスタムフックを発火させることにより、擬似的にカスタムフックをFunctional Componentの中で発火させている状態にします。 - https://qiita.com/bebetaro/items/4b4e2e8cdacddb5aa7bf
 //renderHook関数の戻り値のresultオブジェクトのcurrentはカスタムフックの返り値と等しくなります。
 //例として、result.current.counterをexpectで比較することで変数の値をテストすることが可能になります
+//beforeEachは testとitの最初にbeforeEachの中身が実行される
 
 //カスタムフックは個別にテスト
 //コンポーネントも個別にテスト
@@ -46,17 +48,11 @@ afterEach(() => {
 //Enzym : React componentsは、通常は小さく、propsにのみ依存しているので、テストがしやすいという特徴があります。React componentsのテストにはEnzymeが推奨されています。
 
 
-const customRender = (ui, { providerProps, ...renderOptions }) => {
-  return render(
-    <ProfileContext {...providerProps}>{ui}</ProfileContext>,
-    renderOptions
-  )
-}
 
 describe('<Basic>', () => {
 
 	const handleBasicProfileChange = jest.fn();
-	const validation = {
+	let validation = {
 		message:{
 			basic:{
 				name:"",
@@ -72,30 +68,48 @@ describe('<Basic>', () => {
 		birthday:"",
 		gender:""
 	};
-	// customRender(<Basic />, { providerProps });
-  	// const wrapper = render(<Basic />);
 
-  	const theme = {
+  	let theme = {
   		handleBasicProfileChange:handleBasicProfileChange,
   		validation:validation,
   		basic:basic
   	}
 
 	// beforeEach(() => {
+		// render(
+		// 	<ProfileContext.Provider value={theme} >
+		// 		<Basic />
+		// 	</ProfileContext.Provider>
+		// );
+	// });
+
+    it('イベントハンドラが4回呼ばれるか', () => {
 		render(
 			<ProfileContext.Provider value={theme} >
 				<Basic />
 			</ProfileContext.Provider>
 		);
-	// });
-
-    it('イベントハンドラが呼ばれるか', () => {
-
         fireEvent.change(screen.getByTestId('name'), { target: { value: 'よしお' } });
-        expect(handleBasicProfileChange).toHaveBeenCalled()
+        fireEvent.change(screen.getByTestId('description'), { target: { value: 'こんにちわ！' } });
+        fireEvent.click(screen.getByTestId('male'));
+        fireEvent.change(screen.getByTestId('birthday'), { target: { value: '2020-11-12' } });
+        expect(handleBasicProfileChange).toHaveBeenCalledTimes( 4 );
 
     });
 
+    it('validationのアラート文が表示されるか', () => {
+	  	theme.validation.message.basic.name = "名前を入力してください。";
+	  	theme.validation.message.basic.gender = "性別を選択してください。";
+	  	theme.validation.message.basic.birthday = "誕生日を選択してください。";
+		render(
+			<ProfileContext.Provider value={theme} >
+				<Basic />
+			</ProfileContext.Provider>
+		);
+        expect(screen.queryByText('名前を入力してください。')).not.toBeUndefined();
+        expect(screen.queryByText('性別を選択してください。')).not.toBeUndefined();
+        expect(screen.queryByText('誕生日を選択してください。')).not.toBeUndefined();
+    });
 	// it('onChange', () => {
 	// 	const component = shallow(<Basic />);
 	// 	component.find('input').simulate('change', {target: {value: 'input new value'}});

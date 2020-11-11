@@ -45,21 +45,37 @@ const Basic = () => {
 				
 				<TextField fullWidth multiline className={classes.textField} rows={5} label={ PROFILE.BASIC.DESCRIPTION } onChange={ e => handleBasicProfileChange( { description:e.target.value } ) }
 			    error={!!validation.message.basic.description}
-			    helperText={validation.message.basic.description} />
+			    helperText={validation.message.basic.description}
+			    inputProps={{
+			        "data-testid": "description",
+			    }}
+			    />
 				
 				<FormControl className={classes.formField}
 		        error={!!validation.message.basic.gender}
 		        required>
 					<FormLabel>{PROFILE.BASIC.GENDER}</FormLabel>
 					<RadioGroup onChange={e=>handleBasicProfileChange( { gender:e.target.value as Gender } )}>
-						<FormControlLabel value="male" label="男性" control={<Radio color="primary" />} />
-						<FormControlLabel value="female" label="女性" control={<Radio color="primary" />} />
+						<FormControlLabel value="male" label="男性" control={<Radio color="primary"
+					    inputProps={{
+					        "data-testid": "male",
+					    }}
+						/>} />
+						<FormControlLabel value="female" label="女性" control={<Radio color="primary"
+					    inputProps={{
+					        "data-testid": "female",
+					    }}
+						/>} />
 					</RadioGroup>
 				</FormControl>
 
 				<TextField fullWidth className={classes.formField} label={PROFILE.BASIC.BIRTHDAY} type="date" InputLabelProps={{shrink:true}} onChange={ e => handleBasicProfileChange( { birthday:e.target.value } ) }
 		        required
-		        error={!!validation.message.basic.birthday} />
+		        error={!!validation.message.basic.birthday}
+			    inputProps={{
+			        "data-testid": "birthday",
+			    }}
+		        />
 			</>
 		);
 	}, [validation.message.basic, basic]);
