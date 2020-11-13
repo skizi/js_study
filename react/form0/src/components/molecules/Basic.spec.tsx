@@ -1,14 +1,8 @@
 import React from 'react'
-import sinon from 'sinon';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { renderHook, act } from '@testing-library/react-hooks';
-
+import { render, fireEvent } from '@testing-library/react';
 
 import Basic from './Basic'
 import { ProfileContext } from "../../store/profile/contexts";
-
-import { useBasic } from "../../store/profile/useBasic";
-import { TextField } from '@material-ui/core'
 
 
 
