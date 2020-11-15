@@ -58,11 +58,13 @@ const Basic = () => {
 					<RadioGroup onChange={e=>handleBasicProfileChange( { gender:e.target.value as Gender } )}>
 						<FormControlLabel value="male" label="男性" control={<Radio color="primary"
 					    inputProps={{
+					    	// @ts-ignore
 					        "data-testid": "male",
 					    }}
 						/>} />
 						<FormControlLabel value="female" label="女性" control={<Radio color="primary"
 					    inputProps={{
+					    	// @ts-ignore
 					        "data-testid": "female",
 					    }}
 						/>} />
@@ -73,6 +75,7 @@ const Basic = () => {
 		        required
 		        error={!!validation.message.basic.birthday}
 			    inputProps={{
+			    	// @ts-ignore
 			        "data-testid": "birthday",
 			    }}
 		        />
