@@ -43,6 +43,9 @@ const Career:React.FC = () =>{
               onChange={ e=>{ handleChangeCareer( { company:e.target.value }, i ) } }
               error={!!validation.message.careers[i]?.company}
               helperText={validation.message.careers[i]?.company}
+              inputProps={{
+                  "data-testid": "company",
+              }}
             />
             <TextField
               className={classes.formField}
@@ -52,6 +55,9 @@ const Career:React.FC = () =>{
               onChange={ e=>{ handleChangeCareer( { position:e.target.value }, i ) } }
               error={!!validation.message.careers[i]?.position}
               helperText={validation.message.careers[i]?.position}
+              inputProps={{
+                  "data-testid": "position",
+              }}
             />
             <div className={classes.careerSpan}>
               <InputLabel shrink>{PROFILE.CAREERS.SPAN}</InputLabel>
@@ -72,6 +78,9 @@ const Career:React.FC = () =>{
                     onChange={ e=>{ handleChangeCareer( { startAt:e.target.value }, i ) } }
                     error={!!validation.message.careers[i]?.startAt}
                     helperText={validation.message.careers[i]?.startAt}
+                    inputProps={{
+                        "data-testid": "startAt",
+                    }}
                   />
                 </Grid>
                 <Grid item xs={2}>
@@ -88,6 +97,9 @@ const Career:React.FC = () =>{
                     onChange={ e=>{ handleChangeCareer( { endAt:e.target.value }, i ) } }
                     error={!!validation.message.careers[i]?.endAt}
                     helperText={validation.message.careers[i]?.endAt}
+                    inputProps={{
+                        "data-testid": "endAt",
+                    }}
                   />
                 </Grid>
               </Grid>
@@ -98,6 +110,7 @@ const Career:React.FC = () =>{
               fullWidth
               variant="outlined"
               color="secondary"
+              data-testid="delete"
             >
               職歴 {i + 1} を削除
             </Button>
@@ -110,6 +123,7 @@ const Career:React.FC = () =>{
           fullWidth
           variant="outlined"
           disabled={isAbleToAddCarrer}
+          data-testid="add"
         >
           職歴を追加
         </Button>
