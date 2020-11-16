@@ -54,6 +54,9 @@ const College:React.FC = () => {
 					fullWidth
 					label="大学名を検索"
 					onChange={e => handleChange(e.target.value)}
+			        inputProps={{
+			          "data-testid": "search",
+			        }}
 					/>
 					<Button
 					className={classes.button}
@@ -62,6 +65,7 @@ const College:React.FC = () => {
 					variant="outlined"
 					color="primary"
 		            disabled={!searchWord}
+			        data-testid="searchBtn"
 					>
 					検索
 					</Button>
@@ -73,6 +77,7 @@ const College:React.FC = () => {
 						      variant="outlined"
 						      color="primary"
 						      onClick={() => handleChangeCollege({ name: c.name })}
+						      data-testid="collegeNameBtn"
 						    >
 						      {c.name}
 						    </Button>
@@ -102,6 +107,7 @@ const College:React.FC = () => {
 			                  department: ""
 						    })
 						  }
+					      data-testid="faculty"
 						>
 						  {currentCollege.faculty.map(f => (
 						    <MenuItem key={f.name} value={f.name}>
@@ -119,6 +125,7 @@ const College:React.FC = () => {
 						    onChange={e =>
 						      handleChangeCollege({ department: e.target.value as string })
 						    }
+					        data-testid="department"
 						  >
 						    {currentFaculty.department.map(d => (
 						      <MenuItem key={d} value={d}>
@@ -139,6 +146,7 @@ const College:React.FC = () => {
 					}}
 					variant="outlined"
 					color="secondary"
+				    data-testid="resetBtn"
 					>
 					学歴の入力情報をリセット
 					</Button>
