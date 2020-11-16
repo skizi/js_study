@@ -25,10 +25,11 @@ const College:React.FC = () => {
 			c => c.name === college.name
 		)[0];
 	}, [college.result, college.name]);
-
+	
 	const currentFaculty = currentCollege?.faculty.filter(
 		f => f.name === college.faculty
 	)[0];
+
 
   	const classes = useStyles();
 

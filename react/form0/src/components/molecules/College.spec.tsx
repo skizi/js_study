@@ -1,11 +1,34 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, within, waitForElementToBeRemoved } from '@testing-library/react';
+import UserEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 
 import College from './College'
 import { ProfileContext } from "../../store/profile/contexts";
 
 
+
+
+export const selectMaterialUiSelectOption = async (element, optionText) =>
+    new Promise(resolve => {
+        // The the button that opens the dropdown, which is a sibling of the input
+        const selectButton = element.parentNode.querySelector('[role=button]');
+
+        // Open the select dropdown
+        UserEvent.click(selectButton);
+
+        // Get the dropdown element. We don't use getByRole() because it includes <select>s too.
+        const listbox = document.body.querySelector('ul[role=listbox]');
+
+        // Click the list item
+        const listItem = within(listbox).getByText(optionText);
+        UserEvent.click(listItem);
+
+        // Wait for the listbox to be removed, so it isn't visible in subsequent calls
+        waitForElementToBeRemoved(() => document.body.querySelector('ul[role=listbox]')).then(
+            resolve,
+        );
+    });
 
 describe('<College>', () => {
 
@@ -51,23 +74,22 @@ describe('<College>', () => {
 
     it('イベントハンドラが指定通り回呼ばれるか', async () => {
     	theme.college.name = "北海道大学";
+    	theme.college.faculty = "普通学部";
     	theme.college.result = [{
     		name:"北海道大学",
-    		faculty:["普通学部"],
+    		faculty:[{ name:"普通学部", department:["普通学科"] }],
     		department:["普通学科"]
     	}];
-		const { getByTestId } = render(
+		const { getByTestId, queryByText } = render(
 			<ProfileContext.Provider value={theme} >
 				<College />
 			</ProfileContext.Provider>
 		);
-		// const select = await waitForElement(() =>
-		//   getByTestId("faculty")
-		// );
+
+		//学科の選択
 		const select = getByTestId("faculty");
-		select.value = "普通学部";
-		fireEvent.change(select);
-        expect(handleChangeCollege).toHaveBeenCalledTimes( 1 );
+		await selectMaterialUiSelectOption( select, "普通学部" );
+        expect(queryByText('普通学部')).not.toBeUndefined();
     });
 		
     /*
