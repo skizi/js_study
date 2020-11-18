@@ -8,7 +8,7 @@ import { ProfileContext } from "../../store/profile/contexts";
 
 
 
-
+//https://github.com/testing-library/react-testing-library/issues/322
 export const selectMaterialUiSelectOption = async (element, optionText) =>
     new Promise(resolve => {
         // The the button that opens the dropdown, which is a sibling of the input
@@ -87,9 +87,17 @@ describe('<College>', () => {
 		);
 
 		//学科の選択
-		const select = getByTestId("faculty");
-		await selectMaterialUiSelectOption( select, "普通学部" );
+		const select0 = getByTestId("faculty");
+		await selectMaterialUiSelectOption( select0, "普通学部" );
         expect(queryByText('普通学部')).not.toBeUndefined();
+
+		const select1 = getByTestId("department");
+		await selectMaterialUiSelectOption( select1, "普通学科" );
+        expect(queryByText('普通学科')).not.toBeUndefined();
+
+        fireEvent.click(getByTestId('resetBtn'));
+        expect(handleResetCollege).toHaveBeenCalledTimes( 1 );
+
     });
 		
     /*
