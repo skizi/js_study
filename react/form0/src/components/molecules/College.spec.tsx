@@ -100,23 +100,32 @@ describe('<College>', () => {
 
     });
 		
-    /*
 
-    it('validationのアラート文が表示されるか', () => {
-	  	theme.validation.message.careers[0].company = "会社名を入力してください。";
-	  	theme.validation.message.careers[0].position = "役職を入力してください。";
-	  	theme.validation.message.careers[0].startAt = "開始月を入力してください。";
-	  	theme.validation.message.careers[0].endAt = "終了月を入力してください。";
-		const { queryByText } = render(
+    it('validationのアラート文が表示されるか', async () => {
+	  	theme.validation.message.college.faculty = "学部を選択してください。";
+	  	theme.validation.message.college.department = "学科を選択してください。";
+
+    	theme.college.name = "北海道大学";
+    	theme.college.faculty = "普通学部";
+    	theme.college.result = [{
+    		name:"北海道大学",
+    		faculty:[{ name:"普通学部", department:["普通学科"] }],
+    		department:["普通学科"]
+    	}];
+		const { getByTestId, queryByText } = render(
 			<ProfileContext.Provider value={theme} >
 				<College />
 			</ProfileContext.Provider>
 		);
-        expect(queryByText('会社名を入力してください。')).not.toBeUndefined();
-        expect(queryByText('役職を入力してください。')).not.toBeUndefined();
-        expect(queryByText('開始月を入力してください。')).not.toBeUndefined();
-        expect(queryByText('終了月を入力してください。')).not.toBeUndefined();
+        
+        expect(queryByText('学部を選択してください。')).not.toBeUndefined();
+
+		//学科の選択
+		const select0 = getByTestId("faculty");
+		await selectMaterialUiSelectOption( select0, "普通学部" );
+        expect(queryByText('普通学部')).not.toBeUndefined();
+
+        expect(queryByText('学科を選択してください。')).not.toBeUndefined();
     });
-    */
 
 });
