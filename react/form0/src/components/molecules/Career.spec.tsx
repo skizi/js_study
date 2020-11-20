@@ -1,6 +1,5 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
 
 import Career from './Career'
 import { ProfileContext } from "../../store/profile/contexts";
@@ -46,7 +45,7 @@ describe('<Career>', () => {
     });
 		
 
-    it('イベントハンドラが指定通り回呼ばれるか', () => {
+    it('イベントハンドラが指定回数通り呼ばれるか', () => {
     	theme.careers = [{
 		    company: "",
 		    position: "",

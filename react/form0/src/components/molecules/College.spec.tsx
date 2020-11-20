@@ -72,7 +72,7 @@ describe('<College>', () => {
     });
 
 
-    it('イベントハンドラが指定通り回呼ばれるか', async () => {
+    it('イベントハンドラが指定回数通り呼ばれるか', async () => {
     	theme.college.name = "北海道大学";
     	theme.college.faculty = "普通学部";
     	theme.college.result = [{
