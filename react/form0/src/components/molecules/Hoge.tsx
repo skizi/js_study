@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
 
+
+
 const Hoge:React.FC = () =>{
 
-	console.log("hoge------------");
 	type Fuga = {
 		name:string;
 		title:string;
@@ -24,10 +25,11 @@ const Hoge:React.FC = () =>{
 	
 	return(
 		<>
-			<button onClick={e=>clickHandler({ name:"よしお" })}>nameボタン</button>
-			<button onClick={e=>clickHandler({ title:"いい天気" })}>titleボタン</button>
-			<input onChange={e=>clickHandler({ title:e.target.value })} />
-			<p>{JSON.stringify(fuga)}</p>
+			<button onClick={e=>clickHandler({ name:"よしお" })} data-testid="nameBtn">nameボタン</button>
+			<button onClick={e=>clickHandler({ title:"いい天気" })} data-testid="titleBtn">titleボタン</button>
+			<input onChange={e=>clickHandler({ title:e.target.value })} data-testid="titleInput" />
+			<p data-testid="nameText">{fuga.name}</p>
+			<p data-testid="titleText">{fuga.title}</p>
 		</>
 	);
 
