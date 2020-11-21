@@ -28,7 +28,8 @@ export const selectMaterialUiSelectOption = async (element, optionText) =>
         waitForElementToBeRemoved(() => document.body.querySelector('ul[role=listbox]')).then(
             resolve,
         );
-    });
+});
+    
 
 describe('<College>', () => {
 
