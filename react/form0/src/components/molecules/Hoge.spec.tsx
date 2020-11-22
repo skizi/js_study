@@ -1,41 +1,17 @@
 import React from 'react'
-import { render, fireEvent, within, waitForElementToBeRemoved } from '@testing-library/react';
-import UserEvent from '@testing-library/user-event';
-import { act } from 'react-dom/test-utils';
-import '@testing-library/jest-dom/extend-expect';
+import { render, fireEvent } from '@testing-library/react';
+// import '@testing-library/jest-dom/extend-expect';
 
 import Hoge from './Hoge'
-import { ProfileContext } from "../../store/profile/contexts";
 
 
 
 
 describe('<Hoge>', () => {
 
-	let college = {
-	    name: "",
-	    faculty: "",
-	    department: "",
-	    result: []
-	};
-
-
-	const handleChangeCollege = jest.fn();
-	const handleSearchCollege = jest.fn();
-	const handleResetCollege = jest.fn();
-  	let theme = {
-        handleChangeCollege:handleChangeCollege,
-        handleSearchCollege:handleSearchCollege,
-        handleResetCollege:handleResetCollege,
-        college:college,
-  	}
-
-
-    it('イベントハンドラが指定通り回呼ばれるか', () => {
+    it('イベントハンドラが指定回数通り呼ばれるか', () => {
 		const { getByTestId } = render(
-			<ProfileContext.Provider value={theme} >
-				<Hoge />
-			</ProfileContext.Provider>
+			<Hoge />
 		);
 
         fireEvent.click(getByTestId('nameBtn'));
