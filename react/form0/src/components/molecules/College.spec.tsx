@@ -29,7 +29,7 @@ export const selectMaterialUiSelectOption = async (element, optionText) =>
             resolve,
         );
 });
-    
+
 
 describe('<College>', () => {
 
@@ -89,14 +89,18 @@ describe('<College>', () => {
 
 		//学科の選択
 		const select0 = getByTestId("faculty");
+		expect(select0).toBeTruthy();
 		await selectMaterialUiSelectOption( select0, "普通学部" );
         expect(queryByText('普通学部')).not.toBeUndefined();
 
 		const select1 = getByTestId("department");
+		expect(select1).toBeTruthy();
 		await selectMaterialUiSelectOption( select1, "普通学科" );
         expect(queryByText('普通学科')).not.toBeUndefined();
 
-        fireEvent.click(getByTestId('resetBtn'));
+        const resetBtn = getByTestId('resetBtn');
+		expect(resetBtn).toBeTruthy();
+        fireEvent.click(resetBtn);
         expect(handleResetCollege).toHaveBeenCalledTimes( 1 );
 
     });

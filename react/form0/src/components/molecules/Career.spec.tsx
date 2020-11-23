@@ -57,10 +57,18 @@ describe('<Career>', () => {
 				<Career />
 			</ProfileContext.Provider>
 		);
-        fireEvent.change(getByTestId('company'), { target: { value: '株式会社やまだ' } });
-        fireEvent.change(getByTestId('position'), { target: { value: '部長' } });
-        fireEvent.change(getByTestId('startAt'), { target: { value: '2020-11' } });
-        fireEvent.change(getByTestId('endAt'), { target: { value: '2020-12' } });
+		const companyInput = getByTestId('company');
+		expect(companyInput).toBeTruthy();
+        fireEvent.change(companyInput, { target: { value: '株式会社やまだ' } });
+		const positionInput = getByTestId('position');
+		expect(positionInput).toBeTruthy();
+        fireEvent.change(positionInput, { target: { value: '部長' } });
+		const startAtInput = getByTestId('startAt');
+		expect(startAtInput).toBeTruthy();
+        fireEvent.change(startAtInput, { target: { value: '2020-11' } });
+		const endAtInput = getByTestId('endAt');
+		expect(endAtInput).toBeTruthy();
+        fireEvent.change(endAtInput, { target: { value: '2020-12' } });
         expect(handleChangeCareer).toHaveBeenCalledTimes( 4 );
 
     });
