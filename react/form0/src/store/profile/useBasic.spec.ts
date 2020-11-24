@@ -31,16 +31,40 @@ const profile = {
 };
 const recalculateValidation = jest.fn();
 
+
 describe("useBasic custom Hook", () => {
 
-  it("", () => {
+  it("値の変更がされているか", () => {
 
     const { result } = renderHook(() => useBasic( profile, recalculateValidation ));
-    // expect(result.current.count).toBe(3);
-    // act(() => {
-    //   result.current.increment();
-    // });
-    // expect(result.current.count).toBe(4);
+
+    //name
+    expect(result.current.basic.name).toBe("");
+    act(() => {
+      result.current.handleBasicProfileChange({ name:"hogeo" });
+    });
+    expect(result.current.basic.name).toBe("hogeo");
+
+    //description
+    expect(result.current.basic.description).toBe("");
+    act(() => {
+      result.current.handleBasicProfileChange({ description:"初めましてhogeoです" });
+    });
+    expect(result.current.basic.description).toBe("初めましてhogeoです");
+
+    //birthday
+    expect(result.current.basic.birthday).toBe("");
+    act(() => {
+      result.current.handleBasicProfileChange({ birthday:"2020-12-24" });
+    });
+    expect(result.current.basic.birthday).toBe("2020-12-24");
+
+    //gender
+    expect(result.current.basic.gender).toBe("");
+    act(() => {
+      result.current.handleBasicProfileChange({ gender:"male" });
+    });
+    expect(result.current.basic.gender).toBe("male");
   });
 
 });
