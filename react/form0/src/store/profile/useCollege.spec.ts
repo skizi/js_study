@@ -4,7 +4,6 @@ import { cleanup } from "@testing-library/react";
 
 afterEach(() => cleanup());
 
-
 const profile = {
 	basic:{
 		name:"",
