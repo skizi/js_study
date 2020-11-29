@@ -19,7 +19,7 @@ const initialState: CurrentUserState = {
   address: ""
 };
 
-const currentUserSlice = createSlice({
+export const currentUserSlice = createSlice({
   name: 'currentUser',
   initialState,
   reducers: {

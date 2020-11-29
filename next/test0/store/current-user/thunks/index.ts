@@ -1,9 +1,8 @@
 import { createAsyncThunk, ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import {
+import ZipAddressApi, {
   CurrentUser
-} from '~/vendor/zipaddress';
+} from '../../../vendor/zipaddress';
 import { AppThunkApi } from '../..';
-import ZipAddressApi from '~/vendor/zipaddress';
 
 import { CurrentUserState } from '..';
 
