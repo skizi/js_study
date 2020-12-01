@@ -83,7 +83,7 @@ const Profile = () => {
 
 
   //--------------------保存------------------------
-  const handleSave = () => {
+  const handleSave = () => { //こいつをカスタムフック(useSaveとか)にしてテストした方が良さげ？
 
     const message = calculateValidation(profile);
 
@@ -158,12 +158,13 @@ const Profile = () => {
 
       </ProfileContext.Provider>
 
-       <Button
+      <Button
       fullWidth
       className={classes.button}
       onClick={handleSave}
       variant="outlined"
       color="primary"
+      data-testid="saveBtn"
       >
       保存
       </Button>
