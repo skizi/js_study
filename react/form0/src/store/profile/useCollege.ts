@@ -6,12 +6,7 @@ import { Profile } from "../../domain/entity/profile";
 
 export const useCollege = ( profile:Profile, recalculateValidation:(profile:Profile)=>void ) => {
 
-  const [college, setCollege] = useState<College>({
-    name: "",
-    faculty: "",
-    department: "",
-    result: []
-  });
+  const [college, setCollege] = useState<College>(profile.college);
 
   //------------------文字列から学校検索------------------
   const handleSearchCollege = ( searchWord:string ) => {

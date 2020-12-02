@@ -19,7 +19,7 @@ const College:React.FC = () => {
     const { handleChangeCollege, handleSearchCollege, handleResetCollege, validation, college } = useContext(ProfileContext);
 
 
-
+console.log(college);
 	const currentCollege = useMemo(() => {
 		return college.result.filter(
 			c => c.name === college.name

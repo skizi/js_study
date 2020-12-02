@@ -12,12 +12,7 @@ import {
 
 export const useAddress = ( profile:Profile, recalculateValidation:(profile:Profile)=>void ) => {
 
-  const [address, setAddress] = useState<Address>({
-    postalcode:"",
-    prefecture:"",
-    city:"",
-    restAddress:""
-  });
+  const [address, setAddress] = useState<Address>(profile.address);
 
 
   //------------------郵便番号から住所検索------------------

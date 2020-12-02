@@ -6,12 +6,7 @@ import { Profile } from "../../domain/entity/profile";
 
 export const useBasic = ( profile:Profile, recalculateValidation:(profile:Profile)=>void ) => {
 
-  const [ basic, setBasic ] = useState<Basic>( {
-    name:"",
-    description:"",
-    birthday:"",
-    gender:""
-  } );
+  const [ basic, setBasic ] = useState<Basic>( profile.basic );
 
   const handleBasicProfileChange = (member:Partial<Basic>) => {
     // const key:string = Object.keys(member)[0];

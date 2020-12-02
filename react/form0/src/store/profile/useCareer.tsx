@@ -7,7 +7,7 @@ import { exitEmptyCareers } from "../../domain/services/career";
 
 export const useCareer = ( profile:Profile, recalculateValidation:(profile:Profile)=>void ) => {
 
-  const [careers, setCareer] = useState<Career[]>([]);
+  const [careers, setCareer] = useState<Career[]>(profile.careers);
   const initCareer: Career = {
     company: "",
     position: "",

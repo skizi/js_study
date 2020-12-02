@@ -38,8 +38,7 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const profile:ProfileType = useSelector((state: RootState) => state.profile);
-
-
+  
   //--------------------Validation------------------------
   const [ validation, setValidation ] = useState<ValidationType>({
     isStartValidation: false,
@@ -62,6 +61,7 @@ const Profile = () => {
       careers: []
     }
   });
+
   const recalculateValidation = ( _profile:ProfileType ) => {
     
     if (!validation.isStartValidation) return;
@@ -84,7 +84,7 @@ const Profile = () => {
 
   //--------------------保存------------------------
   const handleSave = () => { //こいつをカスタムフック(useSaveとか)にしてテストした方が良さげ？
-    
+
 
     const message = calculateValidation(profile);
 
@@ -119,7 +119,6 @@ const Profile = () => {
   const handleAlertClose = () => {
     setAlert({ ...alert, open:false });
   };
-
 
 
   return (
