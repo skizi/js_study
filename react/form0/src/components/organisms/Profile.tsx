@@ -38,7 +38,7 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const profile:ProfileType = useSelector((state: RootState) => state.profile);
-  
+
   //--------------------Validation------------------------
   const [ validation, setValidation ] = useState<ValidationType>({
     isStartValidation: false,
@@ -79,7 +79,6 @@ const Profile = () => {
   useMemo(()=>{
     dispatch( profileActions.setProfile({ basic, address, careers, college }) );
   }, [basic, address, careers, college]);
-
 
 
   //--------------------保存------------------------
