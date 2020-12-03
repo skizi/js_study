@@ -36,6 +36,7 @@ describe( "Reducer of ReduxToolKit", () => {
 		    		name:"北海道大学",
 		    		faculty:[{ name:"普通学部", department:["普通学科"] }],
 		    		department:["普通学科"]
+		    		
 		    	}]
 			}
 		}
