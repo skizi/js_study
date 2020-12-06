@@ -20,7 +20,7 @@ const Index: React.FC = () => {
 		<RefTest />
 		<UseStateTest />
 		<UseFormTest />
-		<ApiTest />
+		{/*<ApiTest />*/}
 		<RestTest hoge0="hoge0" hoge1="hoge1" hoge2="hoge2" />
 	</>
   );
