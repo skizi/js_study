@@ -1,14 +1,11 @@
-import {
-  configureStore,
-  SerializedError,
-} from '@reduxjs/toolkit';
+import { configureStore, SerializedError } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import currentUserReducer from './current-user';
 
 //reducerをまとめる
 const store = configureStore({
   reducer: {
-    currentUser:currentUserReducer
+    currentUser: currentUserReducer,
   },
   devTools: true,
 });
@@ -26,6 +23,5 @@ export interface AppThunkApi {
   dispatch: AppDispatch;
   state: AppState;
   rejectValue: Error | SerializedError; //rejectWithValueで返す値の型
-  extra: {
-  };
+  extra: {};
 }

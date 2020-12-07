@@ -5,9 +5,9 @@ const Layout: React.FC = (props) => {
   return (
     <>
       <style jsx>{`
-        .main-container{
-          width:500px;
-          margin:30px auto 30px;
+        .main-container {
+          width: 500px;
+          margin: 30px auto 30px;
         }
       `}</style>
       <GlobalHeader />

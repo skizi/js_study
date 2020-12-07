@@ -2,20 +2,15 @@ import { Provider } from 'react-redux';
 import store from '~/store/index';
 import Head from 'next/head';
 import Layout from '~/components/layout';
-import {
-  Auth0Provider as Auth0ProviderImpl
-} from '@auth0/auth0-react';
+import { Auth0Provider as Auth0ProviderImpl } from '@auth0/auth0-react';
 import { useRouter } from 'next/router';
 
 import { AppProps } from 'next/app';
 
-
-
-
 const Auth0Provider: React.FC = (props) => {
   const router = useRouter();
 
-  const onRedirectCallback:() => void = () => {
+  const onRedirectCallback: () => void = () => {
     router.replace('/');
   };
 
@@ -23,9 +18,7 @@ const Auth0Provider: React.FC = (props) => {
     <Auth0ProviderImpl
       domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN}
       clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID}
-      redirectUri={
-        (typeof window !== 'undefined' && window.location.origin ) || undefined
-      }
+      redirectUri={(typeof window !== 'undefined' && window.location.origin) || undefined}
       onRedirectCallback={onRedirectCallback}
     >
       {props.children}
@@ -33,18 +26,12 @@ const Auth0Provider: React.FC = (props) => {
   );
 };
 
-
-
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-
-	return(
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
+  return (
     <>
       <Head>
         <title>test0</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <style global jsx>{`
         html {
@@ -59,16 +46,14 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
       `}</style>
 
       <Provider store={store}>
-      	<Auth0Provider>
-	        <Layout>
-	          <Component {...pageProps} />
-	        </Layout>
+        <Auth0Provider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </Auth0Provider>
       </Provider>
     </>
-	);
-
-}
-
+  );
+};
 
 export default MyApp;

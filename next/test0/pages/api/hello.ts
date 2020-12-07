@@ -1,5 +1,5 @@
 function sleep(sec) {
-  return new Promise(resolve => setTimeout(resolve, sec * 1000));
+  return new Promise((resolve) => setTimeout(resolve, sec * 1000));
 }
 
 export default async (req, res) => {
@@ -7,6 +7,6 @@ export default async (req, res) => {
   const now = new Date().toISOString();
   res.status(200).json({
     date: now,
-    message: "Hello"
+    message: 'Hello',
   });
 };

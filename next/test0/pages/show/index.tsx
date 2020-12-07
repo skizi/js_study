@@ -1,20 +1,18 @@
-import Link from "next/link";
-import fetch from "node-fetch";
+import Link from 'next/link';
+import fetch from 'node-fetch';
 
 type Props = {
-  shows : {
-    id : number,
-    name : string
-  }[]
-}
+  shows: {
+    id: number;
+    name: string;
+  }[];
+};
 
-
-
-const Index: React.FC<Props> = props => (
+const Index: React.FC<Props> = (props) => (
   <div>
     <h1>Batman TV Shows</h1>
     <ul>
-      {props.shows.map(show => (
+      {props.shows.map((show) => (
         <li key={show.id}>
           <Link href="/show/[id]" as={`/show/${show.id}`}>
             <a>{show.name}</a>
@@ -25,13 +23,11 @@ const Index: React.FC<Props> = props => (
   </div>
 );
 
-
-
 export const getStaticProps = async () => {
-  const res = await fetch("https://api.tvmaze.com/search/shows?q=batman");
-  const data:any[] = await res.json();
+  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
+  const data: any[] = await res.json();
   console.log(`Show data fetched. Count: ${data.length}`);
-  return { props : { shows: data.map(entry => entry.show) } };
+  return { props: { shows: data.map((entry) => entry.show) } };
 };
 
 export default Index;
