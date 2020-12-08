@@ -8,7 +8,7 @@ type Props = {
   }[];
 };
 
-const Index: React.FC<Props> = (props) => (
+const Index: React.FC<Props> = (props: Props) => (
   <div>
     <h1>Batman TV Shows</h1>
     <ul>

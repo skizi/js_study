@@ -1,7 +1,11 @@
 import GlobalHeader from '~/components/organisms/global-header';
 import GlobalFooter from '~/components/organisms/global-footer';
 
-const Layout: React.FC = (props) => {
+type Props = {
+  children?: React.Node;
+};
+
+const Layout: React.FC<Props> = (props: Props) => {
   return (
     <>
       <style jsx>{`

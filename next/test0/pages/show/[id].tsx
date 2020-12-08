@@ -16,7 +16,7 @@ type Props = {
   };
 };
 
-const Post: React.FC<Props> = (props) => (
+const Post: React.FC<Props> = (props: Props) => (
   <div>
     <style jsx>
       {`

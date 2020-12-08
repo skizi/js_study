@@ -7,7 +7,11 @@ import { useRouter } from 'next/router';
 
 import { AppProps } from 'next/app';
 
-const Auth0Provider: React.FC = (props) => {
+type Props = {
+  children?: React.Node;
+};
+
+const Auth0Provider: React.FC<Props> = (props: Props) => {
   const router = useRouter();
 
   const onRedirectCallback: () => void = () => {
