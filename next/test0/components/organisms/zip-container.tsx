@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../../store';
+import { useAppDispatch, AppDispatch } from '../../store';
 import { zipcodeToAddress } from '../../store/current-user';
 
 import { useSelector } from 'react-redux';
@@ -7,7 +7,7 @@ import { addressSelector } from '../../store/current-user';
 const ZipContainer: React.FC = () => {
   let code = '';
 
-  const dispatch: Function = useAppDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
   const exportCode = () => {
     dispatch(zipcodeToAddress(code));
   };

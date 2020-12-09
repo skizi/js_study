@@ -6,7 +6,7 @@ import RefTest from '~/components/organisms/ref-test';
 import UseStateTest from '~/components/organisms/use-state-test';
 import UseFormTest from '~/components/organisms/use-form-test';
 
-import ApiTest from '~/components/organisms/api-test';
+// import ApiTest from '~/components/organisms/api-test';
 import RestTest from '~/components/organisms/rest-test';
 
 const Index: React.FC = () => {

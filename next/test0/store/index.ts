@@ -23,5 +23,5 @@ export interface AppThunkApi {
   dispatch: AppDispatch;
   state: AppState;
   rejectValue: Error | SerializedError; //rejectWithValueで返す値の型
-  extra: {};
+  extra: null;
 }

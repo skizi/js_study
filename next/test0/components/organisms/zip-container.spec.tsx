@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { render, fireEvent, screen, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import { configureStore } from '@reduxjs/toolkit';
 
 import ZipContainer from './zip-container';
@@ -17,7 +17,7 @@ describe('createAsyncThunk of ReduxToolKit', () => {
   });
 
   it('createAsyncThunkのテスト', async () => {
-    const { getByTestId, waitForNextUpdate } = render(
+    const { getByTestId } = render(
       <Provider store={store}>
         <ZipContainer />
       </Provider>,

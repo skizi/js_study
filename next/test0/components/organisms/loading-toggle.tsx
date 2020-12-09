@@ -1,7 +1,7 @@
 import Btn from '../atoms/btn';
 import { toggleLoading } from '~/store/current-user';
 
-import { useAppDispatch } from '~/store';
+import { useAppDispatch, AppDispatch } from '~/store';
 import { useSelector } from 'react-redux';
 import { isLoadingSelector } from '~/store/current-user';
 
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const LoadingToggle: React.FC<Props> = (props: Props) => {
-  const dispatch: Function = useAppDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
 
   const click: () => void = (): void => {
     dispatch(toggleLoading());
