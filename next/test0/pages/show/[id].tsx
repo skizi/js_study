@@ -64,7 +64,13 @@ export const getStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-export const getStaticProps = async (context: any) => {
+type ContextProps = {
+  params: {
+    id: string;
+  };
+};
+
+export const getStaticProps = async (context: ContextProps) => {
   const id = context.params.id;
   const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
   const show: any = await res.json();

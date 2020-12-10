@@ -1,6 +1,7 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import fetch from 'node-fetch';
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.query.keyword) {
     return res.status(404).end();
   }

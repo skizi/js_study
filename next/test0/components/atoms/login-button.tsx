@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-function LoginButton(props: any) {
+function LoginButton() {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   return isAuthenticated ? (
@@ -10,7 +10,6 @@ function LoginButton(props: any) {
       onClick={() => {
         logout({ returnTo: window.location.origin });
       }}
-      {...props}
     >
       Log out
     </button>
