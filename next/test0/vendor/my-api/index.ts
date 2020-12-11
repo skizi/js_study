@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default class HelloApi {
-  public async hello() {
+  public async hello(): any {
     const response = axios
       .get('/api/hello?hoge')
       .then((response) => {

@@ -6,7 +6,7 @@ import axios from 'axios';
  * @class ZipAddressApi
  */
 export default class ZipAddressApi {
-  public async zipcodeToAddress(zipcode: string) {
+  public async zipcodeToAddress(zipcode: string): any {
     const response = await axios
       .get('https://api.zipaddress.net', { params: { zipcode: zipcode } })
       .then((response) => {

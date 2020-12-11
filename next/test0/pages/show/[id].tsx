@@ -54,7 +54,7 @@ const Post: React.FC<Props> = (props: Props) => (
   </div>
 );
 
-export const getStaticPaths = async () => {
+export const getStaticPaths = async (): any => {
   const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
   const data: any[] = await res.json();
   // レポジトリの名前をパスとする
@@ -70,7 +70,7 @@ type ContextProps = {
   };
 };
 
-export const getStaticProps = async (context: ContextProps) => {
+export const getStaticProps = async (context: ContextProps): any => {
   const id = context.params.id;
   const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
   const show: any = await res.json();

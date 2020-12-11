@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import HelloApi from '../../vendor/my-api';
 
-const ApiTest = () => {
+const ApiTest = (): React.ReactElement => {
   const [message, setMessage] = useState('Loading...');
 
   const api = new HelloApi();
