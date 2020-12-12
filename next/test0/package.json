@@ -25,6 +25,7 @@
     "next": "^9.5.3",
     "node-fetch": "^2.6.1",
     "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.8.6",
@@ -44,7 +45,8 @@
     "build": "next build",
     "export": "next export",
     "start": "next start",
-    "lint": "eslint . --ext .ts,.tsx --fix"
+    "lint": "eslint . --ext .ts,.tsx --fix",
+    "prettier:quick": "pretty-quick --staged"
   },
   "keywords": [],
   "author": "",
