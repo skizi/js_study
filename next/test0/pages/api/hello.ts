@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from "next";
 
 function sleep(sec) {
   return new Promise((resolve) => setTimeout(resolve, sec * 1000));
@@ -9,6 +9,6 @@ export default async (req: NextApiRequest, res: NextApiResponse): void => {
   const now = new Date().toISOString();
   res.status(200).json({
     date: now,
-    message: 'Hello',
+    message: "Hello",
   });
 };

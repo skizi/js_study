@@ -1,8 +1,8 @@
-import { createSlice, SerializedError } from '@reduxjs/toolkit';
-import { mountZipcodeToAddressThunk } from './thunks';
+import { createSlice, SerializedError } from "@reduxjs/toolkit";
+import { mountZipcodeToAddressThunk } from "./thunks";
 
-export * from './thunks';
-export * from './selectors';
+export * from "./thunks";
+export * from "./selectors";
 
 export interface CurrentUserState {
   isRegistered: boolean;
@@ -14,11 +14,11 @@ export interface CurrentUserState {
 const initialState: CurrentUserState = {
   isRegistered: false,
   isLoading: false,
-  address: '',
+  address: "",
 };
 
 export const currentUserSlice = createSlice({
-  name: 'currentUser',
+  name: "currentUser",
   initialState,
   reducers: {
     toggleLoading(state) {

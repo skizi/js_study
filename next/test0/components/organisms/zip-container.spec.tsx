@@ -1,12 +1,12 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import { configureStore } from '@reduxjs/toolkit';
+import React from "react";
+import { Provider } from "react-redux";
+import { render, fireEvent, waitFor } from "@testing-library/react";
+import { configureStore } from "@reduxjs/toolkit";
 
-import ZipContainer from './zip-container';
-import currentUserReducer from '../../store/current-user';
+import ZipContainer from "./zip-container";
+import currentUserReducer from "../../store/current-user";
 
-describe('createAsyncThunk of ReduxToolKit', () => {
+describe("createAsyncThunk of ReduxToolKit", () => {
   let store;
   beforeEach(() => {
     store = configureStore({
@@ -16,18 +16,18 @@ describe('createAsyncThunk of ReduxToolKit', () => {
     });
   });
 
-  it('createAsyncThunkのテスト', async () => {
+  it("createAsyncThunkのテスト", async () => {
     const { getByTestId } = render(
       <Provider store={store}>
         <ZipContainer />
-      </Provider>,
+      </Provider>
     );
 
-    fireEvent.change(getByTestId('zipCodeInput'), { target: { value: '4250041' } });
-    fireEvent.click(getByTestId('zipCodeBtn'));
+    fireEvent.change(getByTestId("zipCodeInput"), { target: { value: "4250041" } });
+    fireEvent.click(getByTestId("zipCodeBtn"));
 
     await waitFor(() => {
-      expect(getByTestId('address').textContent).toBe('静岡県焼津市石津');
+      expect(getByTestId("address").textContent).toBe("静岡県焼津市石津");
     });
   });
 });

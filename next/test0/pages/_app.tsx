@@ -1,11 +1,11 @@
-import { Provider } from 'react-redux';
-import store from '~/store/index';
-import Head from 'next/head';
-import Layout from '~/components/layout';
-import { Auth0Provider as Auth0ProviderImpl } from '@auth0/auth0-react';
-import { useRouter } from 'next/router';
+import { Provider } from "react-redux";
+import store from "~/store/index";
+import Head from "next/head";
+import Layout from "~/components/layout";
+import { Auth0Provider as Auth0ProviderImpl } from "@auth0/auth0-react";
+import { useRouter } from "next/router";
 
-import { AppProps } from 'next/app';
+import { AppProps } from "next/app";
 
 type Props = {
   children?: React.Node;
@@ -15,14 +15,14 @@ const Auth0Provider: React.FC<Props> = (props: Props) => {
   const router = useRouter();
 
   const onRedirectCallback: () => void = () => {
-    router.replace('/');
+    router.replace("/");
   };
 
   return (
     <Auth0ProviderImpl
       domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN}
       clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID}
-      redirectUri={(typeof window !== 'undefined' && window.location.origin) || undefined}
+      redirectUri={(typeof window !== "undefined" && window.location.origin) || undefined}
       onRedirectCallback={onRedirectCallback}
     >
       {props.children}

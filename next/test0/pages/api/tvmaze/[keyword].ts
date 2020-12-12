@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import fetch from 'node-fetch';
+import { NextApiRequest, NextApiResponse } from "next";
+import fetch from "node-fetch";
 
 export default async (req: NextApiRequest, res: NextApiResponse): void => {
   if (!req.query.keyword) {
@@ -11,9 +11,9 @@ export default async (req: NextApiRequest, res: NextApiResponse): void => {
     .catch((error) => error);
 
   if (!content) {
-    return res.status(400).json({ status: 'error', message: 'Invalid keyword' });
+    return res.status(400).json({ status: "error", message: "Invalid keyword" });
   }
 
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader("Content-Type", "application/json");
   return res.status(200).json(content);
 };

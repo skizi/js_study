@@ -1,9 +1,9 @@
-import Btn from '../atoms/btn';
-import { toggleLoading } from '~/store/current-user';
+import Btn from "../atoms/btn";
+import { toggleLoading } from "~/store/current-user";
 
-import { useAppDispatch, AppDispatch } from '~/store';
-import { useSelector } from 'react-redux';
-import { isLoadingSelector } from '~/store/current-user';
+import { useAppDispatch, AppDispatch } from "~/store";
+import { useSelector } from "react-redux";
+import { isLoadingSelector } from "~/store/current-user";
 
 type Props = {
   title: string;
@@ -47,7 +47,7 @@ const LoadingToggle: React.FC<Props> = (props: Props) => {
         <Btn optionClassName="toggle-btn" btnClick={click}>
           ローディングをトグル
         </Btn>
-        <p className="loading-status">{isLoading + ''}</p>
+        <p className="loading-status">{isLoading + ""}</p>
       </div>
     </>
   );

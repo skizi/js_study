@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import fetch from 'isomorphic-unfetch'; //SSRでも動作するfetch
-import styled from 'styled-components';
+import Link from "next/link";
+import fetch from "isomorphic-unfetch"; //SSRでも動作するfetch
+import styled from "styled-components";
 
 const RedLink = styled.a`
   color: red;
@@ -35,7 +35,7 @@ const Post: React.FC<Props> = (props: Props) => (
       `}
     </style>
     <h1>{props.show.name}</h1>
-    <p>{props.show.summary.replace(/<[/]?[pb]>/g, '')}</p>
+    <p>{props.show.summary.replace(/<[/]?[pb]>/g, "")}</p>
     {props.show.image ? <img src={props.show.image.medium} /> : null}
     <Link href="/show">
       <a className="return-btn">一覧に戻る</a>
@@ -55,11 +55,11 @@ const Post: React.FC<Props> = (props: Props) => (
 );
 
 export const getStaticPaths = async (): any => {
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
+  const res = await fetch("https://api.tvmaze.com/search/shows?q=batman");
   const data: any[] = await res.json();
   // レポジトリの名前をパスとする
   // const paths = data.map(entry => `/shows/${entry.show.id}`)
-  const paths = data.map((entry) => ({ params: { id: entry.show.id + '' } }));
+  const paths = data.map((entry) => ({ params: { id: entry.show.id + "" } }));
   // 事前ビルドしたいパスをpathsとして渡す fallbackについては後述
   return { paths, fallback: false };
 };

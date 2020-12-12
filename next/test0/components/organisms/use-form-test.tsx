@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 
 export interface FormObject {
   title: string;
@@ -61,19 +61,19 @@ const UseFormTest: React.FC = () => {
           type="text"
           placeholder="title"
           name="title"
-          ref={register({ required: 'タイトル必須だよ', maxLength: 20 })}
+          ref={register({ required: "タイトル必須だよ", maxLength: 20 })}
           className="title"
         />
-        {GetValidationMessage(errors, 'title')}
+        {GetValidationMessage(errors, "title")}
 
         <input
           type="text"
           placeholder="body"
           name="body"
-          ref={register({ required: '本文も必須だよ' })}
+          ref={register({ required: "本文も必須だよ" })}
           className="body"
         />
-        {GetValidationMessage(errors, 'body')}
+        {GetValidationMessage(errors, "body")}
 
         <input type="submit" />
       </form>

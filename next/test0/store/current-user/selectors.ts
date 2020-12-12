@@ -1,4 +1,4 @@
-import { AppState } from '..';
+import { AppState } from "..";
 
 export const isLoadingSelector = (state: AppState): boolean => state.currentUser.isLoading;
 

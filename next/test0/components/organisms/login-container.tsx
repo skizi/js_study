@@ -1,4 +1,4 @@
-import LoginButton from '../atoms/login-button';
+import LoginButton from "../atoms/login-button";
 
 type Props = {
   title: string;

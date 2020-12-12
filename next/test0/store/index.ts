@@ -1,6 +1,6 @@
-import { configureStore, SerializedError } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
-import currentUserReducer from './current-user';
+import { configureStore, SerializedError } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import currentUserReducer from "./current-user";
 
 //reducerをまとめる
 const store = configureStore({

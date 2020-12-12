@@ -1,5 +1,5 @@
-import GlobalHeader from '~/components/organisms/global-header';
-import GlobalFooter from '~/components/organisms/global-footer';
+import GlobalHeader from "~/components/organisms/global-header";
+import GlobalFooter from "~/components/organisms/global-footer";
 
 type Props = {
   children?: React.Node;

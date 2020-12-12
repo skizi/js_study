@@ -1,14 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default class HelloApi {
   public async hello(): any {
     const response = axios
-      .get('/api/hello?hoge')
+      .get("/api/hello?hoge")
       .then((response) => {
-        return { status: 'success', data: response };
+        return { status: "success", data: response };
       })
       .catch((error) => {
-        return { status: 'error', data: error };
+        return { status: "error", data: error };
       });
 
     return response;

@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import fetch from 'node-fetch';
+import Link from "next/link";
+import fetch from "node-fetch";
 
 type Props = {
   shows: {
@@ -24,7 +24,7 @@ const Index: React.FC<Props> = (props: Props): void => (
 );
 
 export const getStaticProps = async () => {
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
+  const res = await fetch("https://api.tvmaze.com/search/shows?q=batman");
   const data: any[] = await res.json();
   console.log(`Show data fetched. Count: ${data.length}`);
   return { props: { shows: data.map((entry) => entry.show) } };

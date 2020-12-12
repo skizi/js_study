@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 /**
  * ZipAddressApi - object-oriented interface
@@ -8,12 +8,12 @@ import axios from 'axios';
 export default class ZipAddressApi {
   public async zipcodeToAddress(zipcode: string): any {
     const response = await axios
-      .get('https://api.zipaddress.net', { params: { zipcode: zipcode } })
+      .get("https://api.zipaddress.net", { params: { zipcode: zipcode } })
       .then((response) => {
-        return { status: 'success', data: response };
+        return { status: "success", data: response };
       })
       .catch((error) => {
-        return { status: 'error', data: error };
+        return { status: "error", data: error };
       });
 
     return response;

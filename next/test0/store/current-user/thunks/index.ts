@@ -1,11 +1,11 @@
-import { createAsyncThunk, ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import ZipAddressApi, { CurrentUser } from '../../../vendor/zipaddress';
-import { AppThunkApi } from '../..';
+import { createAsyncThunk, ActionReducerMapBuilder } from "@reduxjs/toolkit";
+import ZipAddressApi, { CurrentUser } from "../../../vendor/zipaddress";
+import { AppThunkApi } from "../..";
 
-import { CurrentUserState } from '..';
+import { CurrentUserState } from "..";
 
 export const zipcodeToAddress = createAsyncThunk<CurrentUser, string, AppThunkApi>(
-  'currentUser/address',
+  "currentUser/address",
   async (code, thunkApi) => {
     //string, AppThunkApi
 
@@ -14,7 +14,7 @@ export const zipcodeToAddress = createAsyncThunk<CurrentUser, string, AppThunkAp
     try {
       const response = await api.zipcodeToAddress(code);
 
-      if (response.data.data.code == '400') {
+      if (response.data.data.code == "400") {
         return thunkApi.rejectWithValue(response.data.data); //rejectWithValueの引数は、AppThunkApiのrejectValueで型を指定する
       } else {
         return { address: response.data.data.data.address }; //型はCurrentUser
@@ -27,12 +27,10 @@ export const zipcodeToAddress = createAsyncThunk<CurrentUser, string, AppThunkAp
 
       return thunkApi.rejectWithValue(error.response.data);
     }
-  },
+  }
 );
 
-export const mountZipcodeToAddressThunk = (
-  builder: ActionReducerMapBuilder<CurrentUserState>,
-): void => {
+export const mountZipcodeToAddressThunk = (builder: ActionReducerMapBuilder<CurrentUserState>): void => {
   builder.addCase(zipcodeToAddress.pending, (state) => {
     state.isLoading = true;
   });
