@@ -8,7 +8,10 @@ describe("createAsyncThunk of ReduxToolKit", () => {
         address: "",
         error: "",
       };
-      const action = { type: zipcodeToAddress.fulfilled.type, payload: { address: "北海道" } };
+      const action = {
+        type: zipcodeToAddress.fulfilled.type,
+        payload: { address: "北海道" },
+      };
       const state = currentUserSlice.reducer(initialState, action);
       expect(state.address).toEqual("北海道");
     });
@@ -18,7 +21,10 @@ describe("createAsyncThunk of ReduxToolKit", () => {
         address: "",
         error: "",
       };
-      const action = { type: zipcodeToAddress.rejected.type, payload: "エラー！" };
+      const action = {
+        type: zipcodeToAddress.rejected.type,
+        payload: "エラー！",
+      };
       const state = currentUserSlice.reducer(initialState, action);
       expect(state.error).toEqual("エラー！");
     });

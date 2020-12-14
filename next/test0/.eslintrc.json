@@ -14,7 +14,7 @@
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error" //plugin名/ルール名。errorはESLint で起きた Prettier のエラーをエラーとして扱いたいという設定
   },
   "globals": {
     "React": "writable"

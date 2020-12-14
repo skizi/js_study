@@ -4,33 +4,36 @@ import { AppThunkApi } from "../..";
 
 import { CurrentUserState } from "..";
 
-export const zipcodeToAddress = createAsyncThunk<CurrentUser, string, AppThunkApi>(
-  "currentUser/address",
-  async (code, thunkApi) => {
-    //string, AppThunkApi
+export const zipcodeToAddress = createAsyncThunk<
+  CurrentUser,
+  string,
+  AppThunkApi
+>("currentUser/address", async (code, thunkApi) => {
+  //string, AppThunkApi
 
-    const api = new ZipAddressApi();
+  const api = new ZipAddressApi();
 
-    try {
-      const response = await api.zipcodeToAddress(code);
+  try {
+    const response = await api.zipcodeToAddress(code);
 
-      if (response.data.data.code == "400") {
-        return thunkApi.rejectWithValue(response.data.data); //rejectWithValueの引数は、AppThunkApiのrejectValueで型を指定する
-      } else {
-        return { address: response.data.data.data.address }; //型はCurrentUser
-      }
-    } catch (error) {
-      if (!error.response) {
-        //通信エラーの時はresponseが帰ってこない。その時はerrorを送出
-        throw error;
-      }
-
-      return thunkApi.rejectWithValue(error.response.data);
+    if (response.data.data.code == "400") {
+      return thunkApi.rejectWithValue(response.data.data); //rejectWithValueの引数は、AppThunkApiのrejectValueで型を指定する
+    } else {
+      return { address: response.data.data.data.address }; //型はCurrentUser
     }
-  }
-);
+  } catch (error) {
+    if (!error.response) {
+      //通信エラーの時はresponseが帰ってこない。その時はerrorを送出
+      throw error;
+    }
 
-export const mountZipcodeToAddressThunk = (builder: ActionReducerMapBuilder<CurrentUserState>): void => {
+    return thunkApi.rejectWithValue(error.response.data);
+  }
+});
+
+export const mountZipcodeToAddressThunk = (
+  builder: ActionReducerMapBuilder<CurrentUserState>
+): void => {
   builder.addCase(zipcodeToAddress.pending, (state) => {
     state.isLoading = true;
   });

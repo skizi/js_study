@@ -22,7 +22,9 @@ const Auth0Provider: React.FC<Props> = (props: Props) => {
     <Auth0ProviderImpl
       domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN}
       clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID}
-      redirectUri={(typeof window !== "undefined" && window.location.origin) || undefined}
+      redirectUri={
+        (typeof window !== "undefined" && window.location.origin) || undefined
+      }
       onRedirectCallback={onRedirectCallback}
     >
       {props.children}
@@ -35,7 +37,10 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
     <>
       <Head>
         <title>test0</title>
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
+        />
       </Head>
       <style global jsx>{`
         html {

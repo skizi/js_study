@@ -6,12 +6,16 @@ export default async (req: NextApiRequest, res: NextApiResponse): void => {
     return res.status(404).end();
   }
 
-  const content = await fetch(`https://api.tvmaze.com/search/shows?q=${req.query.keyword}`)
+  const content = await fetch(
+    `https://api.tvmaze.com/search/shows?q=${req.query.keyword}`
+  )
     .then((res) => res.json())
     .catch((error) => error);
 
   if (!content) {
-    return res.status(400).json({ status: "error", message: "Invalid keyword" });
+    return res
+      .status(400)
+      .json({ status: "error", message: "Invalid keyword" });
   }
 
   res.setHeader("Content-Type", "application/json");

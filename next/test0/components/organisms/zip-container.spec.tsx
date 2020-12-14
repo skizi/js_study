@@ -23,7 +23,9 @@ describe("createAsyncThunk of ReduxToolKit", () => {
       </Provider>
     );
 
-    fireEvent.change(getByTestId("zipCodeInput"), { target: { value: "4250041" } });
+    fireEvent.change(getByTestId("zipCodeInput"), {
+      target: { value: "4250041" },
+    });
     fireEvent.click(getByTestId("zipCodeBtn"));
 
     await waitFor(() => {
