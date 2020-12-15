@@ -17,6 +17,6 @@
     "prettier/prettier": "error" //plugin名/ルール名。errorはESLint で起きた Prettier のエラーをエラーとして扱いたいという設定
   },
   "globals": {
-    "React": "writable" //グローバル変数Reactの読み取りと上書きを可能にする
+    "React": "writable" //グローバル変数Reactの読み取りと上書きを可能にし、lintで読み取った時にグローバル変数のReactのところでエラーが出ないようにする
   }
 }
