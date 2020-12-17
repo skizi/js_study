@@ -22,7 +22,11 @@
     "redux-thunk": "^2.3.0",
     "typescript": "^3.7.5",
     "typescript-fsa": "^3.0.0",
-    "typescript-fsa-reducers": "^1.2.2"
+    "typescript-fsa-reducers": "^1.2.2",
+    "eslint": "^7.15.0",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-prettier": "^3.2.0",
+    "eslint-plugin-react": "^7.21.5",
   },
   "scripts": {
     "start": "react-scripts start",
