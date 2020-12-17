@@ -1,0 +1,22 @@
+{
+  "parser": "@typescript-eslint/parser", //typescript用のパーサーを使う
+  "extends": [//Extends はルールの ON/OFF 設定などルール自体に対する設定をするのが役割
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier/react",
+    "prettier/@typescript-eslint"
+  ],
+  "plugins": [//pluginsはrules, environments, processors の実装や設定をセットで提供する
+    "@typescript-eslint",
+    "react",
+    "prettier"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off", //ファイルに「import React」がない場合のエラーを抑制します
+    "prettier/prettier": "error" //plugin名/ルール名。errorはESLint で起きた Prettier のエラーをエラーとして扱いたいという設定
+  },
+  "globals": {
+    "React": "writable" //グローバル変数Reactの読み取りと上書きを可能にし、lintで読み取った時にグローバル変数のReactのところでエラーが出ないようにする
+  }
+}

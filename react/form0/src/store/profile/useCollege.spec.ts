@@ -5,50 +5,49 @@ import { cleanup } from "@testing-library/react";
 afterEach(() => cleanup());
 
 const profile = {
-	basic:{
-		name:"",
-		description:"",
-		birthday:"",
-		gender:"",
-	},
+  basic: {
+    name: "",
+    description: "",
+    birthday: "",
+    gender: "",
+  },
 
-	address:{
-		postalcode:"",
-		prefecture:"",
-		city:"",
-		restAddress:""
-	},
+  address: {
+    postalcode: "",
+    prefecture: "",
+    city: "",
+    restAddress: "",
+  },
 
-	careers:[],
+  careers: [],
 
-	college:{
-	  name: "",
-	  faculty: "",
-	  department: "",
-	  result:[]
-	}
+  college: {
+    name: "",
+    faculty: "",
+    department: "",
+    result: [],
+  },
 };
 const recalculateValidation = jest.fn();
 
-
 describe("useCollege custom Hook", () => {
-
   it("値の変更がされているか", async () => {
-
-    const { result, waitForNextUpdate } = renderHook(() => useCollege( profile, recalculateValidation ));
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useCollege(profile, recalculateValidation)
+    );
 
     const initCollege = {
       name: "",
       faculty: "",
       department: "",
-      result: []
+      result: [],
     };
     expect(result.current.college).toEqual(initCollege);
 
     //handleSearchCollege
     expect(result.current.college.result).toEqual([]);
     act(() => {
-      result.current.handleSearchCollege( "稚内" );
+      result.current.handleSearchCollege("稚内");
     });
     await waitForNextUpdate();
     expect(result.current.college.result.length).not.toBe(0);
@@ -56,7 +55,7 @@ describe("useCollege custom Hook", () => {
     //handleChangeCollege
     expect(result.current.college.name).toEqual("");
     act(() => {
-      result.current.handleChangeCollege({ name:"稚内北星学園" });
+      result.current.handleChangeCollege({ name: "稚内北星学園" });
     });
     expect(result.current.college.name).toBe("稚内北星学園");
 
@@ -66,7 +65,5 @@ describe("useCollege custom Hook", () => {
       result.current.handleResetCollege();
     });
     expect(result.current.college.name).toBe("");
-
   });
-
 });

@@ -1,5 +1,11 @@
 import React, { Fragment, useContext, useMemo } from "react";
-import {TextField, Typography, InputLabel, Grid, Button} from "@material-ui/core";
+import {
+  TextField,
+  Typography,
+  InputLabel,
+  Grid,
+  Button,
+} from "@material-ui/core";
 import useStyles from "../styles";
 import { PROFILE } from "../../domain/services/profile";
 
@@ -7,25 +13,27 @@ import { exitEmptyCareers } from "../../domain/services/career";
 
 import { ProfileContext } from "../../store/profile/contexts";
 
+const Career: React.FC = () => {
+  const classes = useStyles();
 
-
-const Career:React.FC = () =>{
-	
-	const classes = useStyles();
-
-  const { handleChangeCareer, handleAddCareer, handleDeleteCareer, validation, careers } = useContext(ProfileContext);
+  const {
+    handleChangeCareer,
+    handleAddCareer,
+    handleDeleteCareer,
+    validation,
+    careers,
+  } = useContext(ProfileContext);
 
   const isAbleToAddCarrer = exitEmptyCareers(careers);
 
-
   return useMemo(() => {
-  	return(
-  		<>
+    return (
+      <>
         <Typography
-        variant="h4"
-        component="h2"
-        className={classes.title}
-        color="primary"
+          variant="h4"
+          component="h2"
+          className={classes.title}
+          color="primary"
         >
           職歴
         </Typography>
@@ -40,11 +48,13 @@ const Career:React.FC = () =>{
               fullWidth
               label={PROFILE.CAREERS.COMPANY}
               value={c.company}
-              onChange={ e=>{ handleChangeCareer( { company:e.target.value }, i ) } }
+              onChange={(e) => {
+                handleChangeCareer({ company: e.target.value }, i);
+              }}
               error={!!validation.message.careers[i]?.company}
               helperText={validation.message.careers[i]?.company}
               inputProps={{
-                  "data-testid": "company",
+                "data-testid": "company",
               }}
             />
             <TextField
@@ -52,11 +62,13 @@ const Career:React.FC = () =>{
               fullWidth
               label={PROFILE.CAREERS.POSITION}
               value={c.position}
-              onChange={ e=>{ handleChangeCareer( { position:e.target.value }, i ) } }
+              onChange={(e) => {
+                handleChangeCareer({ position: e.target.value }, i);
+              }}
               error={!!validation.message.careers[i]?.position}
               helperText={validation.message.careers[i]?.position}
               inputProps={{
-                  "data-testid": "position",
+                "data-testid": "position",
               }}
             />
             <div className={classes.careerSpan}>
@@ -72,14 +84,16 @@ const Career:React.FC = () =>{
                     fullWidth
                     type="month"
                     InputLabelProps={{
-                      shrink: true
+                      shrink: true,
                     }}
                     value={c.startAt}
-                    onChange={ e=>{ handleChangeCareer( { startAt:e.target.value }, i ) } }
+                    onChange={(e) => {
+                      handleChangeCareer({ startAt: e.target.value }, i);
+                    }}
                     error={!!validation.message.careers[i]?.startAt}
                     helperText={validation.message.careers[i]?.startAt}
                     inputProps={{
-                        "data-testid": "startAt",
+                      "data-testid": "startAt",
                     }}
                   />
                 </Grid>
@@ -91,14 +105,16 @@ const Career:React.FC = () =>{
                     fullWidth
                     type="month"
                     InputLabelProps={{
-                      shrink: true
+                      shrink: true,
                     }}
                     value={c.endAt}
-                    onChange={ e=>{ handleChangeCareer( { endAt:e.target.value }, i ) } }
+                    onChange={(e) => {
+                      handleChangeCareer({ endAt: e.target.value }, i);
+                    }}
                     error={!!validation.message.careers[i]?.endAt}
                     helperText={validation.message.careers[i]?.endAt}
                     inputProps={{
-                        "data-testid": "endAt",
+                      "data-testid": "endAt",
                     }}
                   />
                 </Grid>
@@ -106,7 +122,9 @@ const Career:React.FC = () =>{
             </div>
             <Button
               className={classes.button}
-              onClick={ () => { handleDeleteCareer(i) } }
+              onClick={() => {
+                handleDeleteCareer(i);
+              }}
               fullWidth
               variant="outlined"
               color="secondary"
@@ -127,12 +145,9 @@ const Career:React.FC = () =>{
         >
           職歴を追加
         </Button>
-  		</>
-  	);
+      </>
+    );
   }, [validation.message.careers, careers]);
-	
-
-}
-
+};
 
 export default React.memo(Career);

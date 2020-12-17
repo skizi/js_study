@@ -28,22 +28,18 @@ import { Alert as AlertType } from "../../domain/entity/alert";
 
 import { Validation as ValidationType } from "../../domain/entity/validation";
 
-
-
-
-
 const Profile = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
 
-  const profile:ProfileType = useSelector((state: RootState) => state.profile);
+  const profile: ProfileType = useSelector((state: RootState) => state.profile);
 
   //--------------------Validation------------------------
-  const [ validation, setValidation ] = useState<ValidationType>({
+  const [validation, setValidation] = useState<ValidationType>({
     isStartValidation: false,
     message: {
-      basic:{
+      basic: {
         name: "",
         description: "",
         birthday: "",
@@ -53,37 +49,50 @@ const Profile = () => {
         postalcode: "",
         prefecture: "",
         city: "",
-        restAddress: ""
+        restAddress: "",
       },
       college: {
-        faculty: ""
+        faculty: "",
       },
-      careers: []
-    }
+      careers: [],
+    },
   });
 
-  const recalculateValidation = ( _profile:ProfileType ) => {
-    
+  const recalculateValidation = (_profile: ProfileType) => {
     if (!validation.isStartValidation) return;
 
     const message = calculateValidation(_profile);
     setValidation({ ...validation, message });
-
   };
 
   //--------------------Basic, Address, Careers, College, Custom Hooks------------------------
-  const { basic, handleBasicProfileChange } = useBasic( profile, recalculateValidation );
-  const { address, handleAddressChange, handlePostalcodeChange } = useAddress( profile, recalculateValidation );
-  const { careers, handleChangeCareer, handleAddCareer, handleDeleteCareer } = useCareer( profile, recalculateValidation );
-  const { college, handleSearchCollege, handleChangeCollege, handleResetCollege } = useCollege( profile, recalculateValidation );
-  useMemo(()=>{
-    dispatch( profileActions.setProfile({ basic, address, careers, college }) );
+  const { basic, handleBasicProfileChange } = useBasic(
+    profile,
+    recalculateValidation
+  );
+  const { address, handleAddressChange, handlePostalcodeChange } = useAddress(
+    profile,
+    recalculateValidation
+  );
+  const {
+    careers,
+    handleChangeCareer,
+    handleAddCareer,
+    handleDeleteCareer,
+  } = useCareer(profile, recalculateValidation);
+  const {
+    college,
+    handleSearchCollege,
+    handleChangeCollege,
+    handleResetCollege,
+  } = useCollege(profile, recalculateValidation);
+  useMemo(() => {
+    dispatch(profileActions.setProfile({ basic, address, careers, college }));
   }, [basic, address, careers, college]);
 
-
   //--------------------保存------------------------
-  const handleSave = () => { //こいつをカスタムフック(useSaveとか)にしてテストした方が良さげ？
-
+  const handleSave = () => {
+    //こいつをカスタムフック(useSaveとか)にしてテストした方が良さげ？
 
     const message = calculateValidation(profile);
 
@@ -91,62 +100,60 @@ const Profile = () => {
       setAlert({
         severity: "success",
         message: "保存に成功しました！",
-        open:true
+        open: true,
       });
-      dispatch( profileActions.setProfile(profile) );
+      dispatch(profileActions.setProfile(profile));
       return;
     }
 
-    setValidation({ isStartValidation:true, message });
+    setValidation({ isStartValidation: true, message });
 
     setAlert({
       severity: "error",
       message: "入力に誤りがあります。",
-      open:true
+      open: true,
     });
-
   };
-
 
   //--------------------Alert------------------------
   const [alert, setAlert] = useState<AlertType>({
     severity: "error",
     message: "",
-    open: false
+    open: false,
   });
 
   const handleAlertClose = () => {
-    setAlert({ ...alert, open:false });
+    setAlert({ ...alert, open: false });
   };
-
 
   return (
     <Container maxWidth="sm">
-      <ProfileContext.Provider value={{
-        handleBasicProfileChange,
-        basic,
+      <ProfileContext.Provider
+        value={{
+          handleBasicProfileChange,
+          basic,
 
-        prefecture:address.prefecture,
-        city:address.city,
-        handleAddressChange,
-        handlePostalcodeChange,
+          prefecture: address.prefecture,
+          city: address.city,
+          handleAddressChange,
+          handlePostalcodeChange,
 
-        handleChangeCareer,
-        handleAddCareer,
-        handleDeleteCareer,
-        careers,
+          handleChangeCareer,
+          handleAddCareer,
+          handleDeleteCareer,
+          careers,
 
-        handleChangeCollege,
-        handleSearchCollege,
-        handleResetCollege,
-        college,
+          handleChangeCollege,
+          handleSearchCollege,
+          handleResetCollege,
+          college,
 
-        validation,
+          validation,
 
-        handleAlertClose,
-        alert
-      }}>
-
+          handleAlertClose,
+          alert,
+        }}
+      >
         <Container maxWidth="sm">
           <Basic />
           <Address />
@@ -154,18 +161,17 @@ const Profile = () => {
           <College />
         </Container>
         <Alert />
-
       </ProfileContext.Provider>
 
       <Button
-      fullWidth
-      className={classes.button}
-      onClick={handleSave}
-      variant="outlined"
-      color="primary"
-      data-testid="saveBtn"
+        fullWidth
+        className={classes.button}
+        onClick={handleSave}
+        variant="outlined"
+        color="primary"
+        data-testid="saveBtn"
       >
-      保存
+        保存
       </Button>
     </Container>
   );

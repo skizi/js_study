@@ -7,7 +7,7 @@ export type College = {
 
   // 学科
   department: string;
-  
+
   result: CollegeResult[];
 };
 

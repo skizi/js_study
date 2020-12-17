@@ -4,39 +4,37 @@ import { cleanup } from "@testing-library/react";
 
 afterEach(() => cleanup());
 
-
 const profile = {
-	basic:{
-		name:"",
-		description:"",
-		birthday:"",
-		gender:"",
-	},
+  basic: {
+    name: "",
+    description: "",
+    birthday: "",
+    gender: "",
+  },
 
-	address:{
-		postalcode:"",
-		prefecture:"",
-		city:"",
-		restAddress:""
-	},
+  address: {
+    postalcode: "",
+    prefecture: "",
+    city: "",
+    restAddress: "",
+  },
 
-	careers:[],
+  careers: [],
 
-	college:{
-	  name: "",
-	  faculty: "",
-	  department: "",
-	  result:[]
-	}
+  college: {
+    name: "",
+    faculty: "",
+    department: "",
+    result: [],
+  },
 };
 const recalculateValidation = jest.fn();
 
-
 describe("useCareer custom Hook", () => {
-
   it("値の変更がされているか", async () => {
-
-    const { result } = renderHook(() => useCareer( profile, recalculateValidation ));
+    const { result } = renderHook(() =>
+      useCareer(profile, recalculateValidation)
+    );
 
     //handleAddCareer
     expect(result.current.careers).toEqual([]);
@@ -47,14 +45,14 @@ describe("useCareer custom Hook", () => {
       company: "",
       position: "",
       startAt: "",
-      endAt: ""
+      endAt: "",
     };
     expect(result.current.careers).toEqual([initCareer]);
 
     //handleChangeCareer
     expect(result.current.careers[0].company).toBe("");
     act(() => {
-      result.current.handleChangeCareer({ company:"会社A" }, 0);
+      result.current.handleChangeCareer({ company: "会社A" }, 0);
     });
     expect(result.current.careers[0].company).toBe("会社A");
 
@@ -63,7 +61,5 @@ describe("useCareer custom Hook", () => {
       result.current.handleDeleteCareer(0);
     });
     expect(result.current.careers).toEqual([]);
-
   });
-
 });

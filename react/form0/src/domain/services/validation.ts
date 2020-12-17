@@ -25,15 +25,15 @@ export const calculateValidation = (profile: Profile) => {
       restAddress: emptyValidation(
         profile.address.restAddress,
         PROFILE.ADDRESS.RESTADDRESS
-      )
+      ),
     },
     // collegeおよびcareersに関しては次のパート以降で実装
     college: {
-      faculty: facultyValidation(profile.college)
+      faculty: facultyValidation(profile.college),
     },
-    careers: careerValidation(profile.careers)
+    careers: careerValidation(profile.careers),
   };
-console.log(message);
+  console.log(message);
   return message;
 };
 
@@ -45,13 +45,12 @@ const emptyValidation = (target: string, col: string) =>
 const lengthValidation = (target: string, maxLen: number) =>
   isTooLong(target, maxLen) ? `${maxLen}文字以下で入力してください。` : "";
 
-
 const careerValidation = (careers: Career[]) =>
-  careers.map(c => ({
+  careers.map((c) => ({
     company: emptyValidation(c.company, PROFILE.CAREERS.COMPANY),
     position: emptyValidation(c.position, PROFILE.CAREERS.POSITION),
     startAt: emptyValidation(c.startAt, PROFILE.CAREERS.START_AT),
-    endAt: emptyValidation(c.endAt, PROFILE.CAREERS.END_AT)
+    endAt: emptyValidation(c.endAt, PROFILE.CAREERS.END_AT),
   }));
 
 const facultyValidation = (college: College) =>
@@ -63,16 +62,12 @@ const isEmpty = (str: string) => !str.trim();
 
 const isTooLong = (str: string, maxLen: number) => str.trim().length >= maxLen;
 
-
-
-
-
 export const isValid = (message: ValidationMessage) => {
   const falttenValues = Object.values(message)
     .map(extractValues)
     .flat(Infinity) as string[]; //yoshida edit
-console.log(falttenValues);
-  return falttenValues.every(fv => !fv);
+  console.log(falttenValues);
+  return falttenValues.every((fv) => !fv);
 };
 
 // 再帰的にObjectを配列に

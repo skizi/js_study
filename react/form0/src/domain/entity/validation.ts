@@ -1,5 +1,5 @@
 export type ValidationMessage = {
-  basic:{
+  basic: {
     name: string;
     description: string;
     birthday: string;

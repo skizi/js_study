@@ -10,4 +10,4 @@ export type Career = {
 
   // 終了月
   endAt: string;
-}
+};

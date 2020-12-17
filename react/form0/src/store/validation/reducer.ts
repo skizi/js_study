@@ -5,7 +5,7 @@ import validationActions from "./actions";
 const init: Validation = {
   isStartValidation: false,
   message: {
-    basic:{
+    basic: {
       name: "",
       description: "",
       birthday: "",
@@ -15,23 +15,23 @@ const init: Validation = {
       postalcode: "",
       prefecture: "",
       city: "",
-      restAddress: ""
+      restAddress: "",
     },
     college: {
-      faculty: ""
+      faculty: "",
     },
-    careers: []
-  }
+    careers: [],
+  },
 };
 
 const validationReducer = reducerWithInitialState(init)
   .case(validationActions.setIsStartvalidation, (state, payload) => ({
     ...state,
-    isStartValidation: payload
+    isStartValidation: payload,
   }))
   .case(validationActions.setValidation, (state, payload) => ({
     ...state,
-    message: payload
+    message: payload,
   }));
 
 export default validationReducer;

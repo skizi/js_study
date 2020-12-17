@@ -3,29 +3,29 @@ import { Profile } from "../../domain/entity/profile";
 // import { Career } from "../../domain/entity/career";
 import profileActions from "./actions";
 
-const initializeState:Profile = {
-	basic:{
-		name:"",
-		description:"",
-		birthday:"",
-		gender:"",
-	},
+const initializeState: Profile = {
+  basic: {
+    name: "",
+    description: "",
+    birthday: "",
+    gender: "",
+  },
 
-	address:{
-		postalcode:"",
-		prefecture:"",
-		city:"",
-		restAddress:""
-	},
+  address: {
+    postalcode: "",
+    prefecture: "",
+    city: "",
+    restAddress: "",
+  },
 
-	careers:[],
+  careers: [],
 
-	college:{
-	  name: "",
-	  faculty: "",
-	  department: "",
-	  result:[]
-	}
+  college: {
+    name: "",
+    faculty: "",
+    department: "",
+    result: [],
+  },
 };
 
 // const initCareer: Career = {
@@ -35,14 +35,15 @@ const initializeState:Profile = {
 //   endAt: ""
 // };
 
-
 const profileReducers = reducerWithInitialState(initializeState).case(
-	profileActions.setProfile, (state, payload) => { 
-	return {
-		...state,
-		...payload
-	}
-});
+  profileActions.setProfile,
+  (state, payload) => {
+    return {
+      ...state,
+      ...payload,
+    };
+  }
+);
 // .case(
 // profileActions.setCareer, ( state, payload ) => {
 
@@ -54,13 +55,12 @@ const profileReducers = reducerWithInitialState(initializeState).case(
 // 		...state,
 // 		careers: careers
 // 	}
-// }).case(profileActions.addCareer, (state, payload) => { 
+// }).case(profileActions.addCareer, (state, payload) => {
 
 // 	return {
 // 		...state,
 // 		careers: [ ...state.careers, initCareer ]
 // 	}
 // });
-
 
 export default profileReducers;

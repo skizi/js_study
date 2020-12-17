@@ -4,8 +4,8 @@ import { Career } from "./career";
 import { College } from "./college";
 
 export type Profile = {
-	basic:Basic;
-	address:Address;
-	careers:Career[];
-	college:College;
-}
+  basic: Basic;
+  address: Address;
+  careers: Career[];
+  college: College;
+};

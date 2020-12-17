@@ -7,12 +7,12 @@ const init: Alert = { open: false, message: "", severity: "error" };
 const alertReducer = reducerWithInitialState(init)
   .case(alertActions.openAlert, (_state, payload) => ({
     ...payload,
-    open: true
+    open: true,
   }))
-  .case(alertActions.closeAlert, state => ({
+  .case(alertActions.closeAlert, (state) => ({
     ...state,
     message: "",
-    open: false
+    open: false,
   }));
 
 export default alertReducer;
