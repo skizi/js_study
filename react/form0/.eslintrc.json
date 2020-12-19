@@ -12,7 +12,9 @@
     "react",
     "prettier"
   ],
+  "ignorePatterns": ["serviceWorker.ts"],
   "rules": {
+    "@typescript-eslint/ban-ts-ignore": "off",
     "react/react-in-jsx-scope": "off", //ファイルに「import React」がない場合のエラーを抑制します
     "prettier/prettier": "error" //plugin名/ルール名。errorはESLint で起きた Prettier のエラーをエラーとして扱いたいという設定
   },

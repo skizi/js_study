@@ -9,9 +9,6 @@ export const useCollege = (
   const [college, setCollege] = useState<College>(profile.college);
 
   //------------------文字列から学校検索------------------
-  const handleSearchCollege = (searchWord: string) => {
-    searchColleges(searchWord);
-  };
   const mountedRef = useRef<boolean>(false);
   useEffect(() => {
     mountedRef.current = true;
@@ -39,6 +36,10 @@ export const useCollege = (
       }
     };
     void load();
+  };
+
+  const handleSearchCollege = (searchWord: string) => {
+    searchColleges(searchWord);
   };
 
   //------------------学校更新------------------

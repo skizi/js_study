@@ -15,16 +15,6 @@ export const useAddress = (
   const [address, setAddress] = useState<Address>(profile.address);
 
   //------------------郵便番号から住所検索------------------
-  const handlePostalcodeChange = (code: string) => {
-    if (!isPostalcode(code)) return;
-
-    searchAddress(code);
-    recalculateValidation({
-      ...profile,
-      address: { ...address, postalcode: code },
-    });
-  };
-
   //メモリリーク対策
   const mountedRef = useRef<boolean>(false);
   useEffect(() => {
@@ -67,6 +57,15 @@ export const useAddress = (
       }
     };
     void load();
+  };
+  const handlePostalcodeChange = (code: string) => {
+    if (!isPostalcode(code)) return;
+
+    searchAddress(code);
+    recalculateValidation({
+      ...profile,
+      address: { ...address, postalcode: code },
+    });
   };
 
   //------------------住所更新------------------

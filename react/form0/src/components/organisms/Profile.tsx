@@ -90,6 +90,17 @@ const Profile = () => {
     dispatch(profileActions.setProfile({ basic, address, careers, college }));
   }, [basic, address, careers, college]);
 
+  //--------------------Alert------------------------
+  const [alert, setAlert] = useState<AlertType>({
+    severity: "error",
+    message: "",
+    open: false,
+  });
+
+  const handleAlertClose = () => {
+    setAlert({ ...alert, open: false });
+  };
+
   //--------------------保存------------------------
   const handleSave = () => {
     //こいつをカスタムフック(useSaveとか)にしてテストした方が良さげ？
@@ -113,17 +124,6 @@ const Profile = () => {
       message: "入力に誤りがあります。",
       open: true,
     });
-  };
-
-  //--------------------Alert------------------------
-  const [alert, setAlert] = useState<AlertType>({
-    severity: "error",
-    message: "",
-    open: false,
-  });
-
-  const handleAlertClose = () => {
-    setAlert({ ...alert, open: false });
   };
 
   return (
