@@ -24,7 +24,7 @@ app.get("/hc", (_req, res) => {
 });
 
 app.get("/colleges", (req, res) => {
-  (async () => {
+  (async (): void => {
     try {
       const url = `http://webservice.recruit.co.jp/shingaku/school/v1/?key=${process.env.API_KEY}&format=json&name=${req.query.name}`;
       const result = await fetch(encodeURI(url)).then((res) => res.json());

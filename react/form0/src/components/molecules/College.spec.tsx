@@ -6,13 +6,16 @@ import {
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import UserEvent from "@testing-library/user-event";
-import { act } from "react-dom/test-utils";
+// import { act } from "react-dom/test-utils";
 
 import College from "./College";
 import { ProfileContext } from "../../store/profile/contexts";
 
 //https://github.com/testing-library/react-testing-library/issues/322
-export const selectMaterialUiSelectOption = async (element, optionText) =>
+export const selectMaterialUiSelectOption = async (
+  element,
+  optionText
+): Promise<HTMLInputElement> =>
   new Promise((resolve) => {
     // The the button that opens the dropdown, which is a sibling of the input
     const selectButton = element.parentNode.querySelector("[role=button]");

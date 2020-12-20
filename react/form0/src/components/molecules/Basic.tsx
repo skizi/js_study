@@ -8,14 +8,14 @@ import {
   Radio,
   Typography,
 } from "@material-ui/core";
-import useStyles from "../styles";
+// import useStyles from "../styles";
 
 import { Gender } from "../../domain/entity/gender";
 import { PROFILE } from "../../domain/services/profile";
 
 import { ProfileContext } from "../../store/profile/contexts";
 
-const Basic = () => {
+const Basic = (): ReactElement => {
   // const classes = useStyles();
   const classes = {
     title: "",
@@ -43,7 +43,9 @@ const Basic = () => {
           fullWidth
           className={classes.textField}
           label={PROFILE.BASIC.NAME}
-          onChange={(e) => handleBasicProfileChange({ name: e.target.value })}
+          onChange={(e): void =>
+            handleBasicProfileChange({ name: e.target.value })
+          }
           required
           error={!!validation.message.basic.name}
           helperText={validation.message.basic.name}
@@ -58,7 +60,7 @@ const Basic = () => {
           className={classes.textField}
           rows={5}
           label={PROFILE.BASIC.DESCRIPTION}
-          onChange={(e) =>
+          onChange={(e): void =>
             handleBasicProfileChange({ description: e.target.value })
           }
           error={!!validation.message.basic.description}
@@ -75,7 +77,7 @@ const Basic = () => {
         >
           <FormLabel>{PROFILE.BASIC.GENDER}</FormLabel>
           <RadioGroup
-            onChange={(e) =>
+            onChange={(e): void =>
               handleBasicProfileChange({ gender: e.target.value as Gender })
             }
           >
@@ -114,7 +116,7 @@ const Basic = () => {
           label={PROFILE.BASIC.BIRTHDAY}
           type="date"
           InputLabelProps={{ shrink: true }}
-          onChange={(e) =>
+          onChange={(e): void =>
             handleBasicProfileChange({ birthday: e.target.value })
           }
           required

@@ -33,7 +33,7 @@ const Address: React.FC = () => {
           fullWidth
           className={classes.formField}
           label={PROFILE.ADDRESS.POSTALCODE}
-          onChange={(e) => handlePostalcodeChange(e.target.value)}
+          onChange={(e): void => handlePostalcodeChange(e.target.value)}
           required
           error={!!validation.message.address.postalcode}
           helperText={validation.message.address.postalcode}
@@ -46,7 +46,9 @@ const Address: React.FC = () => {
           className={classes.formField}
           label={PROFILE.ADDRESS.PREFECTURE}
           value={prefecture}
-          onChange={(e) => handleAddressChange({ prefecture: e.target.value })}
+          onChange={(e): void =>
+            handleAddressChange({ prefecture: e.target.value })
+          }
           required
           error={!!validation.message.address.prefecture}
           helperText={validation.message.address.prefecture}
@@ -59,7 +61,7 @@ const Address: React.FC = () => {
           className={classes.formField}
           label={PROFILE.ADDRESS.CITY}
           value={city}
-          onChange={(e) => handleAddressChange({ city: e.target.value })}
+          onChange={(e): void => handleAddressChange({ city: e.target.value })}
           required
           error={!!validation.message.address.city}
           helperText={validation.message.address.city}
@@ -71,7 +73,9 @@ const Address: React.FC = () => {
           fullWidth
           className={classes.formField}
           label={PROFILE.ADDRESS.RESTADDRESS}
-          onBlur={(e) => handleAddressChange({ restAddress: e.target.value })}
+          onBlur={(e): void =>
+            handleAddressChange({ restAddress: e.target.value })
+          }
           error={!!validation.message.address.restAddress}
           helperText={validation.message.address.restAddress}
           inputProps={{

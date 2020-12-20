@@ -48,7 +48,7 @@ const Career: React.FC = () => {
               fullWidth
               label={PROFILE.CAREERS.COMPANY}
               value={c.company}
-              onChange={(e) => {
+              onChange={(e): void => {
                 handleChangeCareer({ company: e.target.value }, i);
               }}
               error={!!validation.message.careers[i]?.company}
@@ -62,7 +62,7 @@ const Career: React.FC = () => {
               fullWidth
               label={PROFILE.CAREERS.POSITION}
               value={c.position}
-              onChange={(e) => {
+              onChange={(e): void => {
                 handleChangeCareer({ position: e.target.value }, i);
               }}
               error={!!validation.message.careers[i]?.position}
@@ -87,7 +87,7 @@ const Career: React.FC = () => {
                       shrink: true,
                     }}
                     value={c.startAt}
-                    onChange={(e) => {
+                    onChange={(e): void => {
                       handleChangeCareer({ startAt: e.target.value }, i);
                     }}
                     error={!!validation.message.careers[i]?.startAt}
@@ -108,7 +108,7 @@ const Career: React.FC = () => {
                       shrink: true,
                     }}
                     value={c.endAt}
-                    onChange={(e) => {
+                    onChange={(e): void => {
                       handleChangeCareer({ endAt: e.target.value }, i);
                     }}
                     error={!!validation.message.careers[i]?.endAt}
@@ -122,7 +122,7 @@ const Career: React.FC = () => {
             </div>
             <Button
               className={classes.button}
-              onClick={() => {
+              onClick={(): void => {
                 handleDeleteCareer(i);
               }}
               fullWidth
