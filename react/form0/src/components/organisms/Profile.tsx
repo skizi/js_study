@@ -28,7 +28,7 @@ import { Alert as AlertType } from "../../domain/entity/alert";
 
 import { Validation as ValidationType } from "../../domain/entity/validation";
 
-const Profile = () => {
+const Profile = (): void => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -58,7 +58,7 @@ const Profile = () => {
     },
   });
 
-  const recalculateValidation = (_profile: ProfileType) => {
+  const recalculateValidation = (_profile: ProfileType): void => {
     if (!validation.isStartValidation) return;
 
     const message = calculateValidation(_profile);
@@ -97,12 +97,12 @@ const Profile = () => {
     open: false,
   });
 
-  const handleAlertClose = () => {
+  const handleAlertClose = (): void => {
     setAlert({ ...alert, open: false });
   };
 
   //--------------------保存------------------------
-  const handleSave = () => {
+  const handleSave = (): void => {
     //こいつをカスタムフック(useSaveとか)にしてテストした方が良さげ？
 
     const message = calculateValidation(profile);

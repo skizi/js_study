@@ -18,7 +18,7 @@ import { ProfileContext } from "../../store/profile/contexts";
 const College: React.FC = () => {
   const [searchWord, setSearchWord] = useState("");
 
-  const handleChange = (name: string) => {
+  const handleChange = (name: string): void => {
     setSearchWord(name);
   };
 
@@ -58,14 +58,14 @@ const College: React.FC = () => {
             className={classes.formField}
             fullWidth
             label="大学名を検索"
-            onChange={(e) => handleChange(e.target.value)}
+            onChange={(e): void => handleChange(e.target.value)}
             inputProps={{
               "data-testid": "search",
             }}
           />
           <Button
             className={classes.button}
-            onClick={() => handleSearchCollege(searchWord)}
+            onClick={(): void => handleSearchCollege(searchWord)}
             fullWidth
             variant="outlined"
             color="primary"
@@ -81,7 +81,7 @@ const College: React.FC = () => {
                 <Button
                   variant="outlined"
                   color="primary"
-                  onClick={() => handleChangeCollege({ name: c.name })}
+                  onClick={(): void => handleChangeCollege({ name: c.name })}
                   data-testid="collegeNameBtn"
                 >
                   {c.name}
@@ -109,7 +109,7 @@ const College: React.FC = () => {
             <InputLabel>{PROFILE.COLLEGE.FACULTY}</InputLabel>
             <Select
               value={college.faculty}
-              onChange={(e) =>
+              onChange={(e): void =>
                 handleChangeCollege({
                   faculty: e.target.value as string,
                   department: "",
@@ -130,7 +130,7 @@ const College: React.FC = () => {
               <InputLabel>{PROFILE.COLLEGE.DEPARTMENT}</InputLabel>
               <Select
                 value={college.department}
-                onChange={(e) =>
+                onChange={(e): void =>
                   handleChangeCollege({ department: e.target.value as string })
                 }
                 data-testid="department"
@@ -148,7 +148,7 @@ const College: React.FC = () => {
           <Button
             fullWidth
             className={classes.button}
-            onClick={() => {
+            onClick={(): void => {
               handleResetCollege();
               setSearchWord("");
             }}

@@ -11,26 +11,26 @@ const Hoge: React.FC = () => {
     title: "",
   });
 
-  const clickHandler = (member: Partial<Fuga>) => {
+  const clickHandler = (member: Partial<Fuga>): void => {
     setFuga({ ...fuga, ...member });
   };
 
   return (
     <>
       <button
-        onClick={(e) => clickHandler({ name: "よしお" })}
+        onClick={(): void => clickHandler({ name: "よしお" })}
         data-testid="nameBtn"
       >
         nameボタン
       </button>
       <button
-        onClick={(e) => clickHandler({ title: "いい天気" })}
+        onClick={(): void => clickHandler({ title: "いい天気" })}
         data-testid="titleBtn"
       >
         titleボタン
       </button>
       <input
-        onChange={(e) => clickHandler({ title: e.target.value })}
+        onChange={(): void => clickHandler({ title: e.target.value })}
         data-testid="titleInput"
       />
       <p data-testid="nameText">{fuga.name}</p>
