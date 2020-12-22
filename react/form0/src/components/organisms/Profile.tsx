@@ -28,7 +28,7 @@ import { Alert as AlertType } from "../../domain/entity/alert";
 
 import { Validation as ValidationType } from "../../domain/entity/validation";
 
-const Profile = (): void => {
+const Profile:React.FC = ():JSX.Element => {
   const classes = useStyles();
 
   const dispatch = useDispatch();

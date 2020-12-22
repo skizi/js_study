@@ -6,7 +6,7 @@ import { Snackbar } from "@material-ui/core";
 
 import { ProfileContext } from "../../store/profile/contexts";
 
-const Alert = (): ReactElement => {
+const Alert:React.FC = () => {
   const { handleAlertClose, alert } = useContext(ProfileContext);
 
   return (

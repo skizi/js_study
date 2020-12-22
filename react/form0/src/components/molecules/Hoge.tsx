@@ -30,7 +30,7 @@ const Hoge: React.FC = () => {
         titleボタン
       </button>
       <input
-        onChange={(): void => clickHandler({ title: e.target.value })}
+        onChange={(e):void => clickHandler({ title: e.target.value })}
         data-testid="titleInput"
       />
       <p data-testid="nameText">{fuga.name}</p>

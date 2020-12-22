@@ -2,7 +2,7 @@ import React from "react";
 
 import Profile from "./organisms/Profile";
 
-function App(): ReactElement {
+function App() {
   return (
     <>
       <Profile />
