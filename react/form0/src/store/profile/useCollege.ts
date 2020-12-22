@@ -12,13 +12,13 @@ export const useCollege = (
   const mountedRef = useRef<boolean>(false);
   useEffect(() => {
     mountedRef.current = true;
-    return () => {
+    return (): void => {
       mountedRef.current = false;
     };
   }, []);
 
   const [loadingFlag, setLoadingFlag] = useState(false);
-  const searchColleges = (name: string) => {
+  const searchColleges = (name: string): void => {
     setLoadingFlag(true);
 
     const load = async (): Promise<void> => {
@@ -38,18 +38,18 @@ export const useCollege = (
     void load();
   };
 
-  const handleSearchCollege = (searchWord: string) => {
+  const handleSearchCollege = (searchWord: string): void => {
     searchColleges(searchWord);
   };
 
   //------------------学校更新------------------
-  const handleChangeCollege = (member: Partial<College>) => {
+  const handleChangeCollege = (member: Partial<College>): void => {
     setCollege({ ...college, ...member });
     recalculateValidation({ ...profile, college: { ...college, ...member } });
   };
 
   //------------------学校削除------------------
-  const handleResetCollege = () => {
+  const handleResetCollege = (): void => {
     handleChangeCollege({ name: "", faculty: "", department: "" });
   };
 

@@ -15,7 +15,7 @@ export const useCareer = (
     endAt: "",
   };
 
-  const handleChangeCareer = (member: Partial<Career>, index: number) => {
+  const handleChangeCareer = (member: Partial<Career>, index: number): void => {
     const _careers = careers.map((item, i) => {
       return i === index ? { ...item, ...member } : item;
     });
@@ -23,12 +23,12 @@ export const useCareer = (
     recalculateValidation({ ...profile, careers: _careers });
   };
 
-  const handleAddCareer = () => {
+  const handleAddCareer = (): void => {
     if (exitEmptyCareers(careers)) return;
     setCareer([...careers, initCareer]);
   };
 
-  const handleDeleteCareer = (index: number) => {
+  const handleDeleteCareer = (index: number): void => {
     const _careers = careers.filter((item, i) => {
       return i !== index;
     });

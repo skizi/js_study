@@ -4,19 +4,20 @@ import { PROFILE } from "./profile";
 import { College } from "../entity/college";
 import { Career } from "../entity/career";
 
-const isEmpty = (str: string) => !str.trim();
+const isEmpty = (str: string): boolean => !str.trim();
 
 // 必須項目
-const emptyValidation = (target: string, col: string) =>
+const emptyValidation = (target: string, col: string): string =>
   isEmpty(target) ? `${col}を入力してください。` : "";
 
-const isTooLong = (str: string, maxLen: number) => str.trim().length >= maxLen;
+const isTooLong = (str: string, maxLen: number): boolean =>
+  str.trim().length >= maxLen;
 
 // 文字数制限
-const lengthValidation = (target: string, maxLen: number) =>
+const lengthValidation = (target: string, maxLen: number): string =>
   isTooLong(target, maxLen) ? `${maxLen}文字以下で入力してください。` : "";
 
-const careerValidation = (careers: Career[]) =>
+const careerValidation = (careers: Career[]): Career[] =>
   careers.map((c) => ({
     company: emptyValidation(c.company, PROFILE.CAREERS.COMPANY),
     position: emptyValidation(c.position, PROFILE.CAREERS.POSITION),
@@ -24,7 +25,7 @@ const careerValidation = (careers: Career[]) =>
     endAt: emptyValidation(c.endAt, PROFILE.CAREERS.END_AT),
   }));
 
-const facultyValidation = (college: College) =>
+const facultyValidation = (college: College): string =>
   college.name && !college.faculty
     ? `${PROFILE.COLLEGE.FACULTY}を入力してください。`
     : "";
@@ -35,7 +36,7 @@ const extractValues = (obj: any): any[] | string => {
   return Object.values(obj).map(extractValues);
 };
 
-export const isValid = (message: ValidationMessage) => {
+export const isValid = (message: ValidationMessage): boolean => {
   const falttenValues = Object.values(message)
     .map(extractValues)
     .flat(Infinity) as string[]; //yoshida edit
@@ -43,7 +44,7 @@ export const isValid = (message: ValidationMessage) => {
   return falttenValues.every((fv) => !fv);
 };
 
-export const calculateValidation = (profile: Profile) => {
+export const calculateValidation = (profile: Profile): ValidationMessage => {
   const message: ValidationMessage = {
     basic: {
       name: emptyValidation(profile.basic.name, PROFILE.BASIC.NAME),

@@ -19,13 +19,13 @@ export const useAddress = (
   const mountedRef = useRef<boolean>(false);
   useEffect(() => {
     mountedRef.current = true;
-    return () => {
+    return (): void => {
       mountedRef.current = false;
     };
   }, []);
 
   const [loadingFlag, setLoadingFlag] = useState(false);
-  const searchAddress = (code: string) => {
+  const searchAddress = (code: string): void => {
     if (!isCompletePostalcode(code)) {
       setLoadingFlag(false);
       return;
@@ -58,7 +58,7 @@ export const useAddress = (
     };
     void load();
   };
-  const handlePostalcodeChange = (code: string) => {
+  const handlePostalcodeChange = (code: string): void => {
     if (!isPostalcode(code)) return;
 
     searchAddress(code);
@@ -69,7 +69,7 @@ export const useAddress = (
   };
 
   //------------------住所更新------------------
-  const handleAddressChange = (member: Partial<Address>) => {
+  const handleAddressChange = (member: Partial<Address>): void => {
     setAddress({ ...address, ...member });
     recalculateValidation({ ...profile, address: { ...address, ...member } });
   };

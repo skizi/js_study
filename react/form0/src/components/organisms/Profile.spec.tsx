@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import Redux, { createStore, combineReducers } from "redux";
+import { /*Redux,*/ createStore, combineReducers } from "redux";
 import { render, fireEvent } from "@testing-library/react";
 
 import Profile from "./Profile";

@@ -8,7 +8,7 @@ export const useBasic = (
 ) => {
   const [basic, setBasic] = useState<Basic>(profile.basic);
 
-  const handleBasicProfileChange = (member: Partial<Basic>) => {
+  const handleBasicProfileChange = (member: Partial<Basic>): void => {
     // const key:string = Object.keys(member)[0];
     // const _member:any = member as any;
 
