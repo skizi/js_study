@@ -15,7 +15,7 @@ import { PROFILE } from "../../domain/services/profile";
 
 import { ProfileContext } from "../../store/profile/contexts";
 
-const Basic = React.memo(()/*: React.ReactNode*/ => {
+const Basic = (): JSX.Element => {
   // const classes = useStyles();
   const classes = {
     title: "",
@@ -129,6 +129,6 @@ const Basic = React.memo(()/*: React.ReactNode*/ => {
       </>
     );
   }, [validation.message.basic, basic]);
-});
+};
 
-export default Basic;
+export default React.memo(Basic);
