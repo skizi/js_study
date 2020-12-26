@@ -7,8 +7,8 @@ export const useCollege = (
   recalculateValidation: (profile: Profile) => void
 ): {
   college: College;
-  handleSearchCollege: () => void;
-  handleChangeCollege: () => void;
+  handleSearchCollege: (searchWord: string) => void;
+  handleChangeCollege: (member: Partial<College>) => void;
   handleResetCollege: () => void;
   loadingFlag: boolean;
 } => {

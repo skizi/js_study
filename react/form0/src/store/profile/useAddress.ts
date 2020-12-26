@@ -11,7 +11,12 @@ import {
 export const useAddress = (
   profile: Profile,
   recalculateValidation: (profile: Profile) => void
-) => {
+): {
+  address: Address;
+  handleAddressChange: (member: Partial<Address>) => void;
+  handlePostalcodeChange: (code: string) => void;
+  loadingFlag: boolean;
+} => {
   const [address, setAddress] = useState<Address>(profile.address);
 
   //------------------郵便番号から住所検索------------------
