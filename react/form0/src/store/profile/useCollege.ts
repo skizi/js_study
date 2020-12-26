@@ -5,7 +5,13 @@ import { Profile } from "../../domain/entity/profile";
 export const useCollege = (
   profile: Profile,
   recalculateValidation: (profile: Profile) => void
-) => {
+): {
+  college: College;
+  handleSearchCollege: () => void;
+  handleChangeCollege: () => void;
+  handleResetCollege: () => void;
+  loadingFlag: boolean;
+} => {
   const [college, setCollege] = useState<College>(profile.college);
 
   //------------------文字列から学校検索------------------
