@@ -54,7 +54,10 @@ const Post: React.FC<Props> = (props: Props) => (
   </div>
 );
 
-export const getStaticPaths = async (): any => {
+export const getStaticPaths = async (): {
+  paths: { params: { id: string } }[];
+  fallback: boolean;
+} => {
   const res = await fetch("https://api.tvmaze.com/search/shows?q=batman");
   const data: any[] = await res.json();
   // レポジトリの名前をパスとする

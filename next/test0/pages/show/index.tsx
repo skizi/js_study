@@ -23,7 +23,9 @@ const Index: React.FC<Props> = (props: Props): void => (
   </div>
 );
 
-export const getStaticProps = async () => {
+export const getStaticProps = async (): {
+  props: Props;
+} => {
   const res = await fetch("https://api.tvmaze.com/search/shows?q=batman");
   const data: any[] = await res.json();
   console.log(`Show data fetched. Count: ${data.length}`);
