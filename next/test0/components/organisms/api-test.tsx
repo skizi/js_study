@@ -10,7 +10,7 @@ const ApiTest = (): React.ReactElement => {
     .then((response) => {
       setMessage(response.data.data.message + ":" + response.data.data.date);
     })
-    .catch((error) => {
+    .catch((/*error*/) => {
       setMessage("Failed to fetch time.");
     });
 
