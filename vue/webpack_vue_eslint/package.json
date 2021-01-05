@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "vue.config.js",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "copy-webpack-plugin": "^5.0.4",
     "eslint": "^6.8.0",
